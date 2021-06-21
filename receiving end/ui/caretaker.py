@@ -20,4 +20,9 @@ class Patient(App, BoxLayout):
             return Button(text = str(patient), background_color=(1,1,1,1), pos=pos, size_hint = (.25, .18))
             pos[0] += 400
 
-Patient().run()
+class caretakerApp(App):
+    def build(self):
+        return kv
+
+if __name__ == '__main__':
+    caretakerApp().run()
