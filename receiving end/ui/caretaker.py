@@ -8,7 +8,7 @@ Window.size = (360, 640)
 Window.clearcolor = (1, 1, 1, 1)
 
 kv = Builder.load_file("caretaker.kv")
-readCsv = open("/Users/huang/Desktop/Tapspeech/csv - Sheet1.csv").read()
+readCsv = open("caretaker.csv").read()
 patientList = readCsv.split(',')
 global pos
 pos = [0, 1055]
