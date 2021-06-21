@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.core.window import Window
+
 Window.size = (360, 640)
 Window.clearcolor = (1, 1, 1, 1)
 
