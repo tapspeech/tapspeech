@@ -39,13 +39,28 @@ windowManager:
 			pos_hint : {"x" : 0.45, "top" : 0.7}
 		Button:
 			text : "Create an account"
+			font_name : "Barlow-light"
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.4, 0.1
 			pos_hint : {"x" : 0.33, "top" : 0.4}
 			on_release:
 				app.root.current = 'signup'
 				root.manager.transition.direction = "left"
+
 		Button:
-			text : "LOGIN"
+			text : "LogIn"
+			font_name : "Barlow-light"
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.39, "top" : 0.2}
 			on_release:
@@ -385,4 +400,3 @@ windowManager:
 		text : "Please enter valid information"
 		size_hint : 0.2, 0.1
 		pos_hint : {"x" : 0.3, "top" : 0.8}
-        
