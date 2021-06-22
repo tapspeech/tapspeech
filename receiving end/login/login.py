@@ -4,7 +4,7 @@ from plyer import battery, tts, vibrator
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, BooleanProperty
 
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -55,7 +55,7 @@ class loginWindow(Screen):
         else:
 
             # switching the current screen to display validation result
-            sm.current = 'something'
+            sm.current = 'english'
 
             # reset TextInput widget
             self.email.text = ""
@@ -67,11 +67,26 @@ class signupWindow(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
-    def signupbtn(self):
+    patient = BooleanProperty()
+    def signupbtnc(self):
 
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text]],
-                            columns = ['Name', 'Email', 'Password'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
+                            columns = ['Name', 'Email', 'Password', 'Patient'])
+        if self.email.text != "":
+            if self.email.text not in users['Email'].unique():
+                self.name2.text = ""
+                self.email.text = ""
+                self.pwd.text = ""
+                self.patient = False
+        else:
+            # if values are empty or invalid show pop up
+            popFun()
+
+    def signupbtnp(self):
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
+                            columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
             if self.email.text not in users['Email'].unique():
 
@@ -82,6 +97,7 @@ class signupWindow(Screen):
                 self.name2.text = ""
                 self.email.text = ""
                 self.pwd.text = ""
+                self.patient = True
         else:
             # if values are empty or invalid show pop up
             popFun()
@@ -260,7 +276,7 @@ class English_Window(Screen):
             screen_two = self.manager.get_screen('Cantonese_Window')
             screen_two.change_menu(location)
 
-        sm.current = 'something'
+        sm.current = 'english'
 
 class Cantonese_Window(Screen):
     def change_menu(self, menu):
@@ -443,8 +459,8 @@ users=pd.read_csv('login.csv')
 sm.add_widget(loginWindow(name='login'))
 sm.add_widget(signupWindow(name='signup'))
 sm.add_widget(logDataWindow(name='logdata'))
-sm.add_widget(English_Window(name='something'))
-#sm.add_widget(Cantonese_Window(name='canto'))
+sm.add_widget(English_Window(name='english'))
+sm.add_widget(Cantonese_Window(name='canto'))
 
 # class that builds gui
 class loginMain(App):
