@@ -14,6 +14,17 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 
+Window.size = (640, 360)
+Window.clearcolor = (1,1,1,1)
+
+location = 'English_Main'
+
+# Message Function for English Text to Speech
+speak_command_message = ''
+
+# Message Function for Cantonese Audio Files
+cantonese_message_name = ''
+
 
 # class to call the popup function
 class PopupWindow(Widget):
