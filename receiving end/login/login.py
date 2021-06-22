@@ -2,12 +2,26 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty, BooleanProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
+from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 import pandas as pd
+from plyer import battery, tts, vibrator
+
+
+Window.size = (640, 360)
+
+location = 'English_Main'
+
+# Message Function for English Text to Speech
+speak_command_message = ''
+
+# Message Function for Cantonese Audio Files
+cantonese_message_name = ''
+
 
 # class to call the popup function
 class PopupWindow(Widget):
@@ -27,8 +41,9 @@ def popFun():
 
 # function
 def popFun2():
-    window = Popup(title='Test popup', content = show,
-    size_hint=(None, None), size=(400, 400))
+    window = Popup(title='Error',
+    content=Label(text="Account already exists"),
+    size_hint=(None, None), size=(300, 300))
     window.open()
 
 
@@ -44,7 +59,7 @@ class loginWindow(Screen):
         else:
 
             # switching the current screen to display validation result
-            sm.current = 'something'
+            sm.current = 'english'
 
             # reset TextInput widget
             self.email.text = ""
@@ -56,16 +71,14 @@ class signupWindow(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
-    type = StringProperty()
+    patient = BooleanProperty()
     def signupbtnc(self):
-
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.type]],
-                            columns = ['Name', 'Email', 'Password', 'Type'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
+                            columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
             fullstring = self.email.text
             substring = "@"
-            popFun2()
             if substring in fullstring:
                 if self.email.text not in users['Email'].unique():
 
@@ -82,13 +95,11 @@ class signupWindow(Screen):
             popFun()
 
     def signupbtnp(self):
-
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.type]],
-                            columns = ['Name', 'Email', 'Password', 'Type'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
+                            columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
             if self.email.text not in users['Email'].unique():
-
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
@@ -96,11 +107,13 @@ class signupWindow(Screen):
                 self.name2.text = ""
                 self.email.text = ""
                 self.pwd.text = ""
-                self.type = "Patient"
+                self.patient = True
         else:
             # if values are empty or invalid show pop up
             popFun()
 
+    def backbtn(self):
+        sm.current="login"
 
 
 # class to display validation result
@@ -277,9 +290,9 @@ class English_Window(Screen):
             screen_two = self.manager.get_screen('Cantonese_Window')
             screen_two.change_menu(location)
 
-        sm.current = 'something'
+        sm.current = 'english'
 
-#class Cantonese_Window(Screen):
+class Cantonese_Window(Screen):
     def change_menu(self, menu):
         global location
         location = menu
@@ -460,8 +473,8 @@ users=pd.read_csv('login.csv')
 sm.add_widget(loginWindow(name='login'))
 sm.add_widget(signupWindow(name='signup'))
 sm.add_widget(logDataWindow(name='logdata'))
-sm.add_widget(English_Window(name='something'))
-#sm.add_widget(Cantonese_Window(name='canto'))
+sm.add_widget(English_Window(name='english'))
+sm.add_widget(Cantonese_Window(name='canto'))
 
 # class that builds gui
 class loginMain(App):
