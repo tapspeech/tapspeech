@@ -13,7 +13,7 @@ from kivy.uix.scrollview import ScrollView
 Window.size = (640, 360)
 Window.clearcolor = (1, 1, 1, 1)
 
-kv = Builder.load_file("caretaker.kv")
+#kv = Builder.load_file("caretaker.kv")
 
 def initiate_patients_list():
     global patient_list
