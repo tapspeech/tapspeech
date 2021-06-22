@@ -5,8 +5,12 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
+from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 import pandas as pd
+
+
+Window.size = (640, 360)
 
 # class to call the popup function
 class PopupWindow(Widget):
