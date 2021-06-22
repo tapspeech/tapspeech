@@ -59,19 +59,17 @@ class loginWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     def validate(self):
-
+        users=pd.read_csv('login.csv')
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
             popFun()
         else:
-
             # switching the current screen to display validation result
             sm.current = 'english'
 
             # reset TextInput widget
             self.email.text = ""
             self.pwd.text = ""
-
 
 # class to accept sign up info
 class signupWindow(Screen):
@@ -84,7 +82,6 @@ class signupWindow(Screen):
         sm.current="login"
 
     def signupbtnc(self):
-
         # creating a DataFrame of the info
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
@@ -116,7 +113,6 @@ class signupWindow(Screen):
             fullstring = self.email.text
             substring = "@"
             if self.email.text not in users['Email'].unique():
-
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
