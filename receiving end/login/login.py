@@ -68,6 +68,10 @@ class signupWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     patient = BooleanProperty()
+    
+    def backbtn(self):
+        sm.current="login"
+
     def signupbtnc(self):
 
         # creating a DataFrame of the info
