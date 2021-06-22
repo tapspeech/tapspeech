@@ -1,12 +1,19 @@
 # import all the relevant classes
+import pandas as pd
+from plyer import battery, tts, vibrator
+
 from kivy.app import App
+from kivy.lang import Builder
+from kivy.properties import ObjectProperty
+
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty
-from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
-import pandas as pd
+
+from kivy.core.text import LabelBase
+from kivy.core.audio import SoundLoader
+
 
 # class to call the popup function
 class PopupWindow(Widget):
