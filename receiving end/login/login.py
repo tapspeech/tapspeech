@@ -102,7 +102,8 @@ class signupWindow(Screen):
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
-                    self.patient = False
+                    self.patient = 0
+                    print(self.patient)
                 else:
                     popFun2()
             else:
@@ -126,7 +127,8 @@ class signupWindow(Screen):
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
-                    self.patient = True
+                    self.patient = 1
+                    print(self.patient)
                 else:
                     popFun2()
             else:
