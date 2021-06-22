@@ -5,7 +5,7 @@ from validate_email import validate_email
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty, BooleanProperty
+from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
@@ -83,15 +83,14 @@ class signupWindow(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
-    patient = BooleanProperty()
 
     def backbtn(self):
         sm.current="login"
 
     def signupbtnc(self):
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
-                            columns = ['Name', 'Email', 'Password', 'Patient'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
+                            columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
             if(validate_email(self.email.text)):
                 if self.email.text not in users['Email'].unique():
@@ -102,11 +101,10 @@ class signupWindow(Screen):
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
-                    self.patient = 0
                 else:
                     popFun2()
             else:
-                # if values are empty or invalid show pop up
+                # if email invalid
                 popFun3()
         else:
             # if values are empty or invalid show pop up
@@ -114,10 +112,11 @@ class signupWindow(Screen):
 
     def signupbtnp(self):
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
-                            columns = ['Name', 'Email', 'Password', 'Patient'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
+                            columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
             if(validate_email(self.email.text)):
+                print(self.email.text)
                 if self.email.text not in users['Email'].unique():
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
@@ -126,11 +125,10 @@ class signupWindow(Screen):
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
-                    self.patient = 1
                 else:
                     popFun2()
             else:
-                # if values are empty or invalid show pop up
+                # if email invalid
                 popFun3()
         else:
             # if values are empty or invalid show pop up
