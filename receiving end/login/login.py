@@ -267,7 +267,7 @@ class English_Window(Screen):
 
         sm.current = 'something'
 
-#class Cantonese_Window(Screen):
+class Cantonese_Window(Screen):
     def change_menu(self, menu):
         global location
         location = menu
@@ -449,7 +449,7 @@ sm.add_widget(loginWindow(name='login'))
 sm.add_widget(signupWindow(name='signup'))
 sm.add_widget(logDataWindow(name='logdata'))
 sm.add_widget(English_Window(name='something'))
-#sm.add_widget(Cantonese_Window(name='canto'))
+sm.add_widget(Cantonese_Window(name='canto'))
 
 # class that builds gui
 class loginMain(App):
