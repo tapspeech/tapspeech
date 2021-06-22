@@ -2,10 +2,9 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty, BooleanProperty
+from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
-from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 import pandas as pd
 from plyer import battery, tts, vibrator
@@ -35,7 +34,7 @@ class P(FloatLayout):
 # function that displays the content
 def popFun():
     show = P()
-    window = Popup(title = "Error", content = show,
+    window = Popup(title = "popup", content = show,
                    size_hint = (None, None), size = (300, 300))
     window.open()
 
@@ -51,7 +50,7 @@ class loginWindow(Screen):
         else:
 
             # switching the current screen to display validation result
-            sm.current = 'english'
+            sm.current = 'something'
 
             # reset TextInput widget
             self.email.text = ""
@@ -63,13 +62,14 @@ class signupWindow(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
-    patient = BooleanProperty()
-    def signupbtnc(self):
+    def signupbtn(self):
+
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
-                            columns = ['Name', 'Email', 'Password', 'Patient'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text]],
+                            columns = ['Name', 'Email', 'Password'])
         if self.email.text != "":
             if self.email.text not in users['Email'].unique():
+
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
@@ -77,32 +77,9 @@ class signupWindow(Screen):
                 self.name2.text = ""
                 self.email.text = ""
                 self.pwd.text = ""
-                self.patient = False
         else:
             # if values are empty or invalid show pop up
             popFun()
-
-    def signupbtnp(self):
-        # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
-                            columns = ['Name', 'Email', 'Password', 'Patient'])
-        if self.email.text != "":
-            if self.email.text not in users['Email'].unique():
-                # if email does not exist already then append to the csv file
-                # change current screen to log in the user now
-                user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                sm.current = 'login'
-                self.name2.text = ""
-                self.email.text = ""
-                self.pwd.text = ""
-                self.patient = True
-        else:
-            # if values are empty or invalid show pop up
-            popFun()
-
-    def backbtn(self):
-        sm.current="login"
-
 
 # class to display validation result
 class logDataWindow(Screen):
@@ -278,9 +255,9 @@ class English_Window(Screen):
             screen_two = self.manager.get_screen('Cantonese_Window')
             screen_two.change_menu(location)
 
-        sm.current = 'english'
+        sm.current = 'something'
 
-class Cantonese_Window(Screen):
+#class Cantonese_Window(Screen):
     def change_menu(self, menu):
         global location
         location = menu
@@ -461,8 +438,8 @@ users=pd.read_csv('login.csv')
 sm.add_widget(loginWindow(name='login'))
 sm.add_widget(signupWindow(name='signup'))
 sm.add_widget(logDataWindow(name='logdata'))
-sm.add_widget(English_Window(name='english'))
-sm.add_widget(Cantonese_Window(name='canto'))
+sm.add_widget(English_Window(name='something'))
+#sm.add_widget(Cantonese_Window(name='canto'))
 
 # class that builds gui
 class loginMain(App):
