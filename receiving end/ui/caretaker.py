@@ -29,14 +29,6 @@ def update_patients_list():
 update_patients_list()
 print(patient_list)
 
-'''
-class Patient(App, BoxLayout):
-    def build(self):
-        for patient in patientList:
-            return Button(text = str(patient), background_color=(1,1,1,1), pos=pos, size_hint = (.25, .18))
-            pos[0] += 400
-'''
-
 class caretakerApp(App):
     def build(self):
         return kv
