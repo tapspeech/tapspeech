@@ -5,6 +5,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.core.window import Window
 
+from kivymd.app import MDApp
+from kivymd.uix.screen import Screen
+from kivymd.uix.list import TwoLineListItem
+
 Window.size = (640, 360)
 Window.clearcolor = (1, 1, 1, 1)
 
@@ -29,9 +33,14 @@ def update_patients_list():
 update_patients_list()
 print(patient_list)
 
-class caretakerApp(App):
+
+class caretakerApp(MDApp):
     def build(self):
-        return kv
+        screen = Screen()
+        item1 = TwoLineListItem(text='Item 1', secondary_text='wo xiang si')
+        screen.add_widget(item1)
+        return screen
+        #return kv
 
 if __name__ == '__main__':
     caretakerApp().run()
