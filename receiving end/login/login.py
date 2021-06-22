@@ -1,6 +1,7 @@
 # import all the relevant classes
 import pandas as pd
 from plyer import battery, tts, vibrator
+from validate_email import validate_email
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -43,16 +44,22 @@ class P(FloatLayout):
 def popFun():
     window = Popup(title='Error',
     content=Label(text="Please enter valid information"),
-    size_hint=(None, None), size=(300, 300))
+    size_hint=(None, None), size=(500, 300))
     window.open()
 
 # function
 def popFun2():
     window = Popup(title='Error',
     content=Label(text="Account already exists"),
-    size_hint=(None, None), size=(300, 300))
+    size_hint=(None, None), size=(500, 300))
     window.open()
 
+# function that displays the content
+def popFun3():
+    window = Popup(title='Error',
+    content=Label(text="Please enter a valid email"),
+    size_hint=(None, None), size=(500, 300))
+    window.open()
 
 # class to accept user info and validate it
 class loginWindow(Screen):
@@ -86,11 +93,8 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
-            fullstring = self.email.text
-            substring = "@"
-            if substring in fullstring:
+            if(validate_email(self.email.text)):
                 if self.email.text not in users['Email'].unique():
-
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
@@ -101,6 +105,9 @@ class signupWindow(Screen):
                     self.patient = False
                 else:
                     popFun2()
+            else:
+                # if values are empty or invalid show pop up
+                popFun3()
         else:
             # if values are empty or invalid show pop up
             popFun()
@@ -110,9 +117,7 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
-            fullstring = self.email.text
-            substring = "@"
-            if substring in fullstring:
+            if(validate_email(self.email.text)):
                 if self.email.text not in users['Email'].unique():
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
@@ -124,6 +129,9 @@ class signupWindow(Screen):
                     self.patient = True
                 else:
                     popFun2()
+            else:
+                # if values are empty or invalid show pop up
+                popFun3()
         else:
             # if values are empty or invalid show pop up
             popFun()
