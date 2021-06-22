@@ -2,7 +2,7 @@
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty, StringProperty
+from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
@@ -48,12 +48,11 @@ class signupWindow(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
-    type = StringProperty()
-    def signupbtnc(self):
+    def signupbtn(self):
 
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.type]],
-                            columns = ['Name', 'Email', 'Password', 'Type'])
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text]],
+                            columns = ['Name', 'Email', 'Password'])
         if self.email.text != "":
             if self.email.text not in users['Email'].unique():
 
@@ -64,32 +63,9 @@ class signupWindow(Screen):
                 self.name2.text = ""
                 self.email.text = ""
                 self.pwd.text = ""
-                self.type = "Caretaker"
         else:
             # if values are empty or invalid show pop up
             popFun()
-
-    def signupbtnp(self):
-
-        # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.type]],
-                            columns = ['Name', 'Email', 'Password', 'Type'])
-        if self.email.text != "":
-            if self.email.text not in users['Email'].unique():
-
-                # if email does not exist already then append to the csv file
-                # change current screen to log in the user now
-                user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                sm.current = 'login'
-                self.name2.text = ""
-                self.email.text = ""
-                self.pwd.text = ""
-                self.type = "Patient"
-        else:
-            # if values are empty or invalid show pop up
-            popFun()
-
-
 
 # class to display validation result
 class logDataWindow(Screen):
