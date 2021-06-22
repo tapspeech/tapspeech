@@ -15,7 +15,7 @@ Window.clearcolor = (1, 1, 1, 1)
 
 kv = Builder.load_file("caretaker.kv")
 
-def update_patients_list():
+def initiate_patients_list():
     global patient_list
 
     patient_database = open('caretaker.csv', 'r')
@@ -30,20 +30,21 @@ def update_patients_list():
 
     patient_list = new_patient_list
     print(patient_list)
-    '''
-    for patient in patient_list:
-        items = TwoLineListItem(text=str(patient[0]), secondary_text=str(patient[1]))
-        list_view.add_widget(items)
-    '''
 
-update_patients_list()
-
-#def fuckmeintheass():
-#    global patient_list
-
+initiate_patients_list()
 
 class caretakerApp(MDApp):
     def build(self):
+        def update_patients_list():
+            global patient_list
+
+            initiate_patients_list()
+            list_view.clear_widgets()
+            list_view.add_widget(TwoLineListItem(text='Refresh',on_press=lambda x:update_patients_list()))
+            for patient in patient_list:
+                items = TwoLineListItem(text=str(patient[0]), secondary_text=str(patient[1]))
+                list_view.add_widget(items)
+
         screen = Screen()
 
         scroll = ScrollView()
