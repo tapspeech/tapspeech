@@ -48,6 +48,7 @@ class loginWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     def validate(self):
+        users=pd.read_csv('login.csv')
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
             popFun()
