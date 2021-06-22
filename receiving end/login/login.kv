@@ -122,7 +122,8 @@ windowManager:
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.45, "top" : 0.5}
 		Button:
-			text : "SUBMIT"
+			text : "Register As Caretaker"
+			font_size : 26
 			font_name : "Barlow-light"
 			canvas.before:
 				Color:
@@ -131,9 +132,25 @@ windowManager:
 					width: 1
 					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.3, 0.1
-			pos_hint : {"x" : 0.39, "top" : 0.28}
+			pos_hint : {"x" : 0.18, "top" : 0.28}
 			on_press :
-				root.signupbtn()
+				root.signupbtnc()
+				root.manager.transition.direction = "right"
+
+		Button:
+			text : "Register As Patient"
+			font_name : "Barlow-light"
+			font_size : 26
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.57, "top" : 0.28}
+			on_press :
+				root.signupbtnp()
 				root.manager.transition.direction = "right"
 
 # GUI to show validation result
