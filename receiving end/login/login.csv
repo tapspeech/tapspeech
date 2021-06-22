@@ -1,1 +1,2 @@
-Name,Email,Password,type
+Name,Email,Password,Patient
+matt,matt,mw,True
