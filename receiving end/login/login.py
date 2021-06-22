@@ -5,8 +5,22 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
+from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 import pandas as pd
+from plyer import battery, tts, vibrator
+
+
+Window.size = (640, 360)
+
+location = 'English_Main'
+
+# Message Function for English Text to Speech
+speak_command_message = ''
+
+# Message Function for Cantonese Audio Files
+cantonese_message_name = ''
+
 
 # class to call the popup function
 class PopupWindow(Widget):
@@ -36,7 +50,7 @@ class loginWindow(Screen):
         else:
 
             # switching the current screen to display validation result
-            sm.current = 'something'
+            sm.current = 'english'
 
             # reset TextInput widget
             self.email.text = ""
@@ -267,7 +281,7 @@ class English_Window(Screen):
             screen_two = self.manager.get_screen('Cantonese_Window')
             screen_two.change_menu(location)
 
-        sm.current = 'something'
+        sm.current = 'english'
 
 class Cantonese_Window(Screen):
     def change_menu(self, menu):
@@ -450,7 +464,7 @@ users=pd.read_csv('login.csv')
 sm.add_widget(loginWindow(name='login'))
 sm.add_widget(signupWindow(name='signup'))
 sm.add_widget(logDataWindow(name='logdata'))
-sm.add_widget(English_Window(name='something'))
+sm.add_widget(English_Window(name='english'))
 sm.add_widget(Cantonese_Window(name='canto'))
 
 # class that builds gui
