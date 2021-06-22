@@ -21,31 +21,54 @@ windowManager:
 		size: root.width, root.height
 		Label:
 			text : "EMAIL: "
+			font_name : "Barlow-light"
+			font_size : 25
 			size_hint : 0.2, 0.1
 			pos_hint : {"x":0.25, "top":0.9}
 		TextInput:
 			id : email
 			multiline :False
-			size_hint : 0.3, 0.1
-			pos_hint : {"x" : 0.45, "top" : 0.9}
+			font_name : "Barlow-light"
+			font_size : 34
+			size_hint : 0.3, 0.08
+			pos_hint : {"x" : 0.45, "top" : 0.89}
 		Label:
 			text : "PASSWORD: "
+			font_name : "Barlow-light"
+			font_size : 25
 			size_hint : 0.2, 0.1
-			pos_hint : {"x" : 0.25, "top" : 0.7}
+			pos_hint : {"x" : 0.21, "top" : 0.7}
 		TextInput:
 			id : pwd
 			multiline :False
-			size_hint : 0.3, 0.1
-			pos_hint : {"x" : 0.45, "top" : 0.7}
+			size_hint : 0.3, 0.08
+			pos_hint : {"x" : 0.45, "top" : 0.69}
 		Button:
-			text : "Create an account"
+			text : "Create an Account"
+			font_size : 30
+			font_name : "Barlow-light"
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.4, 0.1
 			pos_hint : {"x" : 0.33, "top" : 0.4}
 			on_release:
 				app.root.current = 'signup'
 				root.manager.transition.direction = "left"
+
 		Button:
-			text : "LOGIN"
+			text : "Login"
+			font_name : "Barlow-light"
+			font_size : 30
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.39, "top" : 0.2}
 			on_release:
@@ -65,9 +88,12 @@ windowManager:
 	pwd : pwd
 	FloatLayout:
 		Label:
-			text : "NAME: "
+			text : "FULL NAME: "
+			font_name : "Barlow-light"
+			font_size : 30
+
 			size_hint : 0.2, 0.1
-			pos_hint : {"x":0.25, "top":0.9}
+			pos_hint : {"x":0.21, "top":0.9}
 		TextInput:
 			id : name2
 			multiline : False
@@ -75,6 +101,8 @@ windowManager:
 			pos_hint : {"x" : 0.45, "top" : 0.9}
 		Label:
 			text : "EMAIL: "
+			font_name : "Barlow-light"
+			font_size : 30
 			size_hint : 0.2, 0.1
 			pos_hint : {"x" : 0.25, "top" : 0.7}
 		TextInput:
@@ -84,19 +112,45 @@ windowManager:
 			pos_hint : {"x" : 0.45, "top" : 0.7}
 		Label:
 			text : "PASSWORD: "
+			font_name : "Barlow-light"
+			font_size : 30
 			size_hint : 0.2, 0.1
-			pos_hint : {"x" : 0.25, "top" : 0.5}
+			pos_hint : {"x" : 0.21, "top" : 0.5}
 		TextInput:
 			id : pwd
 			multiline : False
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.45, "top" : 0.5}
 		Button:
-			text : "SUBMIT"
+			text : "Register As Caretaker"
+			font_size : 26
+			font_name : "Barlow-light"
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
 			size_hint : 0.3, 0.1
-			pos_hint : {"x" : 0.39, "top" : 0.28}
+			pos_hint : {"x" : 0.18, "top" : 0.28}
 			on_press :
-				root.signupbtn()
+				root.signupbtnc()
+				root.manager.transition.direction = "right"
+
+		Button:
+			text : "Register As Patient"
+			font_name : "Barlow-light"
+			font_size : 26
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.57, "top" : 0.28}
+			on_press :
+				root.signupbtnp()
 				root.manager.transition.direction = "right"
 
 # GUI to show validation result
@@ -385,4 +439,3 @@ windowManager:
 		text : "Please enter valid information"
 		size_hint : 0.2, 0.1
 		pos_hint : {"x" : 0.3, "top" : 0.8}
-        
