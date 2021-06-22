@@ -12,6 +12,7 @@ from plyer import battery, tts, vibrator
 
 
 Window.size = (640, 360)
+Window.clearcolor = (1,1,1,1)
 
 location = 'English_Main'
 

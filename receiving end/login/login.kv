@@ -5,7 +5,7 @@ windowManager:
 	signupWindow:
 	logDataWindow:
 	English_Window:
-	#Cantonese_Window:
+	Cantonese_Window:
 
 # GUI for the login window
 <loginWindow>:
@@ -327,11 +327,11 @@ windowManager:
             font_size:35
             size_hint: 0.2, 0.15
             pos_hint: {'x':0.6,'y':0.175}
-            text: '中文模式'
+            text: 'zhong wen'
             background_color:0.9,0.9,0.9,1
-            on_press:
-                app.root.current = 'Cantonese_Window'
-                root.button_press('Cantonese')
+			on_release:
+				app.root.current = 'canto'
+
 
         Image:
             id: Tall_Cylinder_Image
@@ -448,9 +448,9 @@ windowManager:
             pos_hint: {'x':0.6,'y':0.175}
             text: 'English Mode'
             background_color:0.9,0.9,0.9,1
-            on_press:
-                app.root.current = 'English_Window'
-                root.button_press('English')
+            on_release:
+                app.root.current = 'english'
+
 
         Image:
             id: Tall_Cylinder_Image
