@@ -262,7 +262,7 @@ class English_Window(Screen):
 
         sm.current = 'something'
 
-#class Cantonese_Window(Screen):
+class Cantonese_Window(Screen):
     def change_menu(self, menu):
         global location
         location = menu
