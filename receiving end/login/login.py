@@ -13,6 +13,7 @@ from kivy.uix.floatlayout import FloatLayout
 
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
+from kivy.core.window import Window
 
 Window.size = (640, 360)
 Window.clearcolor = (1,1,1,1)
