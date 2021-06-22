@@ -5,7 +5,7 @@ windowManager:
 	signupWindow:
 	logDataWindow:
 	English_Window:
-	#Cantonese_Window:
+	Cantonese_Window:
 
 # GUI for the login window
 <loginWindow>:
@@ -40,8 +40,6 @@ windowManager:
 			pos_hint : {"x" : 0.21, "top" : 0.7}
 		TextInput:
 			id : pwd
-			font_name:"Barlow-Light"
-			font_size:34
 			multiline :False
 			size_hint : 0.3, 0.08
 			pos_hint : {"x" : 0.45, "top" : 0.69}
@@ -98,8 +96,6 @@ windowManager:
 			pos_hint : {"x":0.21, "top":0.9}
 		TextInput:
 			id : name2
-			font_name : "Barlow-light"
-			font_size : 34
 			multiline : False
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.45, "top" : 0.9}
@@ -111,8 +107,6 @@ windowManager:
 			pos_hint : {"x" : 0.25, "top" : 0.7}
 		TextInput:
 			id : email
-			font_name : "Barlow-light"
-			font_size : 34
 			multiline : False
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.45, "top" : 0.7}
@@ -124,27 +118,9 @@ windowManager:
 			pos_hint : {"x" : 0.21, "top" : 0.5}
 		TextInput:
 			id : pwd
-			font_name : "Barlow-light"
-			font_size : 34
 			multiline : False
 			size_hint : 0.3, 0.1
 			pos_hint : {"x" : 0.45, "top" : 0.5}
-		Button:
-			text : "Register As Caretaker"
-			font_size : 26
-			font_name : "Barlow-light"
-			canvas.before:
-				Color:
-					rgba: 0, 0, 0, 1
-				Line:
-					width: 1
-					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
-			size_hint : 0.3, 0.1
-			pos_hint : {"x" : 0.18, "top" : 0.28}
-			on_press :
-				root.signupbtnc()
-				root.manager.transition.direction = "right"
-
 		Button:
 			text : " < Back"
 			font_name : "Barlow-light"
@@ -159,6 +135,21 @@ windowManager:
 			pos_hint : {"x" : 0.02, "top" : 0.9}
 			on_press :
 				root.backbtn()
+				root.manager.transition.direction = "right"
+        Button:
+			text : "Register As Caretaker"
+			font_size : 26
+			font_name : "Barlow-light"
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-10), (self.y-10), (self.width+20), (self.height+20)
+			size_hint : 0.3, 0.1
+			pos_hint : {"x" : 0.18, "top" : 0.28}
+			on_press :
+				root.signupbtnc()
 				root.manager.transition.direction = "right"
 
 		Button:
@@ -327,11 +318,11 @@ windowManager:
             font_size:35
             size_hint: 0.2, 0.15
             pos_hint: {'x':0.6,'y':0.175}
-            text: '中文模式'
+            text: 'zhong wen'
             background_color:0.9,0.9,0.9,1
-            on_press:
-                app.root.current = 'Cantonese_Window'
-                root.button_press('Cantonese')
+			on_release:
+				app.root.current = 'canto'
+
 
         Image:
             id: Tall_Cylinder_Image
@@ -448,11 +439,21 @@ windowManager:
             pos_hint: {'x':0.6,'y':0.175}
             text: 'English Mode'
             background_color:0.9,0.9,0.9,1
-            on_press:
-                app.root.current = 'English_Window'
-                root.button_press('English')
+            on_release:
+                app.root.current = 'english'
+
 
         Image:
             id: Tall_Cylinder_Image
             source: 'images/Tall_Cylinder.png'
             pos_hint: {'x':0.2,'y':0.1}
+<<<<<<< HEAD
+=======
+
+# GUI for pop up window
+<P>:
+	Label:
+		text : "Please enter valid information"
+		size_hint : 0.2, 0.1
+		pos_hint : {"x" : 0.3, "top" : 0.8}
+>>>>>>> d872de92d2abdf904adc8d4502ffd98948fab03f

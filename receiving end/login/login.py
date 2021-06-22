@@ -1,18 +1,25 @@
 # import all the relevant classes
+import pandas as pd
+from plyer import battery, tts, vibrator
+
 from kivy.app import App
+from kivy.lang import Builder
+from kivy.properties import ObjectProperty, BooleanProperty
+
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
-from kivy.properties import ObjectProperty, BooleanProperty
-from kivy.lang import Builder
 from kivy.uix.popup import Popup
-from kivy.core.window import Window
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 import pandas as pd
 from plyer import battery, tts, vibrator
 
+from kivy.core.text import LabelBase
+from kivy.core.audio import SoundLoader
+from kivy.core.window import Window
 
 Window.size = (640, 360)
+Window.clearcolor = (1,1,1,1)
 
 location = 'English_Main'
 
@@ -72,7 +79,12 @@ class signupWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     patient = BooleanProperty()
+
+    def backbtn(self):
+        sm.current="login"
+
     def signupbtnc(self):
+
         # creating a DataFrame of the info
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
@@ -104,6 +116,7 @@ class signupWindow(Screen):
             fullstring = self.email.text
             substring = "@"
             if self.email.text not in users['Email'].unique():
+
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
@@ -117,10 +130,6 @@ class signupWindow(Screen):
         else:
             # if values are empty or invalid show pop up
             popFun()
-
-    def backbtn(self):
-        sm.current="login"
-
 
 # class to display validation result
 class logDataWindow(Screen):

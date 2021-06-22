@@ -1,3 +1,8 @@
 Name,Email,Password,Patient
+<<<<<<< HEAD
 jared,jared@gmail.com,jared,False
 mw,mw,mw,True
+=======
+mw,mw,mw,True
+mwfd,mwdf, mwdf,True
+>>>>>>> d872de92d2abdf904adc8d4502ffd98948fab03f
