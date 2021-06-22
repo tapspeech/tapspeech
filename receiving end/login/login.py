@@ -75,6 +75,7 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
+            users=pd.read_csv('login.csv')
             if self.email.text not in users['Email'].unique():
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
                 sm.current = "login"
@@ -91,6 +92,7 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
+            users=pd.read_csv('login.csv')
             if self.email.text not in users['Email'].unique():
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
