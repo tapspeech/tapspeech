@@ -48,19 +48,16 @@ class loginWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     def validate(self):
-
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
             popFun()
         else:
-
             # switching the current screen to display validation result
             sm.current = 'english'
 
             # reset TextInput widget
             self.email.text = ""
             self.pwd.text = ""
-
 
 # class to accept sign up info
 class signupWindow(Screen):
