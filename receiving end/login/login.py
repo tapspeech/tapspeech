@@ -6,6 +6,7 @@ from kivy.properties import ObjectProperty, StringProperty
 from kivy.lang import Builder
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.label import Label
 import pandas as pd
 
 # class to call the popup function
@@ -20,9 +21,16 @@ class P(FloatLayout):
 # function that displays the content
 def popFun():
     show = P()
-    window = Popup(title = "popup", content = show,
+    window = Popup(title = "Error", content = show,
                    size_hint = (None, None), size = (300, 300))
     window.open()
+
+# function
+def popFun2():
+    window = Popup(title='Test popup', content = show,
+    size_hint=(None, None), size=(400, 400))
+    window.open()
+
 
 # class to accept user info and validate it
 class loginWindow(Screen):
@@ -32,7 +40,7 @@ class loginWindow(Screen):
 
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
-            popFun()
+            popFun2()
         else:
 
             # switching the current screen to display validation result
@@ -57,6 +65,7 @@ class signupWindow(Screen):
         if self.email.text != "":
             fullstring = self.email.text
             substring = "@"
+            popFun2()
             if substring in fullstring:
                 if self.email.text not in users['Email'].unique():
 
