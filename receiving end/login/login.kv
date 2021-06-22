@@ -146,6 +146,22 @@ windowManager:
 				root.manager.transition.direction = "right"
 
 		Button:
+			text : " < Back"
+			font_name : "Barlow-light"
+			font_size : 20
+			canvas.before:
+				Color:
+					rgba: 0, 0, 0, 1
+				Line:
+					width: 1
+					rectangle: (self.x-2.5), (self.y-2.5), (self.width+5), (self.height+5)
+			size_hint : 0.15, 0.1
+			pos_hint : {"x" : 0.02, "top" : 0.9}
+			on_press :
+				root.backbtn()
+				root.manager.transition.direction = "right"
+
+		Button:
 			text : "Register As Patient"
 			font_name : "Barlow-light"
 			font_size : 26

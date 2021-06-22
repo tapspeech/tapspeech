@@ -89,6 +89,8 @@ class signupWindow(Screen):
             # if values are empty or invalid show pop up
             popFun()
 
+    def backbtn(self):
+        sm.current="login"
 
 
 # class to display validation result
