@@ -34,9 +34,9 @@ class P(FloatLayout):
 
 # function that displays the content
 def popFun():
-    show = P()
-    window = Popup(title = "Error", content = show,
-                   size_hint = (None, None), size = (300, 300))
+    window = Popup(title='Error',
+    content=Label(text="Please enter valid information"),
+    size_hint=(None, None), size=(300, 300))
     window.open()
 
 # function
@@ -55,7 +55,7 @@ class loginWindow(Screen):
 
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
-            popFun2()
+            popFun()
         else:
 
             # switching the current screen to display validation result
@@ -89,7 +89,9 @@ class signupWindow(Screen):
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
-                    self.type = "Caretaker"
+                    self.patient = False
+                else:
+                    popFun2()
         else:
             # if values are empty or invalid show pop up
             popFun()
@@ -99,6 +101,8 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, self.patient]],
                             columns = ['Name', 'Email', 'Password', 'Patient'])
         if self.email.text != "":
+            fullstring = self.email.text
+            substring = "@"
             if self.email.text not in users['Email'].unique():
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
@@ -108,6 +112,8 @@ class signupWindow(Screen):
                 self.email.text = ""
                 self.pwd.text = ""
                 self.patient = True
+            else:
+                popFun2()
         else:
             # if values are empty or invalid show pop up
             popFun()
