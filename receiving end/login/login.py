@@ -39,7 +39,7 @@ class P(FloatLayout):
 # function that displays the content
 def popFun():
     show = P()
-    window = Popup(title = "popup", content = show,
+    window = Popup(title = "Error", content = show,
                    size_hint = (None, None), size = (300, 300))
     window.open()
 
@@ -68,7 +68,7 @@ class signupWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     patient = BooleanProperty()
-    
+
     def backbtn(self):
         sm.current="login"
 
