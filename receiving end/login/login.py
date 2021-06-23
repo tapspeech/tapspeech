@@ -81,6 +81,7 @@ class ReadSQL:
         #~ print(query)
         df = pd.read_sql_query(query, self.conn)
         return df
+    #detects whether the email given as the parameter exists
     def check_email(email):
         #list to store emails
         emails=[]
