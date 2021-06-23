@@ -82,26 +82,22 @@ class ReadSQL:
         df = pd.read_sql_query(query, self.conn)
         return df
     def check_email(email):
+        #list to store emails
         emails=[]
+        #selects the database
         test = ReadSQL('db.sqlite3')
         df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientEmail'])
-        for number in len(df):
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerEmail'])
+        #adds all emails into the emails list
+        for number in range(len(df.index)):
             emails.append(df.at[number,'patientEmail'])
-        for email in len(emails):
-            if email == emails[email]:
+        for number in range(len(df2.index)):
+            emails.append(df2.at[number,'caretakerEmail'])
+        #returns true if the email exists and false if it does not
+        for i in range(len(emails)):
+            if email == emails[i]:
                 return True
-            return False
-emails=[]
-email='jaredtung@gmail.com'
-test = ReadSQL('db.sqlite3')
-df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientEmail'])
-for number in range(len(df.index)):
-    emails.append(df.at[number,'patientEmail'])
-for i in range(len(emails)):
-    if email == emails[i]:
-        print ('ok')
-    print ('fail')
-print (emails)
+        return False
 
 # class to accept user info and validate it
 class loginWindow(Screen):
