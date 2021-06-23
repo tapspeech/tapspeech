@@ -42,30 +42,21 @@ cantonese_message_name = ''
 # class to call the popup function
 class PopupWindow(Widget):
     def btn(self):
-        popFun()
+        popFun(1)
 
 # class to build GUI for a popup window
 class P(FloatLayout):
     pass
 
 # function that displays the content
-def popFun():
+def popFun(type):
     window = Popup(title='Error',
-    content=Label(text="Please enter valid information"),
-    size_hint=(None, None), size=(500, 300))
-    window.open()
-
-# function
-def popFun2():
-    window = Popup(title='Error',
-    content=Label(text="Account already exists"),
-    size_hint=(None, None), size=(500, 300))
-    window.open()
-
-# function that displays the content
-def popFun3():
-    window = Popup(title='Error',
-    content=Label(text="Please enter a valid email"),
+    if type == 1:
+        content=Label(text="Please enter valid information")
+    elif type == 2:
+        content=Label(text="Account already exists")
+    elif type == 3:
+        content=Label(text="Please enter a valid email"),
     size_hint=(None, None), size=(500, 300))
     window.open()
 
@@ -101,23 +92,25 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
-            if self.email.text not in users['Email'].unique():
-                # if email does not exist already then append to the csv file
-                # change current screen to log in the user now
-                user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                self.patient = False
-                new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
-                new_caretaker.save()
-                sm.current = 'login'
-                self.name2.text = ""
-                self.email.text = ""
-                self.pwd.text = ""
+            if(validate_email(self.email.text)):
+                if self.email.text not in users['Email'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
+                    new_caretaker.save()
+                    sm.current = 'login'
+                    self.name2.text = ""
+                    self.email.text = ""
+                    self.pwd.text = ""
+                else:
+                    popFun(2)
             else:
                 # if email invalid
-                popFun3()
+                popFun(3)
         else:
             # if values are empty or invalid show pop up
-            popFun()
+            popFun(1)
 
     def signupbtnp(self):
         # for patient
@@ -130,7 +123,6 @@ class signupWindow(Screen):
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    self.patient = True
                     # uses the FullName, Email and Password to create a new listing under the 'Patient' class
                     new_patient = Patient(patientFullName = self.name2.text, patientEmail = self.email.text, patientPassword = self.pwd.text)
                     new_patient.save()
@@ -139,13 +131,13 @@ class signupWindow(Screen):
                     self.email.text = ""
                     self.pwd.text = ""
                 else:
-                    popFun2()
+                    popFun(2)
             else:
                 # if email invalid
-                popFun3()
+                popFun(3)
         else:
             # if values are empty or invalid show pop up
-            popFun()
+            popFun(1)
 
 # class to display validation result
 class logDataWindow(Screen):
