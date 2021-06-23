@@ -45,6 +45,9 @@ curr_request_type = ''
 curr_request_specification = ''
 curr_request_patient = ''
 
+# defines email variable for global usage
+global_email = ''
+
 # class to call the popup function
 class PopupWindow(Widget):
     def btn(self):
@@ -99,8 +102,11 @@ class ReadSQL:
         #returns true if the email exists and false if it does not
         for i in range(len(emails)):
             if email == emails[i]:
+                global global_email
+                global_email = email
                 return True
         return False
+
 
 # class to accept user info and validate it
 class loginWindow(Screen):
@@ -181,6 +187,10 @@ class signupWindow(Screen):
             # if values are empty or invalid show pop up
             popFun(1)
 
+
+
+
+
 # class to display validation result
 class logDataWindow(Screen):
     pass
@@ -190,6 +200,7 @@ class windowManager(ScreenManager):
     pass
 
 class English_Window(Screen):
+
     def change_menu(self, menu):
         global location
         location = menu
@@ -369,12 +380,24 @@ class English_Window(Screen):
             else:
                 pass
 
+
         elif button == 'Speak_Command':
             speak_message()
             change_speak_message('')
-            new_request = Requests(request_type = self.curr_request_type, request_specification = self.curr_request_specification, request_patient = self.curr_request_patient)
+            print(global_email)
+            def patient_returnname():
+                entry = str(Patient.objects.all().filter(patientEmail=global_email).values('patientFullName')[0])
+                entry = entry.replace("'", '')
+                entry = entry.replace("{", '')
+                entry = entry.replace("}", '')
+                entry = entry.replace(":", '')
+                entry = entry.replace("patientFullName", '')
+                patient_name = entry.replace(' ', '')
+                print (patient_name)
+            patient_returnname()
+            new_request = Requests(request_type = self.curr_request_type, request_specification = self.curr_request_specification, request_patient = patient_name)
             new_request.save()
-            print(new_request)
+            print("REQUEST SAVED")
 
 
         elif button == 'Cantonese':
@@ -384,6 +407,11 @@ class English_Window(Screen):
             screen_two.change_menu(location)
 
         sm.current = 'english'
+
+
+
+
+
 
 class Cantonese_Window(Screen):
     def change_menu(self, menu):

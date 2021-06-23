@@ -16,6 +16,9 @@ class Patient(models.Model):
     patientEmail = models.CharField(max_length=30, default = '')
     patientPassword = models.CharField(max_length=30, default = '')
 
+    def __str__(self):
+        return self.patientFullName
+
 class Requests(models.Model):
     request_type = models.CharField(max_length=30)
     request_specification = models.CharField(max_length=30)
