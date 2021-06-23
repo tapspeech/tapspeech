@@ -53,6 +53,12 @@ def popFun2():
     size_hint=(None, None), size=(300, 300))
     window.open()
 
+def popFun3():
+    window = Popup(title='Error',
+    content=Label(text="Email needs to have an @"),
+    size_hint=(None, None), size=(300, 300))
+    window.open()
+
 
 # class to accept user info and validate it
 class loginWindow(Screen):
@@ -124,6 +130,8 @@ class signupWindow(Screen):
                     self.patient = True
                 else:
                     popFun2()
+            else:
+                popFun3()
         else:
             # if values are empty or invalid show pop up
             popFun()
