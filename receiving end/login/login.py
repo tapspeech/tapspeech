@@ -489,8 +489,8 @@ class Cantonese_Window(Screen):
         sm.current = 'canto'
 # kv file
 kv = Builder.load_file('login.kv')
-# sm = windowManager()
-smNT = ScreenManager(transition=NoTransition())
+sm = ScreenManager()
+#smNT = ScreenManager(transition=NoTransition())
 
 # reading all the data stored
 users=pd.read_csv('login.csv')
