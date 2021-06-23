@@ -2,7 +2,7 @@
 import pandas as pd
 from plyer import battery, tts, vibrator
 from validate_email import validate_email
-
+import sqlite3
 import os
 
 import django
@@ -29,6 +29,8 @@ from kivy.core.window import Window
 
 Window.size = (640, 360)
 Window.clearcolor = (1,1,1,1)
+
+LabelBase.register(name='NotoSans', fn_regular='NotoSans.otf')
 
 location = 'English_Main'
 
@@ -67,12 +69,44 @@ def popFun(type):
 
     window.open()
 
+class ReadSQL:
+    def __init__(self, database):
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
+        self.cur = self.conn.cursor()
+
+    def query_columns_to_dataframe(self, table, columns):
+        query = 'select '
+        for i in range(len(columns)):
+            query = query + columns[i] + ', '
+        query = query[:-2] + ' from ' + table
+        #~ print(query)
+        df = pd.read_sql_query(query, self.conn)
+        return df
+    #detects whether the email given as the parameter exists
+    def check_email(email):
+        #list to store emails
+        emails=[]
+        #selects the database
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientEmail'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerEmail'])
+        #adds all emails into the emails list
+        for number in range(len(df.index)):
+            emails.append(df.at[number,'patientEmail'])
+        for number in range(len(df2.index)):
+            emails.append(df2.at[number,'caretakerEmail'])
+        #returns true if the email exists and false if it does not
+        for i in range(len(emails)):
+            if email == emails[i]:
+                return True
+        return False
+
 # class to accept user info and validate it
 class loginWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     def validate(self):
-        users=pd.read_csv('login.csv')
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
             popFun(1)
@@ -83,6 +117,7 @@ class loginWindow(Screen):
             # reset TextInput widget
             self.email.text = ""
             self.pwd.text = ""
+
 
 # class to accept sign up info
 class signupWindow(Screen):
