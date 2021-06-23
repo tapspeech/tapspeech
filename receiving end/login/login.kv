@@ -256,7 +256,7 @@ windowManager:
             on_press:
                 root.button_press('Thumb')
             Image:
-                source: 'images/English_Thumb.png'
+                source: 'images/thumb.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -270,7 +270,7 @@ windowManager:
             on_press:
                 root.button_press('Index')
             Image:
-                source: 'images/English_Index.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -284,7 +284,7 @@ windowManager:
             on_press:
                 root.button_press('Middle')
             Image:
-                source: 'images/English_Middle.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -298,7 +298,7 @@ windowManager:
             on_press:
                 root.button_press('Pinky')
             Image:
-                source: 'images/English_Pinky.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -308,11 +308,14 @@ windowManager:
             id: Speak_Command_Button
             font_size:40
             pos_hint: {'x':0.2,'y':0.1}
-            text: '    Speak\nCommand'
-            color:0,1,0,1
-            background_color:0,0.6,0,1
             on_press:
                 root.button_press('Speak_Command')
+			Image:
+				source: 'images/English_Speak_Command.png'
+                size: self.parent.size
+                stretch: True
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
         Button:
             id: Chinese_Button
@@ -372,7 +375,7 @@ windowManager:
             on_press:
                 root.button_press('拇指')
             Image:
-                source: 'images/Cantonese_Thumb.png'
+                source: 'images/thumb.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -387,7 +390,7 @@ windowManager:
             on_press:
                 root.button_press('食指')
             Image:
-                source: 'images/Cantonese_Index.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -402,7 +405,7 @@ windowManager:
             on_press:
                 root.button_press('中指')
             Image:
-                source: 'images/Cantonese_Middle.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -417,7 +420,7 @@ windowManager:
             on_press:
                 root.button_press('小指')
             Image:
-                source: 'images/Cantonese_Pinky.png'
+                source: 'images/other_fingers.png'
                 size: self.parent.size
                 stretch: True
                 center_x: self.parent.center_x
@@ -428,11 +431,15 @@ windowManager:
             #font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.2,'y':0.1}
-            text: '說話'
-            color:0,1,0,1
-            background_color:0,0.6,0,1
             on_press:
                 root.button_press('Speak_Command')
+			Image:
+			# change this to shuo hua visual
+				source: 'images/Cantonese_Speak_Command.png'
+                size: self.parent.size
+                stretch: True
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
         Button:
             id: English_Button
@@ -443,8 +450,6 @@ windowManager:
             background_color:0.9,0.9,0.9,1
             on_release:
                 app.root.current = 'english'
-
-
 
         Image:
             id: Tall_Cylinder_Image
