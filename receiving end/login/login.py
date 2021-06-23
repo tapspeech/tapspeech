@@ -96,6 +96,7 @@ class signupWindow(Screen):
         sm.current="login"
 
     def signupbtnc(self):
+        # for caretaker
         # creating a DataFrame of the info
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
@@ -104,6 +105,9 @@ class signupWindow(Screen):
                 # if email does not exist already then append to the csv file
                 # change current screen to log in the user now
                 user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                self.patient = False
+                new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
+                new_caretaker.save()
                 sm.current = 'login'
                 self.name2.text = ""
                 self.email.text = ""
@@ -115,6 +119,7 @@ class signupWindow(Screen):
             popFun()
 
     def signupbtnp(self):
+        # for patient
         # creating a DataFrame of the info
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
@@ -125,6 +130,10 @@ class signupWindow(Screen):
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    self.patient = True
+                    # uses the FullName, Email and Password to create a new listing under the 'Patient' class
+                    new_patient = Patient(patientFullName = self.name2.text, patientEmail = self.email.text, patientPassword = self.pwd.text)
+                    new_patient.save()
                     sm.current = 'login'
                     self.name2.text = ""
                     self.email.text = ""
