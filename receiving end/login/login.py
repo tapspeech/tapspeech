@@ -100,16 +100,20 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
-            if self.email.text not in users['Email'].unique():
-                # if email does not exist already then append to the csv file
-                # change current screen to log in the user now
-                user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                sm.current = 'login'
-                self.name2.text = ""
-                self.email.text = ""
-                self.pwd.text = ""
+            if(validate_email(self.email.text)):
+                if self.email.text not in users['Email'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    sm.current = 'login'
+                    self.name2.text = ""
+                    self.email.text = ""
+                    self.pwd.text = ""
+                else:
+                    popFun2()
             else:
-                popFun2()
+                # if email invalid
+                popFun3()
         else:
             # if values are empty or invalid show pop up
             popFun()
@@ -120,7 +124,6 @@ class signupWindow(Screen):
                             columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
             if(validate_email(self.email.text)):
-                print(self.email.text)
                 if self.email.text not in users['Email'].unique():
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
