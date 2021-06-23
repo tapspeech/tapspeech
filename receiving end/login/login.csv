@@ -1,2 +1,4 @@
-Name,Email,Password,Patient
-jared,jared@gmail.com,jared,False
+Name,Email,Password,User Type
+
+sadfsadfsdfasdf,asdfasd@gmail.com,asdfklsadf,
+asdf,asdf@gmail.com,asdfsdaf,patient

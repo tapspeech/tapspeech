@@ -13,9 +13,9 @@ from kivy.uix.scrollview import ScrollView
 Window.size = (640, 360)
 Window.clearcolor = (1, 1, 1, 1)
 
-kv = Builder.load_file("caretaker.kv")
+#kv = Builder.load_file("caretaker.kv")
 
-def update_patients_list():
+def initiate_patients_list():
     global patient_list
 
     patient_database = open('caretaker.csv', 'r')
@@ -29,33 +29,36 @@ def update_patients_list():
         new_patient_list.append(individual_patient)
 
     patient_list = new_patient_list
-    return patient_list
+    print(patient_list)
 
-update_patients_list()
+initiate_patients_list()
 
 class caretakerApp(MDApp):
     def build(self):
+        def update_patients_list():
+            global patient_list
+
+            initiate_patients_list()
+            list_view.clear_widgets()
+            list_view.add_widget(TwoLineListItem(text='Refresh',on_press=lambda x:update_patients_list()))
+            for patient in patient_list:
+                items = TwoLineListItem(text=str(patient[0]), secondary_text=str(patient[1]))
+                list_view.add_widget(items)
+
         screen = Screen()
 
         scroll = ScrollView()
         list_view = MDList()
         scroll.add_widget(list_view)
 
+        list_view.add_widget(TwoLineListItem(text='Refresh',on_press=lambda x:update_patients_list()))
+
         for patient in patient_list:
             items = TwoLineListItem(text=str(patient[0]), secondary_text=str(patient[1]))
             list_view.add_widget(items)
 
-        '''
-        item1 = TwoLineListItem(text='Item 1', secondary_text='wo xiang si')
-        item2 = TwoLineListItem(text='Item 2', secondary_text='wo hai xiang si')
-
-        list_view.add_widget(item1)
-        list_view.add_widget(item2)
-        '''
-
         screen.add_widget(scroll)
         return screen
-        #return kv
 
 if __name__ == '__main__':
     caretakerApp().run()
