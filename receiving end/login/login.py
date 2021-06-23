@@ -4,8 +4,8 @@ from plyer import battery, tts, vibrator
 from validate_email import validate_email
 
 import os
-import django
 
+import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
@@ -16,7 +16,7 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
@@ -37,7 +37,6 @@ speak_command_message = ''
 
 # Message Function for Cantonese Audio Files
 cantonese_message_name = ''
-
 
 # class to call the popup function
 class PopupWindow(Widget):
@@ -490,7 +489,8 @@ class Cantonese_Window(Screen):
         sm.current = 'canto'
 # kv file
 kv = Builder.load_file('login.kv')
-sm = windowManager()
+# sm = windowManager()
+smNT = ScreenManager(transition=NoTransition())
 
 # reading all the data stored
 users=pd.read_csv('login.csv')
