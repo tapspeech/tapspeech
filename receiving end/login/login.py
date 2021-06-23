@@ -75,7 +75,7 @@ class loginWindow(Screen):
         users=pd.read_csv('login.csv')
         # validating if the email already exists
         if self.email.text not in users['Email'].unique():
-            popFun()
+            popFun(1)
         else:
             # switching the current screen to display validation result
             sm.current = 'english'
