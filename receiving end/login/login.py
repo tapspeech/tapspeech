@@ -3,6 +3,14 @@ import pandas as pd
 from plyer import battery, tts, vibrator
 from validate_email import validate_email
 
+import os
+import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
+django.setup()
+
+from tapSpeech_app.models import Patient
+
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
