@@ -30,6 +30,8 @@ from kivy.core.window import Window
 Window.size = (640, 360)
 Window.clearcolor = (1,1,1,1)
 
+LabelBase.register(name='NotoSans', fn_regular='NotoSans.otf')
+
 location = 'English_Main'
 
 # Message Function for English Text to Speech

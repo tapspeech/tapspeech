@@ -319,14 +319,18 @@ windowManager:
 
         Button:
             id: Chinese_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:35
             size_hint: 0.2, 0.15
             pos_hint: {'x':0.6,'y':0.175}
-            text: 'zhong wen'
-            background_color:0.9,0.9,0.9,1
 			on_release:
 				app.root.current = 'canto'
+			Image:
+				source: 'images/Chinese_Button.png'
+                size: self.parent.size
+                stretch: True
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 
         Image:
@@ -339,35 +343,35 @@ windowManager:
     FloatLayout:
         Label:
             id: Cantonese_Thumb_label
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':-0.4,'y':0.4}
             text: '飲品'
 
         Label:
             id: Cantonese_Index_label
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':-0.2,'y':0.4}
             text: '廁所'
 
         Label:
             id: Cantonese_Middle_label
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0,'y':0.4}
             text: '食物'
 
         Label:
             id: Cantonese_Pinky_label
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.4,'y':0.4}
             text: '教床'
 
         Button:
             id: Cantonese_Thumb_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             # Stupid code below
             pos_hint: {'x':0.00001,'y':0.1}
@@ -383,7 +387,7 @@ windowManager:
 
         Button:
             id: Cantonese_Index_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.2,'y':0.4}
             background_color:0,0,0,0
@@ -398,7 +402,7 @@ windowManager:
 
         Button:
             id: Cantonese_Middle_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.4,'y':0.4}
             background_color:0,0,0,0
@@ -413,7 +417,7 @@ windowManager:
 
         Button:
             id: Cantonese_Pinky_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.8,'y':0.4}
             background_color:0,0,0,0
@@ -428,7 +432,7 @@ windowManager:
 
         Button:
             id: Cantonese_Speak_Command_Button
-            #font_name: 'NotoSans'
+            font_name: 'NotoSans'
             font_size:45
             pos_hint: {'x':0.2,'y':0.1}
             on_press:
@@ -446,10 +450,14 @@ windowManager:
             font_size:30
             size_hint: 0.2, 0.15
             pos_hint: {'x':0.6,'y':0.175}
-            text: 'English Mode'
-            background_color:0.9,0.9,0.9,1
             on_release:
                 app.root.current = 'english'
+			Image:
+				source: 'images/English_Button.png'
+                size: self.parent.size
+                stretch: True
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
         Image:
             id: Tall_Cylinder_Image
