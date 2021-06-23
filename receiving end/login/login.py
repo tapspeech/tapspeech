@@ -9,7 +9,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
-from tapSpeech_app.models import Patient
+from tapSpeech_app.models import Patient, Caretaker, Requests
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -37,6 +37,11 @@ speak_command_message = ''
 
 # Message Function for Cantonese Audio Files
 cantonese_message_name = ''
+
+# resets all current request variables
+curr_request_type = ''
+curr_request_specification = ''
+curr_request_patient = ''
 
 # class to call the popup function
 class PopupWindow(Widget):
@@ -229,22 +234,31 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Liquid')
                 speak_message('Liquid selected')
+                self.curr_request_type = 'Liquid 飲品'
             elif location == 'English_Liquid':
                 change_menu('English_Main')
                 speak_message('Exited liquid menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Toilet':
                 change_menu('English_Main')
                 speak_message('Exited toilet menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Food':
                 change_menu('English_Main')
                 speak_message('Exited food menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Bed':
                 change_menu('English_Main')
                 speak_message('Exited bed menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             else:
                 pass
 
@@ -252,18 +266,23 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Toilet')
                 speak_message('Toilet selected')
+                self.curr_request_type = 'Toilet 廁所'
             elif location == 'English_Liquid':
                 speak_message('Water')
                 change_speak_message('Please give me some water')
+                self.curr_request_specification = 'Water 水'
             elif location == 'English_Toilet':
                 speak_message('Urinate')
                 change_speak_message('I need to go urinate')
+                self.curr_request_specification = 'Urinate o尿'
             elif location == 'English_Food':
                 speak_message('Rice')
                 change_speak_message('Please give me some rice')
+                self.curr_request_specification = 'Rice 飯'
             elif location == 'English_Bed':
                 speak_message('Down')
                 change_speak_message('Please move my bed down')
+                self.curr_request_specification = 'Down 下'
             else:
                 pass
 
@@ -271,18 +290,23 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Food')
                 speak_message('Food selected')
+                self.curr_request_type = 'Food 食品'
             elif location == 'English_Liquid':
                 speak_message('Juice')
                 change_speak_message('Please give me some juice')
+                self.curr_request_specification = 'Juice 果汁'
             elif location == 'English_Toilet':
                 speak_message('Poop')
                 change_speak_message('I need to go poop')
+                self.curr_request_specification = 'Poop o屎'
             elif location == 'English_Food':
                 speak_message('Pork')
                 change_speak_message('Please give me some pork')
+                self.curr_request_specification = 'Pork 豬肉'
             elif location == 'English_Bed':
                 speak_message('Up')
                 change_speak_message('Please move my bed up')
+                self.curr_request_specification = 'Up 上'
             else:
                 pass
 
@@ -290,24 +314,33 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Bed')
                 speak_message('Bed selected')
+                self.curr_request_type = 'Bed 床'
             elif location == 'English_Liquid':
                 speak_message('Milk')
                 change_speak_message('Please give me some milk')
+                self.curr_request_specification = 'Milk 奶'
             elif location == 'English_Toilet':
                 speak_message('Help')
                 change_speak_message('Please help me go to the bathroom')
+                self.curr_request_specification = 'Help 幫忙'
             elif location == 'English_Food':
                 speak_message('Chicken')
                 change_speak_message('Please give me some chicken')
+                self.curr_request_specification = 'Chicken 雞肉'
             elif location == 'English_Bed':
                 speak_message('Help')
                 change_speak_message('I need help with my bed')
+                self.curr_request_specification = 'Help 幫忙'
             else:
                 pass
 
         elif button == 'Speak_Command':
             speak_message()
             change_speak_message('')
+            new_request = Requests(request_type = self.curr_request_type, request_specification = self.curr_request_specification, request_patient = self.curr_request_patient)
+            new_request.save()
+            print(new_request)
+
 
         elif button == 'Cantonese':
             change_speak_message('')
