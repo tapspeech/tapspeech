@@ -2,7 +2,7 @@
 import pandas as pd
 from plyer import battery, tts, vibrator
 from validate_email import validate_email
-
+import sqlite3
 import os
 import django
 
@@ -69,14 +69,49 @@ def popFun3():
     size_hint=(None, None), size=(500, 300))
     window.open()
 
+class ReadSQL:
+    def __init__(self, database):
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
+        self.cur = self.conn.cursor()
+
+    def query_columns_to_dataframe(self, table, columns):
+        query = 'select '
+        for i in range(len(columns)):
+            query = query + columns[i] + ', '
+        query = query[:-2] + ' from ' + table
+        #~ print(query)
+        df = pd.read_sql_query(query, self.conn)
+        return df
+    def check_email(email):
+        emails=[]
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientEmail'])
+        for number in len(df):
+            emails.append(df.at[number,'patientEmail'])
+        for email in len(emails):
+            if email == emails[email]:
+                return True
+            return False
+emails=[]
+email='jaredtung@gmail.com'
+test = ReadSQL('db.sqlite3')
+df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientEmail'])
+for number in range(len(df.index)):
+    emails.append(df.at[number,'patientEmail'])
+for i in range(len(emails)):
+    if email == emails[i]:
+        print ('ok')
+    print ('fail')
+print (emails)
+
 # class to accept user info and validate it
 class loginWindow(Screen):
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
     def validate(self):
-        users=pd.read_csv('login.csv')
         # validating if the email already exists
-        if self.email.text not in users['Email'].unique():
+        if ReadSQL.check_email(self.email.text)==False:
             popFun()
         else:
             # switching the current screen to display validation result
@@ -85,6 +120,7 @@ class loginWindow(Screen):
             # reset TextInput widget
             self.email.text = ""
             self.pwd.text = ""
+
 
 # class to accept sign up info
 class signupWindow(Screen):
