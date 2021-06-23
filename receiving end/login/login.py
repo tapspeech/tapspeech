@@ -50,14 +50,17 @@ class P(FloatLayout):
 
 # function that displays the content
 def popFun(type):
-    window = Popup(title='Error',
     if type == 1:
-        content=Label(text="Please enter valid information")
+        label_content="Please enter valid information"
     elif type == 2:
-        content=Label(text="Account already exists")
+        label_content="Account already exists"
     elif type == 3:
-        content=Label(text="Please enter a valid email"),
+        label_content="Please enter a valid email"
+
+    window = Popup(title='Error',
+    content=Label(text=label_content),
     size_hint=(None, None), size=(500, 300))
+
     window.open()
 
 # class to accept user info and validate it
