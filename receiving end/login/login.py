@@ -4,19 +4,19 @@ from plyer import battery, tts, vibrator
 from validate_email import validate_email
 import sqlite3
 import os
-import django
 
+import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
-from tapSpeech_app.models import Patient
+from tapSpeech_app.models import Patient, Caretaker, Requests
 
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
@@ -38,35 +38,33 @@ speak_command_message = ''
 # Message Function for Cantonese Audio Files
 cantonese_message_name = ''
 
+# resets all current request variables
+curr_request_type = ''
+curr_request_specification = ''
+curr_request_patient = ''
 
 # class to call the popup function
 class PopupWindow(Widget):
     def btn(self):
-        popFun()
+        popFun(1)
 
 # class to build GUI for a popup window
 class P(FloatLayout):
     pass
 
 # function that displays the content
-def popFun():
-    window = Popup(title='Error',
-    content=Label(text="Please enter valid information"),
-    size_hint=(None, None), size=(500, 300))
-    window.open()
+def popFun(type):
+    if type == 1:
+        label_content="Please enter valid information"
+    elif type == 2:
+        label_content="Account already exists"
+    elif type == 3:
+        label_content="Please enter a valid email"
 
-# function
-def popFun2():
     window = Popup(title='Error',
-    content=Label(text="Account already exists"),
+    content=Label(text=label_content),
     size_hint=(None, None), size=(500, 300))
-    window.open()
 
-# function that displays the content
-def popFun3():
-    window = Popup(title='Error',
-    content=Label(text="Please enter a valid email"),
-    size_hint=(None, None), size=(500, 300))
     window.open()
 
 class ReadSQL:
@@ -132,47 +130,57 @@ class signupWindow(Screen):
         sm.current="login"
 
     def signupbtnc(self):
+        # for caretaker
         # creating a DataFrame of the info
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
-            if self.email.text not in users['Email'].unique():
-                # if email does not exist already then append to the csv file
-                # change current screen to log in the user now
-                user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                sm.current = 'login'
-                self.name2.text = ""
-                self.email.text = ""
-                self.pwd.text = ""
-            else:
-                popFun2()
-        else:
-            # if values are empty or invalid show pop up
-            popFun()
-
-    def signupbtnp(self):
-        # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
-                            columns = ['Name', 'Email', 'Password', 'User Type'])
-        if self.email.text != "":
             if(validate_email(self.email.text)):
-                print(self.email.text)
                 if self.email.text not in users['Email'].unique():
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
+                    new_caretaker.save()
                     sm.current = 'login'
                     self.name2.text = ""
                     self.email.text = ""
                     self.pwd.text = ""
                 else:
-                    popFun2()
+                    popFun(2)
             else:
                 # if email invalid
-                popFun3()
+                popFun(3)
         else:
             # if values are empty or invalid show pop up
-            popFun()
+            popFun(1)
+
+    def signupbtnp(self):
+        # for patient
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
+                            columns = ['Name', 'Email', 'Password', 'User Type'])
+        if self.email.text != "":
+            if(validate_email(self.email.text)):
+                if self.email.text not in users['Email'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    # uses the FullName, Email and Password to create a new listing under the 'Patient' class
+                    new_patient = Patient(patientFullName = self.name2.text, patientEmail = self.email.text, patientPassword = self.pwd.text)
+                    new_patient.save()
+                    sm.current = 'login'
+                    self.name2.text = ""
+                    self.email.text = ""
+                    self.pwd.text = ""
+                else:
+                    popFun(2)
+            else:
+                # if email invalid
+                popFun(3)
+        else:
+            # if values are empty or invalid show pop up
+            popFun(1)
 
 # class to display validation result
 class logDataWindow(Screen):
@@ -262,22 +270,31 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Liquid')
                 speak_message('Liquid selected')
+                self.curr_request_type = 'Liquid 飲品'
             elif location == 'English_Liquid':
                 change_menu('English_Main')
                 speak_message('Exited liquid menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Toilet':
                 change_menu('English_Main')
                 speak_message('Exited toilet menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Food':
                 change_menu('English_Main')
                 speak_message('Exited food menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             elif location == 'English_Bed':
                 change_menu('English_Main')
                 speak_message('Exited bed menu')
                 change_speak_message('')
+                self.curr_request_type = ''
+                self.curr_request_specification = ''
             else:
                 pass
 
@@ -285,18 +302,23 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Toilet')
                 speak_message('Toilet selected')
+                self.curr_request_type = 'Toilet 廁所'
             elif location == 'English_Liquid':
                 speak_message('Water')
                 change_speak_message('Please give me some water')
+                self.curr_request_specification = 'Water 水'
             elif location == 'English_Toilet':
                 speak_message('Urinate')
                 change_speak_message('I need to go urinate')
+                self.curr_request_specification = 'Urinate o尿'
             elif location == 'English_Food':
                 speak_message('Rice')
                 change_speak_message('Please give me some rice')
+                self.curr_request_specification = 'Rice 飯'
             elif location == 'English_Bed':
                 speak_message('Down')
                 change_speak_message('Please move my bed down')
+                self.curr_request_specification = 'Down 下'
             else:
                 pass
 
@@ -304,18 +326,23 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Food')
                 speak_message('Food selected')
+                self.curr_request_type = 'Food 食品'
             elif location == 'English_Liquid':
                 speak_message('Juice')
                 change_speak_message('Please give me some juice')
+                self.curr_request_specification = 'Juice 果汁'
             elif location == 'English_Toilet':
                 speak_message('Poop')
                 change_speak_message('I need to go poop')
+                self.curr_request_specification = 'Poop o屎'
             elif location == 'English_Food':
                 speak_message('Pork')
                 change_speak_message('Please give me some pork')
+                self.curr_request_specification = 'Pork 豬肉'
             elif location == 'English_Bed':
                 speak_message('Up')
                 change_speak_message('Please move my bed up')
+                self.curr_request_specification = 'Up 上'
             else:
                 pass
 
@@ -323,24 +350,33 @@ class English_Window(Screen):
             if location == 'English_Main':
                 change_menu('English_Bed')
                 speak_message('Bed selected')
+                self.curr_request_type = 'Bed 床'
             elif location == 'English_Liquid':
                 speak_message('Milk')
                 change_speak_message('Please give me some milk')
+                self.curr_request_specification = 'Milk 奶'
             elif location == 'English_Toilet':
                 speak_message('Help')
                 change_speak_message('Please help me go to the bathroom')
+                self.curr_request_specification = 'Help 幫忙'
             elif location == 'English_Food':
                 speak_message('Chicken')
                 change_speak_message('Please give me some chicken')
+                self.curr_request_specification = 'Chicken 雞肉'
             elif location == 'English_Bed':
                 speak_message('Help')
                 change_speak_message('I need help with my bed')
+                self.curr_request_specification = 'Help 幫忙'
             else:
                 pass
 
         elif button == 'Speak_Command':
             speak_message()
             change_speak_message('')
+            new_request = Requests(request_type = self.curr_request_type, request_specification = self.curr_request_specification, request_patient = self.curr_request_patient)
+            new_request.save()
+            print(new_request)
+
 
         elif button == 'Cantonese':
             change_speak_message('')
@@ -522,7 +558,8 @@ class Cantonese_Window(Screen):
         sm.current = 'canto'
 # kv file
 kv = Builder.load_file('login.kv')
-sm = windowManager()
+sm = ScreenManager()
+#smNT = ScreenManager(transition=NoTransition())
 
 # reading all the data stored
 users=pd.read_csv('login.csv')
