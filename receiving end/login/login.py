@@ -92,20 +92,16 @@ class signupWindow(Screen):
         user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
                             columns = ['Name', 'Email', 'Password', 'User Type'])
         if self.email.text != "":
-            if(validate_email(self.email.text)):
-                if self.email.text not in users['Email'].unique():
-                    # if email does not exist already then append to the csv file
-                    # change current screen to log in the user now
-                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    sm.current = 'login'
-                    self.name2.text = ""
-                    self.email.text = ""
-                    self.pwd.text = ""
-                else:
-                    popFun2()
+            if self.email.text not in users['Email'].unique():
+                # if email does not exist already then append to the csv file
+                # change current screen to log in the user now
+                user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                sm.current = 'login'
+                self.name2.text = ""
+                self.email.text = ""
+                self.pwd.text = ""
             else:
-                # if email invalid
-                popFun3()
+                popFun2()
         else:
             # if values are empty or invalid show pop up
             popFun()
@@ -498,27 +494,6 @@ sm.add_widget(Cantonese_Window(name='canto'))
 class loginMain(App):
     def build(self):
         return sm
-
-# class that verifies users(pseudo code)
-# class Verify():
-#     def verification(Name, Email, Password):
-#         if verify(Name):
-#             if verify(password):
-#                 note="Login successful."
-#                 if database.User.role = caretaker:
-#                     show caretaker screen
-#                 else:
-#                     show patient screen
-#         note="An account with this name already exists."
-#
-#     def verify(self, object):
-#         """Checks whether an account exists.
-#         Args:
-#             account_name (str): The account name.
-#         Returns:
-#             bool: Whether the account exists.
-#         """
-#         return object in database.keys()
 
 # driver function
 if __name__=="__main__":
