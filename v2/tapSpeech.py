@@ -14,7 +14,7 @@ import django
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.properties import ObjectProperty, StringProperty
-
+from kivy.uix.layout import Layout
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.uix.popup import Popup
@@ -22,6 +22,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 import pandas as pd
 from plyer import battery, tts, vibrator
+from kivy.uix.gridlayout import GridLayout
 
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
@@ -30,67 +31,75 @@ from kivy.core.window import Window
 Window.size = (360, 640)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
+#LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
+#location = 'start'
 
 '''
 this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class start_Window(Screen):
-    def build(self):
-        btn = Button(text ="Push Me !",
-                     background_normal = 'images',
-                     background_down = 'down.png',
-                     size_hint = (.3, .3),
-                     pos_hint = {"x":0.35, "y":0.3}
-                   )
-        btn.bind(on_press = self.callback)
-        return btn
+class welcomeScreen(Screen):
+    pass
 
-class login_Window(Screen):
+class loginScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
+
+    def check_info(name, birthday):
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientBirthday'])
+        for number in range(len(df.index)):
+            if name == df.at[number,'patientFullName']:
+                if birthday == df2.at[number, 'patientBirthday']:
+                    return True
+            return False
+
     def validate(self):
-        # validating if the email already exists
-        if ReadSQL.check_email(self.email.text) == False:
+        # validating if the info already exists
+        if ReadSQL.check_info(self.name.text, self.name.birthday) == False:
             popFun(1)
         else:
             # switching the current screen to display validation result
-            sm.current = 'english'
+            sm.current = 'Patient_Up'
 
             # reset TextInput widget
-            self.email.text = ""
-            self.pwd.text = ""
+            self.name.text = ""
+            self.birthday.text = ""
 
-class register_Window(Screen):
+class registerScreen(Screen):
+    birthday = ObjectProperty(None)
+    name = ObjectProperty(None)
+
+class PatientUpScreen(Screen):
     pass
 
-
-class Patient_Window_Up(Screen):
+class PatientDownScreen(Screen):
     pass
 
-class Patient_Window_Down(Screen):
+class ContactsScreen(Screen):
     pass
 
-class Contacts_Window(Screen):
+class CaretakerScreen(Screen):
     pass
 
-class Caretaker_Window(Screen):
+class windowManager(ScreenManager):
+    # start = ObjectProperty()
     pass
-
-class WindowManager(ScreenManager):
-    pass
-
-# Runs the kv file
-
-kv = Builder.load_file("tapSpeech.kv")
 
 class tapSpeechApp(App):
+    kv = Builder.load_file("tapSpeech.kv")
     Window.clearcolor = (0.88,0.92,0.92,1)
+    
     def build(self):
-        return kv
+        sm = windowManager()
+        sm.add_widget(welcomeScreen(name="welcome"))
+        sm.add_widget(loginScreen(name="login"))
+
+        sm.current = "welcome"
+        return sm
 
 if __name__ == '__main__':
     tapSpeechApp().run()
-    self.root.current = 'register_Window'
