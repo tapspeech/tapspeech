@@ -1,4 +1,4 @@
-#:import NoTransition kivy.uix.screenmanager.NoTransition
+#import NoTransition kivy.uix.screenmanager.NoTransition
 
 windowManager:
     #transition: NoTransition()
@@ -58,12 +58,28 @@ windowManager:
     #         #size_hint: {}
 
 <loginScreen>:
-    BoxLayout:
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.92, 0.92, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/English_login_background.png'
+    FloatLayout:
+        #pos_hint:{'x':0.2,'y':0.4}
+        #size_hint{'x':0.5,'y':0.1}
         Button:
-            text: 'My settings button'
-        Button:
-            text: 'Back to welcome page'
-            on_press: root.manager.current = 'welcome'
+            source: 'images/Register.png'
+            font_size: 32
+            size_hint: (0.3, 0.3)
+            on_release: app.root.current = 'login'
+        #Button:
+        #    text: 'login'
+        #    font_size: 32
+        #    size_hint{'x':0.5,'y':0.1}
+        #    on_release: app.root.current = 'login'
+    #        text: 'Back to welcome page'
+        #    on_press: root.manager.current = 'welcome'
 
 <registerScreen>:
 
