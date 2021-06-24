@@ -11,20 +11,51 @@ windowManager:
     caretakerScreen:
 
 <welcomeScreen>:
-    FloatLayout:
-        Label:
-            text:'Welcome'
-            font_name:'Pacifico'
+    name: "welcome"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/welcome.png'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 10
+        size_hint: 0.5, 0.1
+        pos: (180,180)
+        # pos_hint: {'center_x':0.5, 'center_y':0.5}
         Button:
-            text: 'Welcome screen'
-            font_size: 32
-            on_release: app.root.current = 'login'
+            # pos_hint: {'center_x':0.5, 'center_y':0.5}
+            id: btn_login
+            # text: "LOGIN"
+            font_size: 15
+            on_press: print("ouch! More gently please")
+            on_release: print("ahhh")
+            on_state:
+                print("my current state is {}".format(self.state))
+        Button:
+            id: btn_register
+            # text: "REGISTER"
+            font_size: 15
+            on_press: print("ouch! More gently please")
+            on_release: print("ahhh")
+            on_state:
+                print("my current state is {}".format(self.state))
 
-        Image:
-            id: Logo_With_Text
-            source: 'images/Logo_With_Text.png'
-            pos_hint: {'x':0.1,'y':0.1}
-            #size_hint: {}
+    
+    # FloatLayout:
+    #     Label:
+    #         text:'Welcome'
+    #         font_name:'Pacifico'
+    #     Button:
+    #         text: 'Welcome screen'
+    #         font_size: 32
+    #         on_release: app.root.current = 'login'
+
+    #     Image:
+    #         id: Logo_With_Text
+    #         source: 'images/Logo_With_Text.png'
+    #         pos_hint: {'x':0.1,'y':0.1}
+    #         #size_hint: {}
 
 <loginScreen>:
     BoxLayout:
