@@ -46,14 +46,13 @@ windowManager:
             pos: self.pos
             size: self.size
             source: 'images/English_login_background.png'
+
     FloatLayout:
         # Fix below line from button to text field
         Button:
             size_hint: (0.82, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            on_release:
-                app.root.current = 'login'
             Image:
                 source: 'images/Eng_login_username_button.png'
                 size: self.parent.size
@@ -65,8 +64,6 @@ windowManager:
             size_hint: (0.82, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            on_release:
-                app.root.current = 'login'
             Image:
                 source: 'images/Eng_login_birthday.png'
                 size: self.parent.size
@@ -74,19 +71,17 @@ windowManager:
                 center_y: self.parent.center_y
 
         Button:
-            size_hint: (0.82, 0.085)
+            size_hint: (0.53, 0.072)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             on_release:
-                app.root.current = 'login'
+                app.root.current = 'welcome'
             Image:
-                source: 'images/Eng_login_birthday.png'
+                source: 'images/Eng_login_back_button.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-            Image:
 
-        #
 
 <registerScreen>:
 

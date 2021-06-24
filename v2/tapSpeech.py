@@ -154,7 +154,8 @@ class windowManager(ScreenManager):
 
 class tapSpeechApp(App):
     kv = Builder.load_file("tapSpeech.kv")
-    Window.clearcolor = (0.88,0.92,0.92,1)
+    #Window.clearcolor = (0.88,0.92,0.92,1)
+    Window.clearcolor = (1,1,1,1)
 
     def build(self):
         sm = windowManager()
