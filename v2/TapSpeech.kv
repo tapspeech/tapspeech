@@ -1,14 +1,14 @@
 
 windowManager:
-    welcomeScreen:
-    loginScreen:
-    registerScreen:
-    patientUpScreen:
-    patientDownScreen:
-    contactsScreen:
-    caretakerScreen:
+    en_welcomeScreen:
+    en_loginScreen:
+    en_registerScreen:
+    en_patientUpScreen:
+    en_patientDownScreen:
+    en_contactsScreen:
+    en_caretakerScreen:
 
-<welcomeScreen>:
+<en_welcomeScreen>:
     name: "welcome"
     canvas.before:
         Rectangle:
@@ -19,7 +19,7 @@ windowManager:
         orientation: 'vertical'
         spacing: 50
         size_hint: 0.45, 0.15
-        pos_hint: {"right":0.74,"top":0.55}
+        pos_hint: {"right":0.73,"top":0.55}
         Button:
             id: btn_login
             background_color: 0, 0, 0, 0
@@ -44,8 +44,22 @@ windowManager:
                 size_hint: None, None
                 width: self.parent.width
                 height: self.parent.width/self.image_ratio
+    Button:
+        id: change_language
+        size_hint: 0.2, 0.05
+        pos_hint: {"right":0.6,"top":0.1}
+        background_color: 0, 0, 0, 0
+        on_release: app.root.current = 'login'
+        Image:
+            source: 'images/icons/chinese_lang.png'
+            pos: self.parent.pos
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: None, None
+            width: self.parent.width
+            height: self.parent.width/self.image_ratio
 
-<loginScreen>:
+<en_loginScreen>:
     canvas.before:
     #    Color:
     #        rgba: 0.88, 0.92, 0.92, 1
@@ -90,9 +104,9 @@ windowManager:
                 center_y: self.parent.center_y
 
 
-<registerScreen>:
+<en_registerScreen>:
 
-<PatientUpScreen>:
+<en_PatientUpScreen>:
     FloatLayout:
         Label:
             text:'Welcome'
@@ -109,10 +123,10 @@ windowManager:
         #    pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
 
-<PatientDownScreen>:
+<en_PatientDownScreen>:
 
 
-<ContactsScreen>:
+<en_ContactsScreen>:
 
 
-<CaretakerScreen>:
+<en_CaretakerScreen>:
