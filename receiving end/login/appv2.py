@@ -26,3 +26,8 @@ from plyer import battery, tts, vibrator
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 from kivy.core.window import Window
+
+Window.size = (360, 640)
+Window.clearcolor = (240,246,247,1)
+
+LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
