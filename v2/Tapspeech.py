@@ -61,4 +61,4 @@ class TapSpeechApp(App):
         return kv
 
 if __name__ == '__main__':
-    tapSpeechApp().run()
+    TapSpeechApp().run()
