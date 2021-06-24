@@ -43,10 +43,10 @@ this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class welcomeScreen(Screen):
-    layout = BoxLayout()
+class en_welcomeScreen(Screen):
+    pass
 
-class loginScreen(Screen):
+class en_loginScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
     password = ObjectProperty(None)
@@ -83,7 +83,7 @@ class loginScreen(Screen):
             self.name.text = ""
             self.birthday.text = ""
 
-class registerScreen(Screen):
+class en_registerScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
 
@@ -138,16 +138,16 @@ class registerScreen(Screen):
             # if values are empty or invalid show pop up
             popFun(1)
 
-class patientUpScreen(Screen):
+class en_patientUpScreen(Screen):
     pass
 
-class patientDownScreen(Screen):
+class en_patientDownScreen(Screen):
     pass
 
-class contactsScreen(Screen):
+class en_contactsScreen(Screen):
     pass
 
-class caretakerScreen(Screen):
+class en_caretakerScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
@@ -160,13 +160,13 @@ class tapSpeechApp(App):
 
     def build(self):
         sm = windowManager(transition=FadeTransition())
-        sm.add_widget(welcomeScreen(name="welcome"))
-        sm.add_widget(loginScreen(name="login"))
-        sm.add_widget(registerScreen(name="register"))
-        sm.add_widget(patientUpScreen(name="patientUp"))
-        sm.add_widget(patientDownScreen(name="patientDown"))
-        sm.add_widget(contactsScreen(name="contacts"))
-        sm.add_widget(caretakerScreen(name="caretaker"))
+        sm.add_widget(en_welcomeScreen(name="welcome"))
+        sm.add_widget(en_loginScreen(name="login"))
+        sm.add_widget(en_registerScreen(name="register"))
+        sm.add_widget(en_patientUpScreen(name="patientUp"))
+        sm.add_widget(en_patientDownScreen(name="patientDown"))
+        sm.add_widget(en_contactsScreen(name="contacts"))
+        sm.add_widget(en_caretakerScreen(name="caretaker"))
 
         sm.current = "welcome"
         return sm
