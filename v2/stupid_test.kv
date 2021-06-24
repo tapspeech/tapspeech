@@ -1,0 +1,19 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+WindowManager:
+    #transition: NoTransition()
+    welcome:
+    Caretaker:
+
+<welcome>:
+    name: 'welcome_Window'
+
+    FloatLayout:
+        Image:
+            id: Logo_With_Text
+            source: 'images/Logo_With_Text.png'
+            pos_hint: {'x':0.1,'y':0.1}
+            #size_hint: {}
+
+<Caretaker>:
+    name: 'caretaker_Window'
