@@ -67,7 +67,7 @@ class welcome(Screen):
 #         # returning the layout
 #         return layout
 
-return
+return welcome()
 
 
     '''
@@ -168,31 +168,7 @@ class register(Screen):
             popFun(1)
 
 class Patient_Up(Screen):
-    def build(self):
-
-        # adding GridLayouts in App
-        # Defining number of coloumn
-        # You can use row as well depends on need
-        layout = GridLayout(cols = 2)
-
-        # 1st row
-        layout.add_widget(Button(text ='Hello 1'))
-        layout.add_widget(Button(text ='World 1'))
-
-        # 2nd row
-        layout.add_widget(Button(text ='Hello 2'))
-        layout.add_widget(Button(text ='World 2'))
-
-        # 3rd row
-        layout.add_widget(Button(text ='Hello 3'))
-        layout.add_widget(Button(text ='World 3'))
-
-        # 4th row
-        layout.add_widget(Button(text ='Hello 4'))
-        layout.add_widget(Button(text ='World 4'))
-
-        # returning the layout
-        return layout
+    pass
 
 class Patient_Down(Screen):
     pass
