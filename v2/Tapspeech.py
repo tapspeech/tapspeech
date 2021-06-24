@@ -6,10 +6,10 @@ import sqlite3
 import os
 
 import django
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
-django.setup()
+#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
+#django.setup()
 
-from tapSpeech_app.models import Patient, Caretaker, Requests
+#from tapSpeech_app.models import Patient, Caretaker, Requests
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -33,14 +33,31 @@ Window.clearcolor = (240,246,247,1)
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 
 
+class login_Window(Screen):
+    pass
+
+class Patient_Window_Up(Screen):
+    pass
+
+class Patient_Window_Down(Screen):
+    pass
+
+class Contacts_Window(Screen):
+    pass
+
+class Caretaker_Window(Screen):
+    pass
+
+class WindowManager(ScreenManager):
+    pass
 
 # Runs the kv file
 
-kv = Builder.load_file("Tap_Speech.kv")
+kv = Builder.load_file("TapSpeech.kv")
 
 class TapSpeechApp(App):
     def build(self):
         return kv
 
 if __name__ == '__main__':
-    Tap_SpeechApp().run()
+    TapSpeechApp().run()
