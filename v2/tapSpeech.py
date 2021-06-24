@@ -33,14 +33,14 @@ Window.size = (360, 640)
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 #LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
-#location = 'start_Window'
+#location = 'start'
 
 '''
 this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class welcome_Window(Screen):
+class welcomeScreen(Screen):
     pass
     '''
     def build(self):
@@ -54,7 +54,7 @@ class welcome_Window(Screen):
         return btn
     '''
 
-class login_Window(Screen):
+class loginScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
 
@@ -74,13 +74,13 @@ class login_Window(Screen):
             popFun(1)
         else:
             # switching the current screen to display validation result
-            sm.current = 'Patient_Window_Up'
+            sm.current = 'Patient_Up'
 
             # reset TextInput widget
             self.email.text = ""
             self.pwd.text = ""
 
-class register_Window(Screen):
+class registerScreen(Screen):
     name2 = ObjectProperty(None)
     email = ObjectProperty(None)
     pwd = ObjectProperty(None)
@@ -141,30 +141,33 @@ class register_Window(Screen):
                 # if values are empty or invalid show pop up
                 popFun(1)
 
-class Patient_Window_Up(Screen):
+class PatientUpScreen(Screen):
     pass
 
-class Patient_Window_Down(Screen):
+class PatientDownScreen(Screen):
     pass
 
-class Contacts_Window(Screen):
+class ContactsScreen(Screen):
     pass
 
-class Caretaker_Window(Screen):
+class CaretakerScreen(Screen):
     pass
 
-class WindowManager(ScreenManager):
-    start_Window = ObjectProperty()
+class windowManager(ScreenManager):
+    # start = ObjectProperty()
     pass
-
-# Runs the kv file
-
-kv = Builder.load_file("tapSpeech.kv")
 
 class tapSpeechApp(App):
+    kv = Builder.load_file("tapSpeech.kv")
     Window.clearcolor = (0.88,0.92,0.92,1)
+    
     def build(self):
-        return kv
+        sm = windowManager()
+        sm.add_widget(welcomeScreen(name="welcome"))
+        sm.add_widget(loginScreen(name="login"))
+
+        sm.current = "welcome"
+        return sm
 
 if __name__ == '__main__':
     tapSpeechApp().run()

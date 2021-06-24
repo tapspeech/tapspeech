@@ -1,39 +1,55 @@
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 
-WindowManager:
+windowManager:
     #transition: NoTransition()
-    welcome_Window:
-    login_Window:
-    register_Window:
-    Patient_Window_Up:
-    Patient_Window_Down:
-    Contacts_Window:
-    Caretaker_Window:
+    welcomeScreen:
+    loginScreen:
+    registerScreen:
+    PatientUpScreen:
+    PatientDownScreen:
+    ContactsScreen:
+    CaretakerScreen:
 
-<welcome_Window>:
-    name: 'welcome_Window'
-
+<welcomeScreen>:
     FloatLayout:
+        Label:
+            text:'Welcome'
+            font_name:'Pacifico'
+
+        Button:
+            text: 'Welcome screen'
+            font_size: 32
+            on_release: app.root.current = 'login'
+
         Image:
             id: Tall_Cylinder_Image
             source: 'images/Logo_With_Text.png'
             pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
 
+<loginScreen>:
+    BoxLayout:
+        Button:
+            text: 'My settings button'
+        Button:
+            text: 'Back to welcome page'
+            on_press: root.manager.current = 'welcome'
 
-<Patient_Window_Up>:
-    name: 'patient_window_up'
+<registerScreen>:
+    name: 'register'
+
+<PatientUpScreen>:
+    name: 'patient_up'
 
     FloatLayout:
         Label:
             text:'Welcome'
             font_name:'Pacifico'
 
-
         Button:
             text: 'Next screen test'
             font_size: 32
-            on_release: app.root.current = 'welcome_Window'
+            on_release: app.root.current = 'welcome'
 
         Image:
             id: Tall_Cylinder_Image
@@ -41,18 +57,11 @@ WindowManager:
             pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
 
+<PatientDownScreenScreen>:
+    name: 'patient_down'
 
-<login_Window>:
-    name: 'login_Window'
+<ContactsScreenScreen>:
+    name: 'contacts'
 
-<register_Window>:
-    name: 'register_Window'
-
-<Patient_Window_Down>:
-    name: 'patient_window_down_Window'
-
-<Contacts_Window>:
-    name: 'contacts_Window'
-
-<Caretaker_Window>:
-    name: 'caretaker_Window'
+<CaretakerScreenScreen>:
+    name: 'caretaker'
