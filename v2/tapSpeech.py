@@ -40,8 +40,36 @@ this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class welcome_Window(Screen):
-    pass
+class welcome(Screen):
+#     def build(self):
+#
+#         # adding GridLayouts in App
+#         # Defining number of coloumn and size of the buttons i.e height
+#         layout = GridLayout(cols = 2, row_force_default = True,
+#                             row_default_height = 30)
+#
+#         # 1st row
+#         layout.add_widget(Button(text ='Hello 1', size_hint_x = None, width = 100))
+#         layout.add_widget(Button(text ='World 1'))
+#
+#         # 2nd row
+#         layout.add_widget(Button(text ='Hello 2', size_hint_x = None, width = 100))
+#         layout.add_widget(Button(text ='World 2'))
+#
+#         # 3rd row
+#         layout.add_widget(Button(text ='Hello 3', size_hint_x = None, width = 100))
+#         layout.add_widget(Button(text ='World 3'))
+#
+#         # 4th row
+#         layout.add_widget(Button(text ='Hello 4', size_hint_x = None, width = 100))
+#         layout.add_widget(Button(text ='World 4'))
+#
+#         # returning the layout
+#         return layout
+
+return
+
+
     '''
     def build(self):
         btn = Button(text ="Push Me !",
@@ -54,7 +82,7 @@ class welcome_Window(Screen):
         return btn
     '''
 
-class login_Window(Screen):
+class login(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
 
@@ -74,19 +102,45 @@ class login_Window(Screen):
             popFun(1)
         else:
             # switching the current screen to display validation result
-            sm.current = 'Patient_Window_Up'
+            sm.current = 'Patient_Up'
 
             # reset TextInput widget
-            self.email.text = ""
-            self.pwd.text = ""
+            self.name.text = ""
+            self.birthday.text = ""
 
-class register_Window(Screen):
-    name2 = ObjectProperty(None)
-    email = ObjectProperty(None)
+class register(Screen):
+    birthday = ObjectProperty(None)
+    name = ObjectProperty(None)
     pwd = ObjectProperty(None)
 
     def backbtn(self):
         sm.current="login"
+
+    def signupbtnp(self):
+        # for patient
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name.text, self.birthday.text, "patient"]],
+                            columns = ['Name', 'Birthdate', 'User Type'])
+        if self.name.text != "":
+            if(check_info(self.name.text, self.birthday.text)):
+                if self.name.text not in users['Name'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    # uses the FullName, Email and Password to create a new listing under the 'Patient' class
+                    new_patient = Patient(patientFullName = self.name.text, patientBirthDate = self.birthday.text)
+                    new_patient.save()
+                    sm.current = 'login_Window'
+                    self.name.text = ""
+                    self.birthday.text = ""
+                else:
+                    popFun(2)
+            else:
+                    # if email invalid
+                popFun(3)
+        else:
+                # if values are empty or invalid show pop up
+            popFun(1)
 
     def signupbtnc(self):
         # for caretaker
@@ -99,11 +153,10 @@ class register_Window(Screen):
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
+                    new_caretaker = Caretaker(caretakerFullName = self.name.text, caretakerPassword = self.pwd.text)
                     new_caretaker.save()
                     sm.current = 'login'
-                    self.name2.text = ""
-                    self.email.text = ""
+                    self.name.text = ""
                     self.pwd.text = ""
                 else:
                     popFun(2)
@@ -114,55 +167,55 @@ class register_Window(Screen):
             # if values are empty or invalid show pop up
             popFun(1)
 
-        def signupbtnp(self):
-            # for patient
-            # creating a DataFrame of the info
-            user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
-                                columns = ['Name', 'Email', 'Password', 'User Type'])
-            if self.email.text != "":
-                if(validate_email(self.email.text)):
-                    if self.email.text not in users['Email'].unique():
-                        # if email does not exist already then append to the csv file
-                        # change current screen to log in the user now
-                        user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                        # uses the FullName, Email and Password to create a new listing under the 'Patient' class
-                        new_patient = Patient(patientFullName = self.name2.text, patientEmail = self.email.text, patientPassword = self.pwd.text)
-                        new_patient.save()
-                        sm.current = 'login'
-                        self.name2.text = ""
-                        self.email.text = ""
-                        self.pwd.text = ""
-                    else:
-                        popFun(2)
-                else:
-                    # if email invalid
-                    popFun(3)
-            else:
-                # if values are empty or invalid show pop up
-                popFun(1)
+class Patient_Up(Screen):
+    def build(self):
 
-class Patient_Window_Up(Screen):
+        # adding GridLayouts in App
+        # Defining number of coloumn
+        # You can use row as well depends on need
+        layout = GridLayout(cols = 2)
+
+        # 1st row
+        layout.add_widget(Button(text ='Hello 1'))
+        layout.add_widget(Button(text ='World 1'))
+
+        # 2nd row
+        layout.add_widget(Button(text ='Hello 2'))
+        layout.add_widget(Button(text ='World 2'))
+
+        # 3rd row
+        layout.add_widget(Button(text ='Hello 3'))
+        layout.add_widget(Button(text ='World 3'))
+
+        # 4th row
+        layout.add_widget(Button(text ='Hello 4'))
+        layout.add_widget(Button(text ='World 4'))
+
+        # returning the layout
+        return layout
+
+class Patient_Down(Screen):
     pass
 
-class Patient_Window_Down(Screen):
+class Contacts(Screen):
     pass
 
-class Contacts_Window(Screen):
-    pass
-
-class Caretaker_Window(Screen):
+class Caretaker(Screen):
     pass
 
 class WindowManager(ScreenManager):
-    start_Window = ObjectProperty()
+    #welcome_Window = ObjectProperty()
     pass
 
 # Runs the kv file
 
 kv = Builder.load_file("tapSpeech.kv")
+sm = ScreenManager()
+
 
 class tapSpeechApp(App):
     Window.clearcolor = (0.88,0.92,0.92,1)
+    WindowManager.current = "login"
     def build(self):
         return kv
 
