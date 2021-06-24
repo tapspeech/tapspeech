@@ -31,3 +31,16 @@ Window.size = (360, 640)
 Window.clearcolor = (240,246,247,1)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
+
+
+
+# Runs the kv file
+
+kv = Builder.load_file("Tap_Speech.kv")
+
+class TapSpeechApp(App):
+    def build(self):
+        return kv
+
+if __name__ == '__main__':
+    Tap_SpeechApp().run()
