@@ -53,11 +53,11 @@ class WindowManager(ScreenManager):
 
 # Runs the kv file
 
-kv = Builder.load_file("TapSpeech.kv")
+kv = Builder.load_file("tapSpeech.kv")
 
 class TapSpeechApp(App):
     def build(self):
         return kv
 
 if __name__ == '__main__':
-    TapSpeechApp().run()
+    tapSpeechApp().run()
