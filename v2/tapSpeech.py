@@ -22,6 +22,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 import pandas as pd
 from plyer import battery, tts, vibrator
+from kivy.uix.gridlayout import GridLayout
 
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
@@ -30,6 +31,7 @@ from kivy.core.window import Window
 Window.size = (360, 640)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
+#LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
 #location = 'start_Window'
 
@@ -38,7 +40,7 @@ this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class start_Window(Screen):
+class welcome_Window(Screen):
     pass
     '''
     def build(self):
@@ -78,10 +80,66 @@ class login_Window(Screen):
             self.email.text = ""
             self.pwd.text = ""
 
-
-
 class register_Window(Screen):
-    pass
+    name2 = ObjectProperty(None)
+    email = ObjectProperty(None)
+    pwd = ObjectProperty(None)
+
+    def backbtn(self):
+        sm.current="login"
+
+    def signupbtnc(self):
+        # for caretaker
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "caretaker"]],
+                            columns = ['Name', 'Email', 'Password', 'User Type'])
+        if self.email.text != "":
+            if(validate_email(self.email.text)):
+                if self.email.text not in users['Email'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
+                    new_caretaker.save()
+                    sm.current = 'login'
+                    self.name2.text = ""
+                    self.email.text = ""
+                    self.pwd.text = ""
+                else:
+                    popFun(2)
+            else:
+                # if email invalid
+                popFun(3)
+        else:
+            # if values are empty or invalid show pop up
+            popFun(1)
+
+        def signupbtnp(self):
+            # for patient
+            # creating a DataFrame of the info
+            user = pd.DataFrame([[self.name2.text, self.email.text, self.pwd.text, "patient"]],
+                                columns = ['Name', 'Email', 'Password', 'User Type'])
+            if self.email.text != "":
+                if(validate_email(self.email.text)):
+                    if self.email.text not in users['Email'].unique():
+                        # if email does not exist already then append to the csv file
+                        # change current screen to log in the user now
+                        user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                        # uses the FullName, Email and Password to create a new listing under the 'Patient' class
+                        new_patient = Patient(patientFullName = self.name2.text, patientEmail = self.email.text, patientPassword = self.pwd.text)
+                        new_patient.save()
+                        sm.current = 'login'
+                        self.name2.text = ""
+                        self.email.text = ""
+                        self.pwd.text = ""
+                    else:
+                        popFun(2)
+                else:
+                    # if email invalid
+                    popFun(3)
+            else:
+                # if values are empty or invalid show pop up
+                popFun(1)
 
 class Patient_Window_Up(Screen):
     pass
@@ -106,19 +164,7 @@ kv = Builder.load_file("tapSpeech.kv")
 class tapSpeechApp(App):
     Window.clearcolor = (0.88,0.92,0.92,1)
     def build(self):
-        '''
-        self.root = WindowManager()
-        self.auth()
-        '''
         return kv
-
-    '''
-    def auth(self):
-        global location
-        if location == 'start_Window':
-            print('works')
-            self.root.current = 'start_Window'
-    '''
 
 if __name__ == '__main__':
     tapSpeechApp().run()
