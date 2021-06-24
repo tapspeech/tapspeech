@@ -16,10 +16,15 @@ windowManager:
             text:'Welcome'
             font_name:'Pacifico'
         Button:
-            text: 'Welcome screen'
-            font_size: 32
             size_hint : 0.3, 0.08
+            pos_hint: {'x':0.5,'y':0.5}
             on_release: app.root.current = 'login'
+            source : 'images/Login.png'
+        Button:
+            size_hint : 0.547, 0.064
+            pos_hint: {'x':0.5,'y':0.3}
+            on_release: app.root.current = 'login'
+            background_normal : 'images/Register.png'
 
         Image:
             id: Logo_With_Text
@@ -39,10 +44,14 @@ windowManager:
         #pos_hint:{'x':0.2,'y':0.4}
         #size_hint{'x':0.5,'y':0.1}
         Button:
-            source: 'images/Register.png'
-            font_size: 32
-            size_hint: (0.3, 0.3)
-            on_release: app.root.current = 'login'
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'x':0.5}
+            on_release:
+                app.root.current = 'login'
+            Image:
+                source: 'images/Eng_login_username_button.png'
+                size: self.parent.size
         #Button:
         #    text: 'login'
         #    font_size: 32
