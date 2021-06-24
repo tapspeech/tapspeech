@@ -40,7 +40,7 @@ this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
 
-class welcome(Screen):
+# class welcome(Screen):
 #     def build(self):
 #
 #         # adding GridLayouts in App
@@ -67,7 +67,7 @@ class welcome(Screen):
 #         # returning the layout
 #         return layout
 
-return welcome()
+pass
 
 
     '''
@@ -111,7 +111,6 @@ class login(Screen):
 class register(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
-    pwd = ObjectProperty(None)
 
     def backbtn(self):
         sm.current="login"
@@ -153,10 +152,11 @@ class register(Screen):
                     # if email does not exist already then append to the csv file
                     # change current screen to log in the user now
                     user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    new_caretaker = Caretaker(caretakerFullName = self.name.text, caretakerPassword = self.pwd.text)
+                    new_caretaker = Caretaker(caretakerFullName = self.name2.text, caretakerEmail = self.email.text, caretakerPassword = self.pwd.text)
                     new_caretaker.save()
                     sm.current = 'login'
-                    self.name.text = ""
+                    self.name2.text = ""
+                    self.email.text = ""
                     self.pwd.text = ""
                 else:
                     popFun(2)
