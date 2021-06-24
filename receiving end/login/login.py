@@ -111,7 +111,7 @@ class loginWindow(Screen):
     pwd = ObjectProperty(None)
     def validate(self):
         # validating if the email already exists
-        if self.email.text not in users['Email'].unique():
+        if check_email(self.email.text) == False):
             popFun(1)
         else:
             # switching the current screen to display validation result

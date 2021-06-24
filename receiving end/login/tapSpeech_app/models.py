@@ -13,8 +13,12 @@ class Caretaker(models.Model):
 
 class Patient(models.Model):
     patientFullName = models.CharField(max_length=30, default = '')
-    patientEmail = models.CharField(max_length=30, default = '')
+    patientBirthday = models.CharField(max_length=30, default = '')
     patientPassword = models.CharField(max_length=30, default = '')
+    EmergencyContactName1 = models.CharField(max_length=30, default = '')
+    EmergencyContactNumber1 = models.CharField(max_length=30, default = '')
+    EmergencyContactName2 = models.CharField(max_length=30, default = '')
+    EmergencyContactNumber2 = models.CharField(max_length=30, default = '')
 
     def __str__(self):
         return self.patientFullName
