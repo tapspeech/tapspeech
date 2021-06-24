@@ -28,13 +28,44 @@ from kivy.core.audio import SoundLoader
 from kivy.core.window import Window
 
 Window.size = (360, 640)
-Window.clearcolor = (240,246,247,1)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 
 
+'''
+this below line returns an error, im commenting it out until you fix it
+layout = GridLayout(cols=2)
+'''
+
+class start_Window(Screen):
+    def build(self):
+        btn = Button(text ="Push Me !",
+                     background_normal = 'images',
+                     background_down = 'down.png',
+                     size_hint = (.3, .3),
+                     pos_hint = {"x":0.35, "y":0.3}
+                   )
+        btn.bind(on_press = self.callback)
+        return btn
+
 class login_Window(Screen):
+    birthday = ObjectProperty(None)
+    name = ObjectProperty(None)
+    def validate(self):
+        # validating if the email already exists
+        if ReadSQL.check_email(self.email.text) == False:
+            popFun(1)
+        else:
+            # switching the current screen to display validation result
+            sm.current = 'english'
+
+            # reset TextInput widget
+            self.email.text = ""
+            self.pwd.text = ""
+
+class register_Window(Screen):
     pass
+
 
 class Patient_Window_Up(Screen):
     pass
@@ -62,3 +93,4 @@ class tapSpeechApp(App):
 
 if __name__ == '__main__':
     tapSpeechApp().run()
+    self.root.current = 'register_Window'
