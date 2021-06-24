@@ -150,6 +150,14 @@ class en_contactsScreen(Screen):
 class en_caretakerScreen(Screen):
     pass
 
+class ch_welcomeScreen(Screen):
+    pass
+
+class ch_loginScreen(Screen):
+    pass
+class ch_registerScreen(Screen):
+    pass
+
 class windowManager(ScreenManager):
     pass
 
@@ -167,7 +175,9 @@ class tapSpeechApp(App):
         sm.add_widget(en_patientDownScreen(name="patientDown"))
         sm.add_widget(en_contactsScreen(name="contacts"))
         sm.add_widget(en_caretakerScreen(name="caretaker"))
-
+        sm.add_widget(ch_welcomeScreen(name="chwelcome"))
+        sm.add_widget(ch_loginScreen(name="chlogin"))
+        sm.add_widget(ch_registerScreen(name="chregister"))
         sm.current = "welcome"
         return sm
 
