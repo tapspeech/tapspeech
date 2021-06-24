@@ -104,6 +104,15 @@ class ReadSQL:
                 global_email = email
                 return True
         return False
+    def check_info(name, birthday):
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientBirthday'])
+        for number in range(len(df.index)):
+            if name == df.at[number,'patientFullName']:
+                if birthday == df2.at[number, 'patientBirthday']:
+                    return True
+            return False
 
 # class to accept user info and validate it
 class loginWindow(Screen):

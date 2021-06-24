@@ -2,8 +2,43 @@
 
 WindowManager:
     transition: NoTransition()
+    start_Window:
     login_Window:
+    register_Window:
     Patient_Window_Up:
     Patient_Window_Down:
     Contacts_Window:
     Caretaker_Window:
+
+<start_Window>:
+    name: 'start_Window'
+
+    FloatLayout:
+        Label:
+            text:'test'
+
+
+<login_Window>:
+    name: 'login_Window'
+
+<register_Window>:
+    name: 'register_Window'
+
+<Patient_Window_Up>:
+    name: 'patient_window_up_Window'
+
+    FloatLayout:
+        Image:
+            id: Tall_Cylinder_Image
+            source: 'images/Logo_With_Text.png'
+            pos_hint: {'x':0.2,'y':0.1}
+            #size_hint: {}
+
+<Patient_Window_Down>:
+    name: 'patient_window_down_Window'
+
+<Contacts_Window>:
+    name: 'contacts_Window'
+
+<Caretaker_Window>:
+    name: 'caretaker_Window'
