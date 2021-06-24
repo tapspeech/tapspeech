@@ -30,6 +30,7 @@ from kivy.core.window import Window
 
 Window.size = (360, 640)
 
+
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 #LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
@@ -73,16 +74,16 @@ class registerScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
 
-class PatientUpScreen(Screen):
+class patientUpScreen(Screen):
     pass
 
-class PatientDownScreen(Screen):
+class patientDownScreen(Screen):
     pass
 
-class ContactsScreen(Screen):
+class contactsScreen(Screen):
     pass
 
-class CaretakerScreen(Screen):
+class caretakerScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
@@ -92,11 +93,16 @@ class windowManager(ScreenManager):
 class tapSpeechApp(App):
     kv = Builder.load_file("tapSpeech.kv")
     Window.clearcolor = (0.88,0.92,0.92,1)
-    
+
     def build(self):
         sm = windowManager()
         sm.add_widget(welcomeScreen(name="welcome"))
         sm.add_widget(loginScreen(name="login"))
+        sm.add_widget(registerScreen(name="register"))
+        sm.add_widget(patientUpScreen(name="patientUp"))
+        sm.add_widget(patientDownScreen(name="patientDown"))
+        sm.add_widget(contactsScreen(name="contacts"))
+        sm.add_widget(caretakerScreen(name="caretaker"))
 
         sm.current = "welcome"
         return sm

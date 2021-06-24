@@ -5,17 +5,16 @@ windowManager:
     welcomeScreen:
     loginScreen:
     registerScreen:
-    PatientUpScreen:
-    PatientDownScreen:
-    ContactsScreen:
-    CaretakerScreen:
+    patientUpScreen:
+    patientDownScreen:
+    contactsScreen:
+    caretakerScreen:
 
 <welcomeScreen>:
     FloatLayout:
         Label:
             text:'Welcome'
             font_name:'Pacifico'
-
         Button:
             text: 'Welcome screen'
             font_size: 32
@@ -28,19 +27,23 @@ windowManager:
             #size_hint: {}
 
 <loginScreen>:
-    BoxLayout:
-        Button:
-            text: 'My settings button'
-        Button:
-            text: 'Back to welcome page'
-            on_press: root.manager.current = 'welcome'
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.92, 0.92, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/English_login_background.png'
+    #BoxLayout:
+        #Button:
+        #    text: 'My settings button'
+    #Button:
+    #        text: 'Back to welcome page'
+        #    on_press: root.manager.current = 'welcome'
 
 <registerScreen>:
-    name: 'register'
 
 <PatientUpScreen>:
-    name: 'patient_up'
-
     FloatLayout:
         Label:
             text:'Welcome'
@@ -57,11 +60,10 @@ windowManager:
         #    pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
 
-<PatientDownScreenScreen>:
-    name: 'patient_down'
+<PatientDownScreen>:
 
-<ContactsScreenScreen>:
-    name: 'contacts'
 
-<CaretakerScreenScreen>:
-    name: 'caretaker'
+<ContactsScreen>:
+
+
+<CaretakerScreen>:
