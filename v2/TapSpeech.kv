@@ -1,7 +1,5 @@
-#:import NoTransition kivy.uix.screenmanager.NoTransition
 
 windowManager:
-    #transition: NoTransition()
     welcomeScreen:
     loginScreen:
     registerScreen:
@@ -11,32 +9,41 @@ windowManager:
     caretakerScreen:
 
 <welcomeScreen>:
-    FloatLayout:
-        Label:
-            text:'Welcome'
-            font_name:'Pacifico'
+    name: "welcome"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/welcome.png'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 50
+        size_hint: 0.45, 0.15
+        pos_hint: {"right":0.74,"top":0.55}
         Button:
-            size_hint : 0.3, 0.08
-            pos_hint: {'x':0.5,'y':0.5}
+            id: btn_login
+            background_color: 0, 0, 0, 0
             on_release: app.root.current = 'login'
-            source : 'images/Login.png'
+            Image:
+                source: 'images/icons/Login.png'
+                pos: self.parent.pos
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: None, None
+                width: self.parent.width
+                height: self.parent.width/self.image_ratio
         Button:
-            size_hint : 0.547, 0.042
-            pos_hint: {'x':0.2523,'y':0.3}
-            on_release: app.root.current = 'login'
-            background_normal : 'images/Register.png'
-        # Button:
-            # source: 'images/Login.png'
-            # keep_ratio: False
-            # allow_stretch: True
-            # opacity: 0.8
-            # size_hint: 0.3, 0.4
-            # pos_hint: {'center_x': 0.5, 'center_y': 0.75}
-        Image:
-            id: Logo_With_Text
-            source: 'images/Logo_With_Text.png'
-            pos_hint: {'x':0.1,'y':0.1}
-            #size_hint: {}
+            id: btn_register
+            background_color: 0, 0, 0, 0
+            on_release: app.root.current = 'register'
+            Image:
+                source: 'images/icons/Register.png'
+                pos: self.parent.pos
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: None, None
+                width: self.parent.width
+                height: self.parent.width/self.image_ratio
 
 <loginScreen>:
     canvas.before:

@@ -13,23 +13,25 @@ import django
 
 from kivy.app import App
 from kivy.lang import Builder
-from kivy.properties import ObjectProperty, StringProperty
-from kivy.uix.layout import Layout
-from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
-from kivy.uix.popup import Popup
-from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.label import Label
-import pandas as pd
-from plyer import battery, tts, vibrator
-from kivy.uix.gridlayout import GridLayout
-
 from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 from kivy.core.window import Window
 
-Window.size = (360, 760)
+from kivy.properties import ObjectProperty, StringProperty
 
+from kivy.uix.layout import Layout
+from kivy.uix.widget import Widget
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.boxlayout import BoxLayout
+
+Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 #LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
@@ -42,7 +44,7 @@ layout = GridLayout(cols=2)
 '''
 
 class welcomeScreen(Screen):
-    pass
+    layout = BoxLayout()
 
 class loginScreen(Screen):
     birthday = ObjectProperty(None)
@@ -149,7 +151,6 @@ class caretakerScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
-    # start = ObjectProperty()
     pass
 
 class tapSpeechApp(App):
@@ -158,7 +159,7 @@ class tapSpeechApp(App):
     Window.clearcolor = (1,1,1,1)
 
     def build(self):
-        sm = windowManager()
+        sm = windowManager(transition=FadeTransition())
         sm.add_widget(welcomeScreen(name="welcome"))
         sm.add_widget(loginScreen(name="login"))
         sm.add_widget(registerScreen(name="register"))
