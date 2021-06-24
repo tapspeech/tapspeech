@@ -21,11 +21,17 @@ windowManager:
             on_release: app.root.current = 'login'
             source : 'images/Login.png'
         Button:
-            size_hint : 0.547, 0.064
-            pos_hint: {'x':0.5,'y':0.3}
+            size_hint : 0.547, 0.042
+            pos_hint: {'x':0.2523,'y':0.3}
             on_release: app.root.current = 'login'
             background_normal : 'images/Register.png'
-
+        # Button:
+            # source: 'images/Login.png'
+            # keep_ratio: False
+            # allow_stretch: True
+            # opacity: 0.8
+            # size_hint: 0.3, 0.4
+            # pos_hint: {'center_x': 0.5, 'center_y': 0.75}
         Image:
             id: Logo_With_Text
             source: 'images/Logo_With_Text.png'
@@ -46,12 +52,15 @@ windowManager:
         Button:
             size_hint: (0.82, 0.085)
             background_color:0,0,0,0
-            pos_hint: {'x':0.5}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
             on_release:
                 app.root.current = 'login'
             Image:
                 source: 'images/Eng_login_username_button.png'
                 size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
         #Button:
         #    text: 'login'
         #    font_size: 32
