@@ -150,12 +150,13 @@ class en_contactsScreen(Screen):
 class en_caretakerScreen(Screen):
     pass
 
-class ch_welcomeScreen(Screen):
+class ct_welcomeScreen(Screen):
     pass
 
-class ch_loginScreen(Screen):
+class ct_loginScreen(Screen):
     pass
-class ch_registerScreen(Screen):
+
+class ct_registerScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
@@ -168,17 +169,17 @@ class tapSpeechApp(App):
 
     def build(self):
         sm = windowManager(transition=FadeTransition())
-        sm.add_widget(en_welcomeScreen(name="welcome"))
-        sm.add_widget(en_loginScreen(name="login"))
-        sm.add_widget(en_registerScreen(name="register"))
-        sm.add_widget(en_patientUpScreen(name="patientUp"))
-        sm.add_widget(en_patientDownScreen(name="patientDown"))
-        sm.add_widget(en_contactsScreen(name="contacts"))
-        sm.add_widget(en_caretakerScreen(name="caretaker"))
-        sm.add_widget(ch_welcomeScreen(name="chwelcome"))
-        sm.add_widget(ch_loginScreen(name="chlogin"))
-        sm.add_widget(ch_registerScreen(name="chregister"))
-        sm.current = "welcome"
+        sm.add_widget(en_welcomeScreen(name="en_welcome"))
+        sm.add_widget(en_loginScreen(name="en_login"))
+        sm.add_widget(en_registerScreen(name="en_register"))
+        sm.add_widget(en_patientUpScreen(name="en_patientUp"))
+        sm.add_widget(en_patientDownScreen(name="en_patientDown"))
+        sm.add_widget(en_contactsScreen(name="en_contacts"))
+        sm.add_widget(en_caretakerScreen(name="en_caretaker"))
+        sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
+        sm.add_widget(ct_loginScreen(name="ct_login"))
+        sm.add_widget(ct_registerScreen(name="ct_register"))
+        sm.current = "en_welcome"
         return sm
 
 if __name__ == '__main__':
