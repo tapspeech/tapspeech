@@ -14,8 +14,11 @@ class Caretaker(models.Model):
 class Patient(models.Model):
     patientFullName = models.CharField(max_length=30, default = '')
     patientBirthDate = models.CharField(max_length=30, default = '')
+    patientEmergencyContactName = models.CharField(max_length=30, default = '')
     patientEmergencyContact = models.CharField(max_length=30, default = '')
+    patientEmergencyContactName2 = models.CharField(max_length=30, default = '')
     patientEmergencyContact2 = models.CharField(max_length=30, default = '')
+    patientEmergencyContactName3 = models.CharField(max_length=30, default = '')
     patientEmergencyContact3 = models.CharField(max_length=30, default = '')
 
     def __str__(self):
