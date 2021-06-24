@@ -1,17 +1,14 @@
 
 windowManager:
-    welcomeScreen:
-    loginScreen:
-    registerScreen:
-    chwelcomeScreen:
-    chloginScreen:
-    chregisterScreen:
-    patientUpScreen:
-    patientDownScreen:
-    contactsScreen:
-    caretakerScreen:
+    en_welcomeScreen:
+    en_loginScreen:
+    en_registerScreen:
+    en_patientUpScreen:
+    en_patientDownScreen:
+    en_contactsScreen:
+    en_caretakerScreen:
 
-<welcomeScreen>:
+<en_welcomeScreen>:
     name: "welcome"
     canvas.before:
         Rectangle:
@@ -22,7 +19,7 @@ windowManager:
         orientation: 'vertical'
         spacing: 50
         size_hint: 0.45, 0.15
-        pos_hint: {"right":0.74,"top":0.55}
+        pos_hint: {"right":0.73,"top":0.55}
         Button:
             id: btn_login
             background_color: 0, 0, 0, 0
@@ -47,8 +44,22 @@ windowManager:
                 size_hint: None, None
                 width: self.parent.width
                 height: self.parent.width/self.image_ratio
+    Button:
+        id: change_language
+        size_hint: 0.2, 0.05
+        pos_hint: {"right":0.6,"top":0.1}
+        background_color: 0, 0, 0, 0
+        on_release: app.root.current = 'login'
+        Image:
+            source: 'images/icons/chinese_lang.png'
+            pos: self.parent.pos
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: None, None
+            width: self.parent.width
+            height: self.parent.width/self.image_ratio
 
-<loginScreen>:
+<en_loginScreen>:
     canvas.before:
     #    Color:
     #        rgba: 0.88, 0.92, 0.92, 1
@@ -60,12 +71,9 @@ windowManager:
     FloatLayout:
         # Fix below line from button to text field
         Button:
-            name: 'username button'
             size_hint: (0.82, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            on_release:
-                app.root.current = 'welcome'
             Image:
                 source: 'images/Eng_login_username_button.png'
                 size: self.parent.size
@@ -74,12 +82,9 @@ windowManager:
 
         # Fix below line from button to text field
         Button:
-            name: 'password button'
             size_hint: (0.82, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            on_release:
-                app.root.current = 'welcome'
             Image:
                 source: 'images/Eng_login_birthday.png'
                 size: self.parent.size
@@ -87,7 +92,6 @@ windowManager:
                 center_y: self.parent.center_y
 
         Button:
-            name: 'back button'
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
@@ -100,203 +104,9 @@ windowManager:
                 center_y: self.parent.center_y
 
 
-<registerScreen>:
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/register.png'
-    #FloatLayout:
-        # Fix below line from button to text field
-    #    Button:
-    #        name: 'username button'
-    #        size_hint: (0.82, 0.085)
-    #        background_color:0,0,0,0
-    #        pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-    #        on_release:
-    #            app.root.current = 'welcome'
-    #        Image:
-    #            source: 'images/Eng_login_username_button.png'
-    #            size: self.parent.size
-    #            center_x: self.parent.center_x
-    #            center_y: self.parent.center_y
+<en_registerScreen>:
 
-        # Fix below line from button to text field
-    #    Button:
-    #        name: 'password button'
-    #        size_hint: (0.82, 0.085)
-    #        background_color:0,0,0,0
-    #        pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-    #        on_release:
-    #            source: 'images/Eng_login_birthday.png'
-    #            size: self.parent.size
-    #            center_x: self.parent.center_x
-    #            center_y: self.parent.center_y
-
-    #    Button:
-    #        name: 'register as patient button'
-    #        size_hint: (0.53, 0.072)
-    #        background_color:0,0,0,0
-    #        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-    #        on_release:
-    #            app.root.current = 'welcome'
-    #        Image:
-    #            source: 'images/Eng_login_back_button.png'
-    #            size: self.parent.size
-    #            center_x: self.parent.center_x
-    #            center_y: self.parent.center_y
-
-
-    #    Button:
-    #        name: 'register as caretaker button'
-    #        size_hint: (0.53, 0.072)
-    #        background_color:0,0,0,0
-    #        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-    #        on_release:
-    #            app.root.current = 'welcome'
-    #        Image:
-    #            source: 'images/Eng_login_back_button.png'
-    #            size: self.parent.size
-    #            center_x: self.parent.center_x
-    #            center_y: self.parent.center_y
-
-    #    Button:
-    #        name: 'back button'
-    #        size_hint: (0.53, 0.072)
-    #        background_color:0,0,0,0
-    #        pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-    #        on_release:
-    #            app.root.current = 'welcome'
-    #        Image:
-    #            source: 'images/Eng_login_back_button.png'
-    #            size: self.parent.size
-    #            center_x: self.parent.center_x
-    #            center_y: self.parent.center_y
-
-<chwelcomeScreen>:
-    name: "welcome"
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/chwelcome.png'
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 50
-        size_hint: 0.45, 0.15
-        pos_hint: {"right":0.74,"top":0.55}
-        Button:
-            id: btn_login
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'login'
-            Image:
-                source: 'images/icons/chLogin.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-        Button:
-            id: btn_register
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'register'
-            Image:
-                source: 'images/icons/chRegister.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-
-<chloginScreen>:
-    canvas.before:
-    #    Color:
-    #        rgba: 0.88, 0.92, 0.92, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/chlogin.png'
-
-    FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            on_release:
-                app.root.current = 'welcome'
-            Image:
-                source: 'images/chusernamebtn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            on_release:
-                app.root.current = 'welcome'
-            Image:
-                source: 'images/chbirthdaybtn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        Button:
-            size_hint: (0.53, 0.072)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            on_release:
-                app.root.current = 'welcome'
-            Image:
-                source: 'images/chbackbtn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-
-<chregisterScreen>:
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/register.png'
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 50
-        size_hint: 0.45, 0.15
-        pos_hint: {"right":0.74,"top":0.55}
-        Button:
-            id: btn_login
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'login'
-            Image:
-                source: 'images/icons/Login.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-        Button:
-            id: btn_register
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'register'
-            Image:
-                source: 'images/icons/Register.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-
-
-<PatientUpScreen>:
+<en_PatientUpScreen>:
     FloatLayout:
         Label:
             text:'Welcome'
@@ -313,10 +123,10 @@ windowManager:
         #    pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
 
-<PatientDownScreen>:
+<en_PatientDownScreen>:
 
 
-<ContactsScreen>:
+<en_ContactsScreen>:
 
 
-<CaretakerScreen>:
+<en_CaretakerScreen>:
