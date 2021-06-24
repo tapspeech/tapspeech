@@ -28,7 +28,7 @@ from kivy.core.text import LabelBase
 from kivy.core.audio import SoundLoader
 from kivy.core.window import Window
 
-Window.size = (360, 640)
+Window.size = (374.93, 793.7)
 
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')

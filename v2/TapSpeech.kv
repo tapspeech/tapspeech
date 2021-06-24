@@ -27,12 +27,19 @@ windowManager:
             #size_hint: {}
 
 <loginScreen>:
-    BoxLayout:
-        Button:
-            text: 'My settings button'
-        Button:
-            text: 'Back to welcome page'
-            on_press: root.manager.current = 'welcome'
+    canvas.before:
+        Color:
+            rgba: 0.88, 0.92, 0.92, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/English_login_background.png'
+    #BoxLayout:
+        #Button:
+        #    text: 'My settings button'
+    #Button:
+    #        text: 'Back to welcome page'
+        #    on_press: root.manager.current = 'welcome'
 
 <registerScreen>:
 
