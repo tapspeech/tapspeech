@@ -49,6 +49,7 @@ class welcomeScreen(Screen):
 class loginScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
+    password = ObjectProperty(None)
 
     def check_info(name, birthday):
         test = ReadSQL('db.sqlite3')
@@ -60,9 +61,19 @@ class loginScreen(Screen):
                     return True
             return False
 
+    def check_info_caretaker(name, password):
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerFullName'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerPassword'])
+        for number in range(len(df.index)):
+            if name == df.at[number,'caretakerFullName']:
+                if password == df2.at[number, 'caretakerPassword']:
+                    return True
+            return False
+
     def validate(self):
         # validating if the info already exists
-        if ReadSQL.check_info(self.name.text, self.name.birthday) == False:
+        if ReadSQL.check_info(self.name.text, self.birthday.text) == False:
             popFun(1)
         else:
             # switching the current screen to display validation result
@@ -75,6 +86,57 @@ class loginScreen(Screen):
 class registerScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
+
+    def signupbtnp(self):
+        # for patient
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name.text, self.birthday.text, "patient"]],
+                            columns = ['Name', 'Birthdate', 'User Type'])
+        if self.name.text != "":
+            if(check_info(self.name.text, self.birthday.text)):
+                if self.name.text not in users['Name'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    # uses the FullName, Email and Password to create a new listing under the 'Patient' class
+                    new_patient = Patient(patientFullName = self.name.text, patientBirthDate = self.birthday.text)
+                    new_patient.save()
+                    sm.current = 'login_Window'
+                    self.name.text = ""
+                    self.birthday.text = ""
+                else:
+                    popFun(2)
+            else:
+                    # if email invalid
+                popFun(3)
+        else:
+                # if values are empty or invalid show pop up
+            popFun(1)
+
+    def signupbtnc(self):
+        # for caretaker
+        # creating a DataFrame of the info
+        user = pd.DataFrame([[self.name.text, self.pwd.text, "caretaker"]],
+                            columns = ['Name', 'Password', 'User Type'])
+        if self.name.text != "":
+            if(check_info_patient(self.name.text, self.pwd.text)):
+                if self.name.text not in users['Name'].unique():
+                    # if email does not exist already then append to the csv file
+                    # change current screen to log in the user now
+                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
+                    new_caretaker = Caretaker(caretakerFullName = self.name.text, caretakerPassword = self.pwd.text)
+                    new_caretaker.save()
+                    sm.current = 'login'
+                    self.name2.text = ""
+                    self.pwd.text = ""
+                else:
+                    popFun(2)
+            else:
+                # if email invalid
+                popFun(3)
+        else:
+            # if values are empty or invalid show pop up
+            popFun(1)
 
 class patientUpScreen(Screen):
     pass
@@ -93,7 +155,8 @@ class windowManager(ScreenManager):
 
 class tapSpeechApp(App):
     kv = Builder.load_file("tapSpeech.kv")
-    Window.clearcolor = (0.88,0.92,0.92,1)
+    #Window.clearcolor = (0.88,0.92,0.92,1)
+    Window.clearcolor = (1,1,1,1)
 
     def build(self):
         sm = windowManager(transition=FadeTransition())
