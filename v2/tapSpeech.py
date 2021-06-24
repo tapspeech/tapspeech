@@ -71,7 +71,7 @@ class loginScreen(Screen):
 
     def validate(self):
         # validating if the info already exists
-        if ReadSQL.check_info(self.name.text, self.name.birthday) == False:
+        if ReadSQL.check_info(self.name.text, self.birthday.text) == False:
             popFun(1)
         else:
             # switching the current screen to display validation result
