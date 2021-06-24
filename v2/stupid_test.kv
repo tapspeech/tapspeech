@@ -3,10 +3,58 @@
 WindowManager:
     #transition: NoTransition()
     welcome:
+    login:
+    register:
+    Patient_Up:
+    Patient_Down:
+    Contacts:
     Caretaker:
 
 <welcome>:
-    name: 'welcome_Window'
+    GridLayout:
+
+        rows : 6
+        cols : 3
+
+        name: 'welcome_Window'
+
+        FloatLayout:
+            Image:
+                id: Logo_With_Text
+                source: 'images/Logo_With_Text.png'
+                pos_hint: {'x':0.1,'y':0.1}
+                #size_hint: {}
+
+
+<Patient_Up>:
+    name: 'patient_window_up'
+
+    FloatLayout:
+        Label:
+            text:'Welcome'
+            font_name:'Pacifico'
+
+
+        Button:
+            text: 'Next screen test'
+            font_size: 32
+            on_release: app.root.current = 'welcome'
+
+        #Image:
+        #    id: Tall_Cylinder_Image
+        #    source: 'images/Logo_With_Text.png'
+        #    pos_hint: {'x':0.1,'y':0.1}
+            #size_hint: {}
+
+
+<login>:
+    name: 'login_Window'
+
+<register>:
+    name: 'register_Window'
+
+<Patient_Down>:
+    name: 'patient_window_down_Window'
 
     FloatLayout:
         Image:
@@ -14,6 +62,9 @@ WindowManager:
             source: 'images/Logo_With_Text.png'
             pos_hint: {'x':0.1,'y':0.1}
             #size_hint: {}
+
+<Contacts>:
+    name: 'contacts_Window'
 
 <Caretaker>:
     name: 'caretaker_Window'
