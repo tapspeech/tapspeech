@@ -43,6 +43,19 @@ LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 this below line returns an error, im commenting it out until you fix it
 layout = GridLayout(cols=2)
 '''
+def popFun(type):
+    if type == 1:
+        label_content="Please enter valid information"
+    elif type == 2:
+        label_content="Account already exists"
+    elif type == 3:
+        label_content="Please enter a valid email"
+
+    window = Popup(title='Error',
+    content=Label(text=label_content),
+    size_hint=(None, None), size=(500, 300))
+
+    window.open()
 
 class en_welcomeScreen(Screen):
     pass
@@ -93,22 +106,17 @@ class ReadSQL:
                 return accountexists
 
 class en_loginScreen(Screen):
-    birthday = ObjectProperty(None)
-    name = ObjectProperty(None)
+    username = ObjectProperty(None)
     password = ObjectProperty(None)
-
 
     def validate(self):
         # validating if the info already exists
-        if ReadSQL.check_info(self.name.text, self.birthday.text) == False:
+        # if ReadSQL.check_info(self.username.text, self.password.text) == False:
+        if (not self.username.text) or (not self.password.text):
             popFun(1)
         else:
-            # switching the current screen to display validation result
-            sm.current = 'Patient_Up'
-
-            # reset TextInput widget
-            self.name.text = ""
-            self.birthday.text = ""
+            print(self.username.text, self.password.text)
+            App.get_running_app().sm.current = 'en_patientUp'
 
 class en_registerScreen(Screen):
     birthday = ObjectProperty(None)
@@ -188,25 +196,25 @@ class tapSpeechApp(App):
 
     def build(self):
         # Bear witness to Matthew's sexy code below
-        sm = windowManager(transition=FadeTransition())
+        self.sm = windowManager(transition=FadeTransition())
 
-        sm.add_widget(en_welcomeScreen(name="en_welcome"))
-        sm.add_widget(en_loginScreen(name="en_login"))
-        sm.add_widget(en_registerScreen(name="en_register"))
-        sm.add_widget(en_patientUpScreen(name="en_patientUp"))
-        sm.add_widget(en_patientDownScreen(name="en_patientDown"))
-        sm.add_widget(en_contactsScreen(name="en_contacts"))
-        sm.add_widget(en_caretakerScreen(name="en_caretaker"))
+        self.sm.add_widget(en_welcomeScreen(name="en_welcome"))
+        self.sm.add_widget(en_loginScreen(name="en_login"))
+        self.sm.add_widget(en_registerScreen(name="en_register"))
+        self.sm.add_widget(en_patientUpScreen(name="en_patientUp"))
+        self.sm.add_widget(en_patientDownScreen(name="en_patientDown"))
+        self.sm.add_widget(en_contactsScreen(name="en_contacts"))
+        self.sm.add_widget(en_caretakerScreen(name="en_caretaker"))
 
-        sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
-        sm.add_widget(ct_loginScreen(name="ct_login"))
-        sm.add_widget(ct_registerScreen(name="ct_register"))
-        sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
-        sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
-        sm.add_widget(ct_contactsScreen(name="ct_contacts"))
-        sm.add_widget(ct_caretakerScreen(name="ct_caretaker"))
-        sm.current = "en_welcome"
-        return sm
+        self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
+        self.sm.add_widget(ct_loginScreen(name="ct_login"))
+        self.sm.add_widget(ct_registerScreen(name="ct_register"))
+        self.sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
+        self.sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
+        self.sm.add_widget(ct_contactsScreen(name="ct_contacts"))
+        self.sm.add_widget(ct_caretakerScreen(name="ct_caretaker"))
+        self.sm.current = "en_welcome"
+        return self.sm
 
 if __name__ == '__main__':
     tapSpeechApp().run()
