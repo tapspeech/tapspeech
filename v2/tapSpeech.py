@@ -25,6 +25,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.textinput import TextInput
 
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
@@ -139,7 +140,18 @@ class en_registerScreen(Screen):
             popFun(1)
 
 class en_patientUpScreen(Screen):
-    pass
+    '''
+    def __init__(self, **kwargs):
+                # Change the 'name' from the line below to the username that is registered
+                # Attach it to the database (in order to find the name)
+                self.ids.Hello_Name.text = 'Hello, '+'name'
+    #def on_start(self, **kwargs):
+    '''
+
+
+    def sound_alarm(self):
+        self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
+        self.sound.play()
 
 class en_patientDownScreen(Screen):
     pass
@@ -159,6 +171,18 @@ class ct_loginScreen(Screen):
 class ct_registerScreen(Screen):
     pass
 
+class ct_patientUpScreen(Screen):
+    pass
+
+class ct_patientDownScreen(Screen):
+    pass
+
+class ct_contactsScreen(Screen):
+    pass
+
+class ct_caretakerScreen(Screen):
+    pass
+
 class windowManager(ScreenManager):
     pass
 
@@ -168,7 +192,9 @@ class tapSpeechApp(App):
     Window.clearcolor = (1,1,1,1)
 
     def build(self):
+        # Bear witness to Matthew's sexy code below
         sm = windowManager(transition=FadeTransition())
+
         sm.add_widget(en_welcomeScreen(name="en_welcome"))
         sm.add_widget(en_loginScreen(name="en_login"))
         sm.add_widget(en_registerScreen(name="en_register"))
@@ -176,9 +202,14 @@ class tapSpeechApp(App):
         sm.add_widget(en_patientDownScreen(name="en_patientDown"))
         sm.add_widget(en_contactsScreen(name="en_contacts"))
         sm.add_widget(en_caretakerScreen(name="en_caretaker"))
+
         sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         sm.add_widget(ct_loginScreen(name="ct_login"))
         sm.add_widget(ct_registerScreen(name="ct_register"))
+        sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
+        sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
+        sm.add_widget(ct_contactsScreen(name="ct_contacts"))
+        sm.add_widget(ct_caretakerScreen(name="ct_caretaker"))
         sm.current = "en_welcome"
         return sm
 

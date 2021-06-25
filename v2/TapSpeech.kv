@@ -1,4 +1,3 @@
-
 windowManager:
     en_welcomeScreen:
     en_loginScreen:
@@ -7,9 +6,14 @@ windowManager:
     en_patientDownScreen:
     en_contactsScreen:
     en_caretakerScreen:
+
     ct_welcomeScreen:
     ct_loginScreen:
     ct_registerScreen:
+    ct_patientUpScreen:
+    ct_patientDownScreen:
+    ct_contactsScreen:
+    ct_caretakerScreen:
 
 <en_welcomeScreen>:
     name: "en_welcome"
@@ -50,7 +54,7 @@ windowManager:
     Button:
         id: change_language
         size_hint: 0.2, 0.05
-        pos_hint: {"right":0.6,"top":0.1}
+        pos_hint: {"right":0.6,"top":0.09}
         background_color: 0, 0, 0, 0
         on_release: app.root.current = 'ct_welcome'
         Image:
@@ -61,6 +65,204 @@ windowManager:
             size_hint: None, None
             width: self.parent.width
             height: self.parent.width/self.image_ratio
+
+<en_loginScreen>:
+    canvas.before:
+    #    Color:
+    #        rgba: 0.88, 0.92, 0.92, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/login.png'
+
+    FloatLayout:
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            Image:
+                source: 'images/icons/en/login_username_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Image:
+                source: 'images/icons/en/password_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.52, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            # as of now, this login button sets it so that the user is redirected to the patients ui screen
+            # in the future, change this to run a function to detect if the user is
+            #   a patient or a caretaker (using the database), then bring them
+            #   to the appropriate screen, i.e. patient user is brought to
+            #   patient screen, and caretaker user is brought to the caretaker screen
+            on_release:
+                app.root.current = 'en_patientUp'
+            Image:
+                source: 'images/icons/en/login_login.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+		TextInput:
+			id : username
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 34
+			size_hint : 0.3, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+		TextInput:
+			id : password
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 34
+			size_hint : 0.3, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+
+
+
+
+        Button:
+            size_hint: (0.53, 0.072)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            on_release:
+                app.root.current = 'en_welcome'
+            Image:
+                source: 'images/icons/en/back_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+<en_registerScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/register.png'
+    FloatLayout:
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            Image:
+                source: 'images/icons/en/login_username_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Image:
+                source: 'images/icons/en/password_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.37, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.275, 'center_y': 0.35}
+            on_release:
+                app.root.current = 'en_login'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/en/reg_patient.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.37, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.725, 'center_y': 0.35}
+            on_release:
+                app.root.current = 'en_login'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/en/reg_caretaker.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.53, 0.072)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            on_release:
+                app.root.current = 'en_welcome'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/en/back_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+<en_PatientUpScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/patient_up.png'
+
+    FloatLayout:
+        Button:
+            size_hint: (0.904, 0.0811)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            on_release:
+                root.sound_alarm()
+            Image:
+                source: 'images/icons/en/alarm_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Label:
+            id: Hello_Name
+            font_name: 'GalanoGrotesque'
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+            text:'Hello, Name...(WIP)'
+
+        TextInput:
+            font_size:40
+            font_name: 'GalanoGrotesque'
+            size_hint: (0.705, 0.0674)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            hint_text:'Say something...'
+            background_normal: 'images/icons/en/say_something_textinput_active.png'
+            background_active: 'images/icons/en/say_something_textinput_active.png'
+            #Image:
+            #    source: 'images/icons/en/alarm_btn.png'
+
+
+
+
+<en_PatientDownScreen>:
+
+<en_ContactsScreen>:
+
+<en_caretakerScreen>:
+
+
+
+<en_CaretakerScreen>:
 
 <ct_welcomeScreen>:
     name: "ct_welcome"
@@ -113,58 +315,12 @@ windowManager:
             width: self.parent.width
             height: self.parent.width/self.image_ratio
 
-<en_loginScreen>:
-    canvas.before:
-    #    Color:
-    #        rgba: 0.88, 0.92, 0.92, 1
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/en/login.png'
-
-    FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/en/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/en/login_birthday.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        Button:
-            size_hint: (0.53, 0.072)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            on_release:
-                app.root.current = 'en_welcome'
-            Image:
-                source: 'images/icons/en/login_back_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
 <ct_loginScreen>:
     canvas.before:
-    #    Color:
-    #        rgba: 0.88, 0.92, 0.92, 1
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/login.png'
+            source: 'images/bg/ct/login.png'
 
     FloatLayout:
         # Fix below line from button to text field
@@ -184,7 +340,24 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.45}
             Image:
-                source: 'images/icons/ct/login_birthday.png'
+                source: 'images/icons/ct/password_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.52, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            # as of now, this login button sets it so that the user is redirected to the patients ui screen
+            # in the future, change this to run a function to detect if the user is
+            #   a patient or a caretaker (using the database), then bring them
+            #   to the appropriate screen, i.e. patient user is brought to
+            #   patient screen, and caretaker user is brought to the caretaker screen
+            on_release:
+                app.root.current = 'ct_patientUp'
+            Image:
+                source: 'images/icons/ct/login_login.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -192,43 +365,85 @@ windowManager:
         Button:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
             on_release:
                 app.root.current = 'ct_welcome'
             Image:
-                source: 'images/icons/ct/login_back_btn.png'
+                source: 'images/icons/ct/back_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-<en_registerScreen>:
-
-
-
 <ct_registerScreen>:
-
-
-<en_PatientUpScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/register.png'
     FloatLayout:
-        Label:
-            text:'Welcome'
-            font_name:'Pacifico'
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            Image:
+                source: 'images/icons/ct/login_username_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Image:
+                source: 'images/icons/ct/password_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
         Button:
-            text: 'Next screen test'
-            font_size: 32
-            on_release: app.root.current = 'en_welcome'
+            size_hint: (0.37, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.275, 'center_y': 0.35}
+            on_release:
+                app.root.current = 'ct_login'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/ct/reg_patient.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
-        #Image:
-        #    id: Tall_Cylinder_Image
-        #    source: 'images/Logo_With_Text.png'
-        #    pos_hint: {'x':0.1,'y':0.1}
-            #size_hint: {}
+        Button:
+            size_hint: (0.37, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.725, 'center_y': 0.35}
+            on_release:
+                app.root.current = 'ct_login'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/ct/reg_caretaker.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
-<en_PatientDownScreen>:
+        Button:
+            size_hint: (0.53, 0.072)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            on_release:
+                app.root.current = 'ct_welcome'
+                # conenct this to a function that registers the typed stuff into the data base
+            Image:
+                source: 'images/icons/ct/back_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
+<ct_PatientUpScreen>:
 
-<en_ContactsScreen>:
+<ct_PatientDownScreen>:
 
-
-<en_CaretakerScreen>:
+<ct_caretakerScreen>:
