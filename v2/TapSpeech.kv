@@ -76,28 +76,40 @@ windowManager:
             source: 'images/bg/en/login.png'
 
     FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/en/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+		TextInput:
+			id : username_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'USERNAME'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
+        
+		TextInput:
+			id : password_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'PASSWORD'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
-
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/en/password_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
         Button:
             size_hint: (0.52, 0.085)
             background_color:0,0,0,0
@@ -114,34 +126,7 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
-
-        TextInput:
-            id : username
-            font_size:40
-            multiline:False
-            font_name: 'GalanoGrotesque'
-			size_hint : 0.8, 0.08
-			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
-            background_normal: 'images/icons/en/say_something_textinput_active.png'
-
-            background_active: 'images/icons/en/login_textinput_active.png'
-            padding:[30,20,20,30]
-
-            #Image:
-
-		TextInput:
-			id : password
-			multiline : False
-			font_name : "GalanoGrotesque"
-			font_size : 34
-			size_hint : 0.8, 0.08
-			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
-            foreground_color: (0.325,0.415,0.4549,1)
-            background_color: (0,0,0,0)
-
-
-
+            
         Button:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
@@ -251,16 +236,20 @@ windowManager:
             text:'Hello, Name...(WIP)'
 
         TextInput:
-            id: say_something
             font_size:40
             multiline:False
             font_name: 'GalanoGrotesque'
             size_hint: (0.705, 0.0674)
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             hint_text:'Say something...'
             background_normal: 'images/icons/en/say_something_textinput_active.png'
             background_active: 'images/icons/en/say_something_textinput_active.png'
-            padding:[30,70,20,20]
+            padding:[30,20,20,30]
+            #Image:
+            #    source: 'images/icons/en/alarm_btn.png'
+
+
+
 
 <en_PatientDownScreen>:
 
