@@ -6,10 +6,10 @@ import sqlite3
 import os
 
 import django
-#os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
-#django.setup()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
+django.setup()
 
-#from tapSpeech_app.models import Patient, Caretaker, Requests
+from tapSpeech_app.models import Patient, Caretaker, Requests
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -42,6 +42,8 @@ def error(type):
         label_content="Please enter valid information"
     elif type == 2:
         label_content="Account already exists"
+    elif type == 3:
+        label_content="Incomplete Function"
 
     window = Popup(title='Error',
     content=Label(text=label_content),
@@ -87,15 +89,38 @@ class ReadSQL:
         for i in range(len(names)):
             if name == names[i]:
                 namecheck = True
-                if birthday == birthdays[i]:
-                    birthdatecheck = True
-                    if namecheck and birthdatecheck == True:
-                        accountexists = True
-                        return accountexists
-                else:
-                    return accountexists
-            else:
-                return accountexists
+            if birthday == birthdays[i]:
+                birthdatecheck = True
+        if namecheck and birthdatecheck == True:
+            accountexists = True
+        return accountexists
+
+    def check_info_caretaker(name, password):
+        #list to store emails
+        names=[]
+        passwords=[]
+        namecheck = False
+        passwordcheck = False
+        accountexists = False
+        #selects the database
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerFullName'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerPassword'])
+        #adds all emails into the emails list
+        for number in range(len(df.index)):
+            names.append(df.at[number,'caretakerFullName'])
+        for number2 in range(len(df2.index)):
+            passwords.append(df2.at[number2,'caretakerPassword'])
+        #returns true if the email exists and false if it does not
+        for i in range(len(names)):
+            if name == names[i]:
+                namecheck = True
+            if password == passwords[i]:
+                passwordcheck = True
+        if namecheck and passwordcheck == True:
+            accountexists = True
+        return accountexists
+
 
 class en_loginScreen(Screen):
     username = ObjectProperty(None)
@@ -105,7 +130,7 @@ class en_loginScreen(Screen):
         # validate if account exists
         # if ReadSQL.check_info(self.username.text, self.password.text):
         if True:
-            received_data = [self.username.text, self.password.text] 
+            received_data = [self.username.text, self.password.text]
             print(received_data)
             App.get_running_app().sm.current = 'en_patientUp'
         # error 1 - account does not exist / invalid info
@@ -117,19 +142,52 @@ class en_registerScreen(Screen):
     password = ObjectProperty(None)
 
     def register_user(self, user_type):
-        return_data = [self.username.text, self.password.text, user_type] 
+        return_data = [self.username.text, self.password.text, user_type]
         print(return_data)
-    
+        completed_registration = False
+        # if the user_type is equal to patient, run the function to add to patient database
+        if user_type == 'patient':
+            infocheckresult = ReadSQL.check_info_patient(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_patient = Patient(patientFullName = self.username.text, patientBirthDate = self.password.text)
+                new_patient.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+        # if the user_type is NOT equal to patient (which means they are caretaker), run the function to add to caretaker database
+        else:
+            infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_caretaker = Caretaker(caretakerFullName = self.username.text, caretakerPassword = self.password.text, listedPatients = '')
+                new_caretaker.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+
     def validate(self, user_type):
         # error 1 - check if they've input something
         if (not self.username.text) or (not self.password.text):
             error(1)
         # error 2 - check if account already exists
-        # else if ReadSQL.check_info(self.username.text, self.password.text) == False: 
+        # else if ReadSQL.check_info(self.username.text, self.password.text) == False:
         #   error(2)
         else:
-            self.register_user(user_type)
-            App.get_running_app().sm.current = 'en_patientUp'
+            completed_registration = self.register_user(user_type)
+            if completed_registration == False:
+                error(1)
+            else:
+                if user_type == 'patient':
+                    App.get_running_app().sm.current = 'en_patientUp'
+                else:
+                    error(3)
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
