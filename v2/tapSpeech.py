@@ -47,30 +47,56 @@ layout = GridLayout(cols=2)
 class en_welcomeScreen(Screen):
     pass
 
+class ReadSQL:
+    def __init__(self, database):
+        self.database = database
+        self.conn = sqlite3.connect(self.database)
+        self.cur = self.conn.cursor()
+
+    def query_columns_to_dataframe(self, table, columns):
+        query = 'select '
+        for i in range(len(columns)):
+            query = query + columns[i] + ', '
+        query = query[:-2] + ' from ' + table
+        #~ print(query)
+        df = pd.read_sql_query(query, self.conn)
+        return df
+
+    def check_info_patient(name, birthday):
+        #list to store emails
+        names=[]
+        birthdays=[]
+        namecheck = False
+        birthdatecheck = False
+        accountexists = False
+        #selects the database
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientBirthDate'])
+        #adds all emails into the emails list
+        for number in range(len(df.index)):
+            names.append(df.at[number,'patientFullName'])
+        for number2 in range(len(df2.index)):
+            birthdays.append(df2.at[number2,'patientBirthDate'])
+        #returns true if the email exists and false if it does not
+        for i in range(len(names)):
+            if name == names[i]:
+                namecheck = True
+                if birthday == birthdays[i]:
+                    birthdatecheck = True
+                    if namecheck and birthdatecheck == True:
+                        accountexists = True
+                        return accountexists
+                else:
+                    return accountexists
+            else:
+                return accountexists
+
 class en_loginScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
     password = ObjectProperty(None)
 
-    def check_info(name, birthday):
-        test = ReadSQL('db.sqlite3')
-        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
-        df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientBirthday'])
-        for number in range(len(df.index)):
-            if name == df.at[number,'patientFullName']:
-                if birthday == df2.at[number, 'patientBirthday']:
-                    return True
-            return False
-
-    def check_info_caretaker(name, password):
-        test = ReadSQL('db.sqlite3')
-        df = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerFullName'])
-        df2 = test.query_columns_to_dataframe('tapSpeech_app_caretaker', ['caretakerPassword'])
-        for number in range(len(df.index)):
-            if name == df.at[number,'caretakerFullName']:
-                if password == df2.at[number, 'caretakerPassword']:
-                    return True
-            return False
 
     def validate(self):
         # validating if the info already exists
@@ -88,52 +114,21 @@ class en_registerScreen(Screen):
     birthday = ObjectProperty(None)
     name = ObjectProperty(None)
 
-    def signupbtnp(self):
-        # for patient
-        # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name.text, self.birthday.text, "patient"]],
-                            columns = ['Name', 'Birthdate', 'User Type'])
-        if self.name.text != "":
-            if(check_info(self.name.text, self.birthday.text)):
-                if self.name.text not in users['Name'].unique():
-                    # if email does not exist already then append to the csv file
-                    # change current screen to log in the user now
-                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    # uses the FullName, Email and Password to create a new listing under the 'Patient' class
-                    new_patient = Patient(patientFullName = self.name.text, patientBirthDate = self.birthday.text)
-                    new_patient.save()
-                    sm.current = 'login_Window'
-                    self.name.text = ""
-                    self.birthday.text = ""
-                else:
-                    popFun(2)
-            else:
-                    # if email invalid
-                popFun(3)
-        else:
-                # if values are empty or invalid show pop up
-            popFun(1)
-
     def signupbtnc(self):
         # for caretaker
         # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name.text, self.pwd.text, "caretaker"]],
+        user = pd.DataFrame([[self.name.text, self.birthday.text, "caretaker"]],
                             columns = ['Name', 'Password', 'User Type'])
         if self.name.text != "":
-            if(check_info_patient(self.name.text, self.pwd.text)):
-                if self.name.text not in users['Name'].unique():
-                    # if email does not exist already then append to the csv file
-                    # change current screen to log in the user now
-                    user.to_csv('login.csv', mode = 'a', header = False, index = False)
-                    new_caretaker = Caretaker(caretakerFullName = self.name.text, caretakerPassword = self.pwd.text)
-                    new_caretaker.save()
-                    sm.current = 'login'
-                    self.name2.text = ""
-                    self.pwd.text = ""
-                else:
-                    popFun(2)
+            resp = ReadSQL.check_info_patient(self.name.text, self.birthday.text)
+            if resp == False:
+                new_patient = Patient(patientFullName = self.name.text, patientBirthDate = self.birthday.text)
+                new_patient.save()
+                sm.current = 'login'
+                self.name.text = ""
+                self.birthday.text = ""
             else:
-                # if email invalid
+                # if email is already made
                 popFun(3)
         else:
             # if values are empty or invalid show pop up
