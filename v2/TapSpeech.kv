@@ -315,7 +315,17 @@ windowManager:
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.4}
             text:'asdflasjdfl'
-
+    Button:
+        size_hint: (0.0856, 0.0504)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+        on_release:
+            app.root.current = 'en_patientUp'
+        Image:
+            source: 'images/icons/en/down_btn.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
 <en_ContactsScreen>:
 
