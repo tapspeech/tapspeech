@@ -9,7 +9,7 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
-#from tapSpeech_app.models import Patient, Caretaker, Requests
+from tapSpeech_app.models import Patient, Caretaker, Requests
 from kivy.uix.carousel import Carousel
 from kivy.uix.image import AsyncImage
 
