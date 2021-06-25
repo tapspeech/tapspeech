@@ -36,21 +36,12 @@ Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
-#LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
-#location = 'start'
-
-'''
-this below line returns an error, im commenting it out until you fix it
-layout = GridLayout(cols=2)
-'''
-def popFun(type):
+def error(type):
     if type == 1:
         label_content="Please enter valid information"
     elif type == 2:
         label_content="Account already exists"
-    elif type == 3:
-        label_content="Please enter a valid email"
 
     window = Popup(title='Error',
     content=Label(text=label_content),
@@ -111,36 +102,34 @@ class en_loginScreen(Screen):
     password = ObjectProperty(None)
 
     def validate(self):
-        # validating if the info already exists
-        # if ReadSQL.check_info(self.username.text, self.password.text) == False:
-        if (not self.username.text) or (not self.password.text):
-            popFun(1)
-        else:
+        # validate if account exists
+        # if ReadSQL.check_info(self.username.text, self.password.text):
+        if True:
+            received_data = [self.username.text, self.password.text] 
+            print(received_data)
             App.get_running_app().sm.current = 'en_patientUp'
+        # error 1 - account does not exist / invalid info
+        else:
+            error(1)
 
 class en_registerScreen(Screen):
-    birthday = ObjectProperty(None)
-    name = ObjectProperty(None)
+    username = ObjectProperty(None)
+    password = ObjectProperty(None)
 
-    def signupbtnc(self):
-        # for caretaker
-        # creating a DataFrame of the info
-        user = pd.DataFrame([[self.name.text, self.birthday.text, "caretaker"]],
-                            columns = ['Name', 'Password', 'User Type'])
-        if self.name.text != "":
-            resp = ReadSQL.check_info_patient(self.name.text, self.birthday.text)
-            if resp == False:
-                new_patient = Patient(patientFullName = self.name.text, patientBirthDate = self.birthday.text)
-                new_patient.save()
-                sm.current = 'login'
-                self.name.text = ""
-                self.birthday.text = ""
-            else:
-                # if email is already made
-                popFun(3)
+    def register_user(self, user_type):
+        return_data = [self.username.text, self.password.text, user_type] 
+        print(return_data)
+    
+    def validate(self, user_type):
+        # error 1 - check if they've input something
+        if (not self.username.text) or (not self.password.text):
+            error(1)
+        # error 2 - check if account already exists
+        # else if ReadSQL.check_info(self.username.text, self.password.text) == False: 
+        #   error(2)
         else:
-            # if values are empty or invalid show pop up
-            popFun(1)
+            self.register_user(user_type)
+            App.get_running_app().sm.current = 'en_patientUp'
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
@@ -150,7 +139,6 @@ class en_patientUpScreen(Screen):
         self.sound.play()
 
     def textInput_enter(self):
-        #print((self.say_something.text))
         message = self.say_something.text
         self.say_something.text = ''
         tts.speak(message)
