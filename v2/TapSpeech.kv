@@ -119,16 +119,19 @@ windowManager:
 			multiline : False
 			font_name : "GalanoGrotesque"
 			font_size : 34
-			size_hint : 0.3, 0.08
+			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+            foreground_color: (0.325,0.415,0.4549,1)
+            background_color: (0,0,0,0)
 		TextInput:
 			id : password
 			multiline : False
 			font_name : "GalanoGrotesque"
 			font_size : 34
-			size_hint : 0.3, 0.08
+			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
-
+            foreground_color: (0.325,0.415,0.4549,1)
+            background_color: (0,0,0,0)
 
 
 
@@ -242,12 +245,14 @@ windowManager:
 
         TextInput:
             font_size:40
+            multiline:False
             font_name: 'GalanoGrotesque'
             size_hint: (0.705, 0.0674)
             pos_hint: {'center_x': 0.5, 'center_y': 0.3}
             hint_text:'Say something...'
             background_normal: 'images/icons/en/say_something_textinput_active.png'
             background_active: 'images/icons/en/say_something_textinput_active.png'
+            padding:[30,20,20,30]
             #Image:
             #    source: 'images/icons/en/alarm_btn.png'
 
