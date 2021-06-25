@@ -115,7 +115,6 @@ class en_loginScreen(Screen):
         if (not self.username.text) or (not self.password.text):
             popFun(1)
         else:
-            print(self.username.text, self.password.text)
             App.get_running_app().sm.current = 'en_patientUp'
 
 class en_registerScreen(Screen):
