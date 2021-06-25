@@ -35,7 +35,7 @@ from kivy.uix.boxlayout import BoxLayout
 Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
-#LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
+LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
 #LabelBase.register(name='Pacifico', fn_regular='Pacifico.tff')
 
 #location = 'start'
