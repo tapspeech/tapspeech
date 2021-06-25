@@ -196,21 +196,23 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_PatientUpScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/patient_up.png'
     FloatLayout:
-        Label:
-            text:'Welcome'
-            font_name:'Pacifico'
-
         Button:
-            text: 'Next screen test'
-            font_size: 32
-            on_release: app.root.current = 'en_welcome'
-
-        #Image:
-        #    id: Tall_Cylinder_Image
-        #    source: 'images/Logo_With_Text.png'
-        #    pos_hint: {'x':0.1,'y':0.1}
-            #size_hint: {}
+            size_hint: (0.904, 0.0811)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.8}
+            on_release:
+                root.sound_alarm()
+            Image:
+                source: 'images/icons/en/alarm_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_PatientDownScreen>:
 

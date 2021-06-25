@@ -139,7 +139,9 @@ class en_registerScreen(Screen):
             popFun(1)
 
 class en_patientUpScreen(Screen):
-    pass
+    def sound_alarm(self):
+        self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
+        self.sound.play()
 
 class en_patientDownScreen(Screen):
     pass
