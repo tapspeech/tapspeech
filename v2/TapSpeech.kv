@@ -123,9 +123,9 @@ windowManager:
             font_name: 'GalanoGrotesque'
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
-            background_normal: 'images/icons/en/say_something_textinput_active.png'
-
             background_active: 'images/icons/en/login_textinput_active.png'
+            background_active: 'images/icons/en/login_textinput_active.png'
+            hint_text:'USERNAME'
             padding:[30,20,20,30]
 
             #Image:
@@ -223,6 +223,7 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_PatientUpScreen>:
+    say_something: say_something
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -252,15 +253,28 @@ windowManager:
 
         TextInput:
             id: say_something
-            font_size:40
+            font_size:35
             multiline:False
             font_name: 'GalanoGrotesque'
-            size_hint: (0.705, 0.0674)
+            size_hint: (0.861, 0.0674)
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
             hint_text:'Say something...'
             background_normal: 'images/icons/en/say_something_textinput_active.png'
             background_active: 'images/icons/en/say_something_textinput_active.png'
-            padding:[30,70,20,20]
+            # Left, Top, Right, Button
+            padding:[40,30,240,20]
+
+        Button:
+            size_hint: (0.222, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.8, 'center_y': 0.35}
+            on_release:
+                root.textInput_enter()
+            Image:
+                source: 'images/icons/en/enter_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_PatientDownScreen>:
 
