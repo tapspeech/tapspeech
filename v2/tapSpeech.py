@@ -159,6 +159,18 @@ class ct_loginScreen(Screen):
 class ct_registerScreen(Screen):
     pass
 
+class ct_patientUpScreen(Screen):
+    pass
+
+class ct_patientDownScreen(Screen):
+    pass
+
+class ct_contactsScreen(Screen):
+    pass
+
+class ct_caretakerScreen(Screen):
+    pass
+
 class windowManager(ScreenManager):
     pass
 
@@ -170,6 +182,7 @@ class tapSpeechApp(App):
     def build(self):
         # Bear witness to Matthew's sexy code below
         sm = windowManager(transition=FadeTransition())
+
         sm.add_widget(en_welcomeScreen(name="en_welcome"))
         sm.add_widget(en_loginScreen(name="en_login"))
         sm.add_widget(en_registerScreen(name="en_register"))
@@ -177,9 +190,14 @@ class tapSpeechApp(App):
         sm.add_widget(en_patientDownScreen(name="en_patientDown"))
         sm.add_widget(en_contactsScreen(name="en_contacts"))
         sm.add_widget(en_caretakerScreen(name="en_caretaker"))
+
         sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         sm.add_widget(ct_loginScreen(name="ct_login"))
         sm.add_widget(ct_registerScreen(name="ct_register"))
+        sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
+        sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
+        sm.add_widget(ct_contactsScreen(name="ct_contacts"))
+        sm.add_widget(ct_caretakerScreen(name="ct_caretaker"))
         sm.current = "en_welcome"
         return sm
 

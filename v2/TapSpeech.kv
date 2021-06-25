@@ -6,9 +6,14 @@ windowManager:
     en_patientDownScreen:
     en_contactsScreen:
     en_caretakerScreen:
+
     ct_welcomeScreen:
     ct_loginScreen:
     ct_registerScreen:
+    ct_patientUpScreen:
+    ct_patientDownScreen:
+    ct_contactsScreen:
+    ct_caretakerScreen:
 
 <en_welcomeScreen>:
     name: "en_welcome"
@@ -54,57 +59,6 @@ windowManager:
         on_release: app.root.current = 'ct_welcome'
         Image:
             source: 'images/icons/en/lang_change.png'
-            pos: self.parent.pos
-            allow_stretch: True
-            keep_ratio: True
-            size_hint: None, None
-            width: self.parent.width
-            height: self.parent.width/self.image_ratio
-
-<ct_welcomeScreen>:
-    name: "ct_welcome"
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/ct/welcome.png'
-    BoxLayout:
-        orientation: 'vertical'
-        spacing: 50
-        size_hint: 0.45, 0.15
-        pos_hint: {"right":0.73,"top":0.55}
-        Button:
-            id: btn_login
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'ct_login'
-            Image:
-                source: 'images/icons/ct/login.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-        Button:
-            id: btn_register
-            background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'ct_register'
-            Image:
-                source: 'images/icons/ct/register.png'
-                pos: self.parent.pos
-                allow_stretch: True
-                keep_ratio: True
-                size_hint: None, None
-                width: self.parent.width
-                height: self.parent.width/self.image_ratio
-    Button:
-        id: change_language
-        size_hint: 0.2, 0.05
-        pos_hint: {"right":0.6,"top":0.1}
-        background_color: 0, 0, 0, 0
-        on_release: app.root.current = 'en_welcome'
-        Image:
-            source: 'images/icons/ct/lang_change.png'
             pos: self.parent.pos
             allow_stretch: True
             keep_ratio: True
@@ -169,65 +123,6 @@ windowManager:
                 app.root.current = 'en_welcome'
             Image:
                 source: 'images/icons/en/back_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-<ct_loginScreen>:
-    canvas.before:
-        Rectangle:
-            pos: self.pos
-            size: self.size
-            source: 'images/bg/ct/login.png'
-
-    FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/ct/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/ct/password_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        Button:
-            size_hint: (0.52, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            # as of now, this login button sets it so that the user is redirected to the patients ui screen
-            # in the future, change this to run a function to detect if the user is
-            #   a patient or a caretaker (using the database), then bring them
-            #   to the appropriate screen, i.e. patient user is brought to
-            #   patient screen, and caretaker user is brought to the caretaker screen
-            on_release:
-                app.root.current = 'ct_patientUp'
-            Image:
-                source: 'images/icons/ct/login_login.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
-        Button:
-            size_hint: (0.53, 0.072)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            on_release:
-                app.root.current = 'ct_welcome'
-            Image:
-                source: 'images/icons/ct/back_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -300,6 +195,143 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+<en_PatientUpScreen>:
+    FloatLayout:
+        Label:
+            text:'Welcome'
+            font_name:'Pacifico'
+
+        Button:
+            text: 'Next screen test'
+            font_size: 32
+            on_release: app.root.current = 'en_welcome'
+
+        #Image:
+        #    id: Tall_Cylinder_Image
+        #    source: 'images/Logo_With_Text.png'
+        #    pos_hint: {'x':0.1,'y':0.1}
+            #size_hint: {}
+
+<en_PatientDownScreen>:
+
+<en_ContactsScreen>:
+
+<en_caretakerScreen>:
+
+
+
+<en_CaretakerScreen>:
+
+<ct_welcomeScreen>:
+    name: "ct_welcome"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/welcome.png'
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: 50
+        size_hint: 0.45, 0.15
+        pos_hint: {"right":0.73,"top":0.55}
+        Button:
+            id: btn_login
+            background_color: 0, 0, 0, 0
+            on_release: app.root.current = 'ct_login'
+            Image:
+                source: 'images/icons/ct/login.png'
+                pos: self.parent.pos
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: None, None
+                width: self.parent.width
+                height: self.parent.width/self.image_ratio
+        Button:
+            id: btn_register
+            background_color: 0, 0, 0, 0
+            on_release: app.root.current = 'ct_register'
+            Image:
+                source: 'images/icons/ct/register.png'
+                pos: self.parent.pos
+                allow_stretch: True
+                keep_ratio: True
+                size_hint: None, None
+                width: self.parent.width
+                height: self.parent.width/self.image_ratio
+    Button:
+        id: change_language
+        size_hint: 0.2, 0.05
+        pos_hint: {"right":0.6,"top":0.1}
+        background_color: 0, 0, 0, 0
+        on_release: app.root.current = 'en_welcome'
+        Image:
+            source: 'images/icons/ct/lang_change.png'
+            pos: self.parent.pos
+            allow_stretch: True
+            keep_ratio: True
+            size_hint: None, None
+            width: self.parent.width
+            height: self.parent.width/self.image_ratio
+
+<ct_loginScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/login.png'
+
+    FloatLayout:
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
+            Image:
+                source: 'images/icons/ct/login_username_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        # Fix below line from button to text field
+        Button:
+            size_hint: (0.82, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
+            Image:
+                source: 'images/icons/ct/password_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.52, 0.085)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.35}
+            # as of now, this login button sets it so that the user is redirected to the patients ui screen
+            # in the future, change this to run a function to detect if the user is
+            #   a patient or a caretaker (using the database), then bring them
+            #   to the appropriate screen, i.e. patient user is brought to
+            #   patient screen, and caretaker user is brought to the caretaker screen
+            on_release:
+                app.root.current = 'ct_patientUp'
+            Image:
+                source: 'images/icons/ct/login_login.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.53, 0.072)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.25}
+            on_release:
+                app.root.current = 'ct_welcome'
+            Image:
+                source: 'images/icons/ct/back_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
 <ct_registerScreen>:
     canvas.before:
         Rectangle:
@@ -368,27 +400,8 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-<en_PatientUpScreen>:
-    FloatLayout:
-        Label:
-            text:'Welcome'
-            font_name:'Pacifico'
+<ct_PatientUpScreen>:
 
-        Button:
-            text: 'Next screen test'
-            font_size: 32
-            on_release: app.root.current = 'en_welcome'
+<ct_PatientDownScreen>:
 
-        #Image:
-        #    id: Tall_Cylinder_Image
-        #    source: 'images/Logo_With_Text.png'
-        #    pos_hint: {'x':0.1,'y':0.1}
-            #size_hint: {}
-
-<en_PatientDownScreen>:
-
-
-<en_ContactsScreen>:
-
-
-<en_CaretakerScreen>:
+<ct_caretakerScreen>:
