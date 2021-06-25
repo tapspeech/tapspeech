@@ -352,29 +352,40 @@ windowManager:
             pos: self.pos
             size: self.size
             source: 'images/bg/ct/login.png'
-
     FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/ct/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+		TextInput:
+			id : username_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: '用戶名稱'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/ct/password_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+		TextInput:
+			id : password_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: '密碼'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
         Button:
             size_hint: (0.52, 0.085)
