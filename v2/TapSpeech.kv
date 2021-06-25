@@ -201,6 +201,7 @@ windowManager:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/patient_up.png'
+
     FloatLayout:
         Button:
             size_hint: (0.904, 0.0811)
@@ -217,8 +218,18 @@ windowManager:
         Label:
             id: Hello_Name
             font_name: 'GalanoGrotesque'
-            font_size:40
-            text:'test'
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+            text:'Hello, Name...(WIP)'
+
+        TextInput:
+            font_size:50
+            size_hint: (0.861, 0.0674)
+            Image:
+                source: 'images/icons/en/alarm_btn.png'
+
+
 
 
 <en_PatientDownScreen>:
