@@ -76,28 +76,40 @@ windowManager:
             source: 'images/bg/en/login.png'
 
     FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/en/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+		TextInput:
+			id : username_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'USERNAME'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
+		TextInput:
+			id : password_field
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'PASSWORD'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/en/password_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
         Button:
             size_hint: (0.52, 0.085)
             background_color:0,0,0,0
@@ -114,7 +126,6 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
 
         TextInput:
             id : username
@@ -139,8 +150,6 @@ windowManager:
 			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
             foreground_color: (0.325,0.415,0.4549,1)
             background_color: (0,0,0,0)
-
-
 
         Button:
             size_hint: (0.53, 0.072)
