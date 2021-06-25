@@ -139,11 +139,6 @@ class en_registerScreen(Screen):
             popFun(1)
 
 class en_patientUpScreen(Screen):
-    def __init__(self, **kwargs):
-                # Change the 'name' from the line below to the username that is registered
-                # Attach it to the database (in order to find the name)
-                self.ids.Hello_Name.text = 'Hello, '+'name'
-                
     '''
     def __init__(self, **kwargs):
                 # Change the 'name' from the line below to the username that is registered
