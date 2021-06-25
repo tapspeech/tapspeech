@@ -148,7 +148,6 @@ class en_patientUpScreen(Screen):
         self.say_something.text = ''
         tts.speak(message)
 
-
 class en_patientDownScreen(Screen):
     pass
 

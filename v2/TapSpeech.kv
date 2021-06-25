@@ -240,6 +240,9 @@ windowManager:
             source: 'images/bg/en/patient_up.png'
 
     FloatLayout:
+        Label:
+
+
         Button:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
@@ -252,6 +255,7 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+        # Change this below so that it is custom to the dude
         Label:
             id: Hello_Name
             font_name: 'GalanoGrotesque'
@@ -284,6 +288,19 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.0856, 0.0504)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.05}
+            on_release:
+                app.root.current = 'en_patientDown'
+            Image:
+                source: 'images/icons/en/down_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
 
 <en_PatientDownScreen>:
 
@@ -356,7 +373,7 @@ windowManager:
 		TextInput:
 			id : username_field
 			multiline : False
-			font_name : "GalanoGrotesque"
+			font_name : "Noto"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
@@ -373,7 +390,7 @@ windowManager:
 		TextInput:
 			id : password_field
 			multiline : False
-			font_name : "GalanoGrotesque"
+			font_name : "Noto"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
