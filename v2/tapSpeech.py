@@ -10,6 +10,8 @@ import django
 #django.setup()
 
 #from tapSpeech_app.models import Patient, Caretaker, Requests
+from kivy.uix.carousel import Carousel
+from kivy.uix.image import AsyncImage
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -105,7 +107,7 @@ class en_loginScreen(Screen):
         # validate if account exists
         # if ReadSQL.check_info(self.username.text, self.password.text):
         if True:
-            received_data = [self.username.text, self.password.text] 
+            received_data = [self.username.text, self.password.text]
             print(received_data)
             App.get_running_app().sm.current = 'en_patientUp'
         # error 1 - account does not exist / invalid info
@@ -117,15 +119,15 @@ class en_registerScreen(Screen):
     password = ObjectProperty(None)
 
     def register_user(self, user_type):
-        return_data = [self.username.text, self.password.text, user_type] 
+        return_data = [self.username.text, self.password.text, user_type]
         print(return_data)
-    
+
     def validate(self, user_type):
         # error 1 - check if they've input something
         if (not self.username.text) or (not self.password.text):
             error(1)
         # error 2 - check if account already exists
-        # else if ReadSQL.check_info(self.username.text, self.password.text) == False: 
+        # else if ReadSQL.check_info(self.username.text, self.password.text) == False:
         #   error(2)
         else:
             self.register_user(user_type)
@@ -145,7 +147,6 @@ class en_patientUpScreen(Screen):
 
 class en_patientDownScreen(Screen):
     pass
-
 class en_contactsScreen(Screen):
     pass
 
