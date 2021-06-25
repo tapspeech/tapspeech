@@ -264,8 +264,8 @@ windowManager:
 
         TextInput:
             id: say_something
-            font_size: 35
-            multiline: False
+            font_size:35
+            multiline:False
             font_name: 'GalanoGrotesque'
             size_hint: (0.861, 0.0674)
             pos_hint: {'center_x': 0.5, 'center_y': 0.20}
@@ -301,6 +301,7 @@ windowManager:
 
 
 <en_PatientDownScreen>:
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -330,21 +331,46 @@ windowManager:
             text:'filler_text_1'
 
 
-    #
-    # BoxLayout:
-    #     Carousel:
-    #     direction: "right"
-    #    image:
-    #    source:
-    #    image:
-    #    source:
-    #    image:
-            # source:
-    #    image:
+        Label:
+            id: Second_Label
+            font_name: 'GalanoGrotesque'
+            font_size:50
+            background_color: 0.435,0.624,0.655,1
+            size_hint: (0.95, 0.101)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.30}
+            text:'filler_text_1'
+
+
+        Label:
+            id: Third_Label
+            font_name: 'GalanoGrotesque'
+            font_size:50
+            background_color: 0.435,0.624,0.655,1
+            size_hint: (0.95, 0.101)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+            text:'filler_text_1'
+
+
+
+    BoxLayout:
+        size_hint: 0.45, 0.45
+        pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+        Carousel:
+            direction: "right"
+            Image:
+                source:'images/icons/en/1.png'
+            Image:
+                source:'images/icons/en/up_btn.png'
+            # image:
+            #     source:
+            # image:
+
+
 
 <en_ContactsScreen>:
 
 <en_caretakerScreen>:
+
 
 
 <en_CaretakerScreen>:

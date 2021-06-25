@@ -9,7 +9,9 @@ import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
-from tapSpeech_app.models import Patient, Caretaker, Requests
+#from tapSpeech_app.models import Patient, Caretaker, Requests
+from kivy.uix.carousel import Carousel
+from kivy.uix.image import AsyncImage
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -221,7 +223,6 @@ class en_patientUpScreen(Screen):
 
 class en_patientDownScreen(Screen):
     pass
-
 class en_contactsScreen(Screen):
     pass
 
