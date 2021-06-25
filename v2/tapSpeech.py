@@ -128,16 +128,34 @@ class en_loginScreen(Screen):
     username = ObjectProperty(None)
     password = ObjectProperty(None)
 
+    def check_for_login(self, username, password):
+        is_caretaker = False
+        is_patient = False
+
+        is_caretaker = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+        if is_caretaker == False:
+            is_patient = ReadSQL.check_info_patient(self.username.text, self.password.text)
+        if is_caretaker == True:
+            return 'caretaker'
+        if is_patient == True:
+            return 'patient'
+        if is_caretaker and is_patient == False:
+            return 'none'
+
     def validate(self):
-        # validate if account exists
-        # if ReadSQL.check_info(self.username.text, self.password.text):
-        if True:
-            received_data = [self.username.text, self.password.text]
-            print(received_data)
-            App.get_running_app().sm.current = 'en_patientUp'
-        # error 1 - account does not exist / invalid info
-        else:
+        # error 1 - check if they've input something
+        if (not self.username.text) or (not self.password.text):
             error(1)
+        # error 2 - check if account already exists
+        else:
+            completed_login = self.check_for_login(self.username.text, self.password.text)
+            if completed_login == 'none':
+                error(1)
+            else:
+                if completed_login == 'patient':
+                    App.get_running_app().sm.current = 'en_patientUp'
+                elif completed_login == 'caretaker':
+                    error(3)
 
 class en_registerScreen(Screen):
     username = ObjectProperty(None)
