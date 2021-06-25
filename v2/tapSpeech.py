@@ -239,7 +239,16 @@ class ct_registerScreen(Screen):
     pass
 
 class ct_patientUpScreen(Screen):
-    pass
+    say_something = ObjectProperty(None)
+
+    def sound_alarm(self):
+        self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
+        self.sound.play()
+
+    def textInput_enter(self):
+        message = self.say_something.text
+        self.say_something.text = ''
+        tts.speak(message)
 
 class ct_patientDownScreen(Screen):
     pass
