@@ -114,6 +114,23 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+		TextInput:
+			id : username
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 34
+			size_hint : 0.3, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+		TextInput:
+			id : password
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 34
+			size_hint : 0.3, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+
+
+
 
         Button:
             size_hint: (0.53, 0.072)
@@ -224,10 +241,15 @@ windowManager:
             text:'Hello, Name...(WIP)'
 
         TextInput:
-            font_size:50
-            size_hint: (0.861, 0.0674)
-            Image:
-                source: 'images/icons/en/alarm_btn.png'
+            font_size:40
+            font_name: 'GalanoGrotesque'
+            size_hint: (0.705, 0.0674)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.3}
+            hint_text:'Say something...'
+            background_normal: 'images/icons/en/say_something_textinput_active.png'
+            background_active: 'images/icons/en/say_something_textinput_active.png'
+            #Image:
+            #    source: 'images/icons/en/alarm_btn.png'
 
 
 
