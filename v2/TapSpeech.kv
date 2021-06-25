@@ -1,3 +1,4 @@
+
 windowManager:
     en_welcomeScreen:
     en_loginScreen:
@@ -70,8 +71,6 @@ windowManager:
     username: username
     password: password
     canvas.before:
-    #    Color:
-    #        rgba: 0.88, 0.92, 0.92, 1
         Rectangle:
             pos: self.pos
             size: self.size
@@ -79,7 +78,7 @@ windowManager:
 
     FloatLayout:
 		TextInput:
-			id : username_field
+			id : username
 			multiline : False
 			font_name : "GalanoGrotesque"
 			font_size : 40
@@ -96,7 +95,7 @@ windowManager:
                 opacity: 1
 
 		TextInput:
-			id : password_field
+			id : password
 			multiline : False
 			font_name : "GalanoGrotesque"
 			font_size : 40
@@ -116,13 +115,8 @@ windowManager:
             size_hint: (0.52, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            # as of now, this login button sets it so that the user is redirected to the patients ui screen
-            # in the future, change this to run a function to detect if the user is
-            #   a patient or a caretaker (using the database), then bring them
-            #   to the appropriate screen, i.e. patient user is brought to
-            #   patient screen, and caretaker user is brought to the caretaker screen
-            on_release:
-                app.root.current = 'en_patientUp'
+            on_press:
+                root.validate()
             Image:
                 source: 'images/icons/en/login_login.png'
                 size: self.parent.size
@@ -184,7 +178,7 @@ windowManager:
                 opacity: 1
 
         TextInput:
-            id : password_field
+            id : password
             multiline : False
             font_name : "GalanoGrotesque"
             font_size : 40
@@ -378,7 +372,7 @@ windowManager:
             source: 'images/bg/ct/login.png'
     FloatLayout:
 		TextInput:
-			id : username_field
+			id : username
 			multiline : False
 			font_name : "Noto"
 			font_size : 40
@@ -395,7 +389,7 @@ windowManager:
                 opacity: 1
 
 		TextInput:
-			id : password_field
+			id : password
 			multiline : False
 			font_name : "Noto"
 			font_size : 40
@@ -450,7 +444,7 @@ windowManager:
         # Fix below line from button to text field
     FloatLayout:
 		TextInput:
-			id : username_field
+			id : username
 			multiline : False
 			font_name : "Noto"
 			font_size : 40
@@ -467,7 +461,7 @@ windowManager:
                 opacity: 1
 
 		TextInput:
-			id : password_field
+			id : password
 			multiline : False
 			font_name : "Noto"
 			font_size : 40
