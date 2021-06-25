@@ -69,7 +69,6 @@ windowManager:
 <en_loginScreen>:
     username: username
     password: password
-
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -136,41 +135,55 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_registerScreen>:
+    username: username
+    password: password
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/register.png'
     FloatLayout:
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.55}
-            Image:
-                source: 'images/icons/en/login_username_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+        TextInput:
+			id : username
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'USERNAME'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
-        # Fix below line from button to text field
-        Button:
-            size_hint: (0.82, 0.085)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.45}
-            Image:
-                source: 'images/icons/en/password_btn.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+		TextInput:
+			id : password
+			multiline : False
+			font_name : "GalanoGrotesque"
+			font_size : 40
+			size_hint : 0.8, 0.08
+			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'PASSWORD'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
 
         Button:
+            id: patient
             size_hint: (0.37, 0.085)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.275, 'center_y': 0.35}
             on_release:
-                app.root.current = 'en_login'
-                # conenct this to a function that registers the typed stuff into the data base
+                root.validate("patient")
             Image:
                 source: 'images/icons/en/reg_patient.png'
                 size: self.parent.size
@@ -178,12 +191,12 @@ windowManager:
                 center_y: self.parent.center_y
 
         Button:
+            id: caretaker
             size_hint: (0.37, 0.085)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.725, 'center_y': 0.35}
             on_release:
-                app.root.current = 'en_login'
-                # conenct this to a function that registers the typed stuff into the data base
+                root.validate("caretaker")
             Image:
                 source: 'images/icons/en/reg_caretaker.png'
                 size: self.parent.size
@@ -192,7 +205,7 @@ windowManager:
 
         Button:
             size_hint: (0.53, 0.072)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
             on_release:
                 app.root.current = 'en_welcome'
