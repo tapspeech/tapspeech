@@ -168,6 +168,7 @@ class tapSpeechApp(App):
     Window.clearcolor = (1,1,1,1)
 
     def build(self):
+        # Bear witness to Matthew's sexy code below
         sm = windowManager(transition=FadeTransition())
         sm.add_widget(en_welcomeScreen(name="en_welcome"))
         sm.add_widget(en_loginScreen(name="en_login"))
