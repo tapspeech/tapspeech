@@ -226,7 +226,7 @@ windowManager:
             source: 'images/bg/en/patient_up.png'
 
     FloatLayout:
-        Label:
+        #Label:
 
 
         Button:
@@ -252,8 +252,8 @@ windowManager:
 
         TextInput:
             id: say_something
-            font_size:35
-            multiline:False
+            font_size: 35
+            multiline: False
             font_name: 'GalanoGrotesque'
             size_hint: (0.861, 0.0674)
             pos_hint: {'center_x': 0.5, 'center_y': 0.20}
@@ -289,6 +289,21 @@ windowManager:
 
 
 <en_PatientDownScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/patient_down.png'
+
+    FloatLayout:
+        Label:
+            id: First_Button
+            font_name: 'GalanoGrotesque'
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.4}
+            text:'asdflasjdfl'
+
 
 <en_ContactsScreen>:
 
