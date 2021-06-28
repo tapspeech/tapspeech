@@ -313,6 +313,23 @@ windowManager:
             source: 'images/bg/en/patient_down.png'
 
     FloatLayout:
+        # for some reason, theres a background to this, but whatever, fix it later lol
+        # this thing blocks the buttons?
+        Carousel:
+            # everytime you swipe, a kivy event runs
+            on_index: root.changebuttons("slide #{}".format(args[1]))
+            size_hint: 0.6, 0.6
+            pos_hint: {'center_x': 0.5, 'center_y': 0.675}
+            direction: "right"
+            AsyncImage:
+                source:'images/icons/en/menu_1.png'
+            AsyncImage:
+                source:'images/icons/en/menu_2.png'
+            AsyncImage:
+                source:'images/icons/en/menu_3.png'
+            AsyncImage:
+                source:'images/icons/en/menu_4.png'
+
         Button:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
@@ -340,7 +357,7 @@ windowManager:
 
             Label:
                 id: label_1
-                text: 'Rice'
+                text: 'Water'
                 font: 'GalanoGrotesque'
                 font_size: 40
                 # below sets the color of the font
@@ -362,7 +379,7 @@ windowManager:
                 center_y: self.parent.center_y
             Label:
                 id: label_2
-                text: 'Noodles'
+                text: 'Milk'
                 font: 'GalanoGrotesque'
                 font_size: 40
                 color: 0.33,0.33,0.33,1
@@ -383,7 +400,7 @@ windowManager:
                 center_y: self.parent.center_y
             Label:
                 id: label_3
-                text: 'Soup'
+                text: 'Juice'
                 font: 'GalanoGrotesque'
                 font_size: 40
                 color: 0.33,0.33,0.33,1
@@ -404,28 +421,12 @@ windowManager:
                 center_y: self.parent.center_y
             Label:
                 id: label_4
-                text: 'Bread'
+                text: 'Tea'
                 font: 'GalanoGrotesque'
                 font_size: 40
                 color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
-        # for some reason, theres a background to this, but whatever, fix it later lol
-        Carousel:
-            # everytime you swipe, a kivy event runs
-            on_index: root.printtest("slide #{}".format(args[1]))
-            size_hint: 0.6, 0.6
-            pos_hint: {'center_x': 0.5, 'center_y': 0.675}
-            direction: "right"
-            AsyncImage:
-                source:'images/icons/en/menu_1.png'
-            AsyncImage:
-                source:'images/icons/en/menu_2.png'
-            AsyncImage:
-                source:'images/icons/en/menu_3.png'
-            AsyncImage:
-                source:'images/icons/en/menu_4.png'
 
 
 

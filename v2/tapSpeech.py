@@ -241,19 +241,19 @@ class en_patientDownScreen(Screen):
             pass
         print(message)
 
-    def printtest(self,index_no):
+    def changebuttons(self,index_no):
         # drinks menu
         if index_no == 'slide #0':
-            self.label_1.text = 'Rice'
-            self.label_2.text = 'Noodles'
-            self.label_3.text = 'Soup'
-            self.label_4.text = 'Bread'
-        # food menu
-        elif index_no == 'slide #1':
             self.label_1.text = 'Water'
             self.label_2.text = 'Milk'
             self.label_3.text = 'Juice'
             self.label_4.text = 'Tea'
+        # food menu
+        elif index_no == 'slide #1':
+            self.label_1.text = 'Rice'
+            self.label_2.text = 'Noodles'
+            self.label_3.text = 'Soup'
+            self.label_4.text = 'Bread'
         # food menu
         elif index_no == 'slide #2':
             self.label_1.text = 'Poop'
