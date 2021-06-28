@@ -222,7 +222,25 @@ class en_patientUpScreen(Screen):
         tts.speak(message)
 
 class en_patientDownScreen(Screen):
-    pass
+    label_1 = ObjectProperty(None)
+    label_2 = ObjectProperty(None)
+    label_3 = ObjectProperty(None)
+    label_4 = ObjectProperty(None)
+
+    # the message below is what you want to be sent to the caretaker
+    def returnMessage(self,label_id):
+        if label_id == 'label_1':
+            message = self.label_1.text
+        elif label_id == 'label_2':
+            message = self.label_2.text
+        elif label_id == 'label_3':
+            message = self.label_3.text
+        elif label_id == 'label_4':
+            message = self.label_4.text
+        else:
+            pass
+        print(message)
+
 class en_contactsScreen(Screen):
     pass
 
