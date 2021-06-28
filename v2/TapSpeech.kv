@@ -234,6 +234,8 @@ windowManager:
 
 <en_PatientUpScreen>:
     say_something: say_something
+    # Hello_Name: Hello_Name
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -241,6 +243,20 @@ windowManager:
             source: 'images/bg/en/patient_up.png'
 
     FloatLayout:
+
+        # below is the logout button
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'en_login'
+            Image:
+                source: 'images/icons/en/logout_button.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
         Button:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0

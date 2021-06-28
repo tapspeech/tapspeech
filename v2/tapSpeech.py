@@ -39,6 +39,8 @@ Window.size = (360, 760)
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
 
+global_patient_name = ''
+
 def error(type):
     if type == 1:
         label_content="Please enter valid information"
@@ -140,7 +142,7 @@ class en_loginScreen(Screen):
         if is_patient == True:
             return 'patient'
         if is_caretaker and is_patient == False:
-            return 'none'
+            return 'role not assigned'
 
     def validate(self):
         # error 1 - check if they've input something
@@ -154,6 +156,8 @@ class en_loginScreen(Screen):
             else:
                 if completed_login == 'patient':
                     App.get_running_app().sm.current = 'en_patientUp'
+                    global global_patient_name
+                    global_patient_name = self.username.text
                 elif completed_login == 'caretaker':
                     error(3)
 
@@ -206,11 +210,17 @@ class en_registerScreen(Screen):
             else:
                 if user_type == 'patient':
                     App.get_running_app().sm.current = 'en_patientUp'
+                    global global_patient_name
+                    global_patient_name = self.username.text
                 else:
                     error(3)
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
+    Hello_Name = ObjectProperty(None)
+
+    # global global_patient_name
+    # self.Hello_Name.text = global_patient_name
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
@@ -228,8 +238,12 @@ class en_patientDownScreen(Screen):
     label_3 = ObjectProperty(None)
     label_4 = ObjectProperty(None)
 
+    request_specification = ''
+    request_type = 'Liquid'
+
     # the message below is what you want to be sent to the caretaker
     def returnMessage(self,label_id):
+        global global_patient_name
         if label_id == 'label_1':
             message = self.label_1.text
         elif label_id == 'label_2':
@@ -240,7 +254,10 @@ class en_patientDownScreen(Screen):
             message = self.label_4.text
         else:
             pass
-        print(message)
+
+        print(message + " " + self.request_type)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name)
+        new_request.save()
 
     def changebuttons(self,index_no):
         # drinks menu
@@ -250,6 +267,7 @@ class en_patientDownScreen(Screen):
             self.label_3.text = 'Juice'
             self.label_4.text = 'Tea'
             self.dots.source = 'images/icons/general/dots_1.png'
+            self.request_type = 'Liquid'
         # food menu
         elif index_no == 'slide #1':
             self.label_1.text = 'Rice'
@@ -257,6 +275,7 @@ class en_patientDownScreen(Screen):
             self.label_3.text = 'Soup'
             self.label_4.text = 'Bread'
             self.dots.source = 'images/icons/general/dots_2.png'
+            self.request_type = 'Food'
         # food menu
         elif index_no == 'slide #2':
             self.label_1.text = 'Poop'
@@ -264,6 +283,7 @@ class en_patientDownScreen(Screen):
             self.label_3.text = 'Feeling Unwell'
             self.label_4.text = 'Other'
             self.dots.source = 'images/icons/general/dots_3.png'
+            self.request_type = 'Toilet'
         # food menu
         elif index_no == 'slide #3':
             self.label_1.text = 'Up'
@@ -271,6 +291,8 @@ class en_patientDownScreen(Screen):
             self.label_3.text = 'Get On'
             self.label_4.text = 'Get Off'
             self.dots.source = 'images/icons/general/dots_4.png'
+            self.request_type = 'Bed'
+
 
 class en_contactsScreen(Screen):
     pass
