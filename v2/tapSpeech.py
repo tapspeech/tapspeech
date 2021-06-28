@@ -222,6 +222,7 @@ class en_patientUpScreen(Screen):
         tts.speak(message)
 
 class en_patientDownScreen(Screen):
+    dots = ObjectProperty(None)
     label_1 = ObjectProperty(None)
     label_2 = ObjectProperty(None)
     label_3 = ObjectProperty(None)
@@ -248,25 +249,28 @@ class en_patientDownScreen(Screen):
             self.label_2.text = 'Milk'
             self.label_3.text = 'Juice'
             self.label_4.text = 'Tea'
+            self.dots.source = 'images/icons/general/dots_1.png'
         # food menu
         elif index_no == 'slide #1':
             self.label_1.text = 'Rice'
             self.label_2.text = 'Noodles'
             self.label_3.text = 'Soup'
             self.label_4.text = 'Bread'
+            self.dots.source = 'images/icons/general/dots_2.png'
         # food menu
         elif index_no == 'slide #2':
             self.label_1.text = 'Poop'
             self.label_2.text = 'Urinate'
             self.label_3.text = 'Feeling Unwell'
             self.label_4.text = 'Other'
+            self.dots.source = 'images/icons/general/dots_3.png'
         # food menu
         elif index_no == 'slide #3':
             self.label_1.text = 'Up'
             self.label_2.text = 'Down'
             self.label_3.text = 'Get On'
             self.label_4.text = 'Get Off'
-
+            self.dots.source = 'images/icons/general/dots_4.png'
 
 class en_contactsScreen(Screen):
     pass

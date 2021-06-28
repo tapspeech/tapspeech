@@ -304,6 +304,7 @@ windowManager:
     label_2: label_2
     label_3: label_3
     label_4: label_4
+    dots: dots
 
     canvas.before:
         Rectangle:
@@ -312,6 +313,12 @@ windowManager:
             source: 'images/bg/en/patient_down.png'
 
     FloatLayout:
+        Image:
+            id: dots
+            size_hint: (0.26, 0.774)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            source:'images/icons/general/dots_1.png'
+
         # for some reason, theres a background to this, but whatever, fix it later lol
         # this thing blocks the buttons?
         Carousel:
@@ -426,8 +433,6 @@ windowManager:
                 color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
-
 
 <en_ContactsScreen>:
 
