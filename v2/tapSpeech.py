@@ -300,8 +300,58 @@ class ct_patientUpScreen(Screen):
         tts.speak(message)
 
 class ct_patientDownScreen(Screen):
-    pass
+    dots = ObjectProperty(None)
+    label_1 = ObjectProperty(None)
+    label_2 = ObjectProperty(None)
+    label_3 = ObjectProperty(None)
+    label_4 = ObjectProperty(None)
 
+    # the message below is what you want to be sent to the caretaker
+    def returnMessage(self,label_id):
+        if label_id == 'label_1ct':
+            message = self.label_1.text
+        elif label_id == 'label_2ct':
+            message = self.label_2.text
+        elif label_id == 'label_3ct':
+            message = self.label_3.text
+        elif label_id == 'label_4ct':
+            message = self.label_4.text
+        else:
+            pass
+        print(message)
+
+    def changebuttons(self,index_no):
+        # drinks menu
+        if index_no == 'slide #0':
+            self.label_1.text = '水'
+            self.label_2.text = '牛奶'
+            self.label_3.text = '果汁'
+            self.label_4.text = '茶'
+            self.dots.source = 'images/icons/general/dots_1.png'
+        # food menu
+        elif index_no == 'slide #1':
+            self.label_1.text = '米飯'
+            self.label_2.text = '麵'
+            self.label_3.text = '湯'
+            self.label_4.text = '麵包'
+            self.dots.source = 'images/icons/general/dots_2.png'
+        # food menu
+        elif index_no == 'slide #2':
+            self.label_1.text = "o'屎"
+            self.label_2.text = "o'尿"
+            self.label_3.text = '感到不舒服'
+            self.label_4.text = '其他'
+            self.dots.source = 'images/icons/general/dots_3.png'
+        # food menu
+        elif index_no == 'slide #3':
+            self.label_1.text = '上'
+            self.label_2.text = '下'
+            self.label_3.text = '上床'
+            self.label_4.text = '下床'
+            self.dots.source = 'images/icons/general/dots_4.png'
+
+class en_contactsScreen(Screen):
+    pass
 class ct_contactsScreen(Screen):
     pass
 

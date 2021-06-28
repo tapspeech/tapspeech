@@ -650,7 +650,7 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/patient_up.png'
+            source: 'images/bg/ct/patient_up.png'
 
     FloatLayout:
         Button:
@@ -660,7 +660,7 @@ windowManager:
             on_release:
                 root.sound_alarm()
             Image:
-                source: 'images/icons/en/alarm_btn.png'
+                source: 'images/icons/ct/alarm_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -694,7 +694,7 @@ windowManager:
             on_release:
                 root.textInput_enter()
             Image:
-                source: 'images/icons/en/enter_btn.png'
+                source: 'images/icons/ct/enter_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -711,19 +711,48 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 <ct_PatientDownScreen>:
+    label_1: label_1
+    label_2: label_2
+    label_3: label_3
+    label_4: label_4
+    dots: dots
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/patient_down.png'
+            source: 'images/bg/ct/patient_down.png'
 
     FloatLayout:
+        Image:
+            id: dots
+            size_hint: (0.26, 0.774)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            source:'images/icons/general/dots_1.png'
+
+        # for some reason, theres a background to this, but whatever, fix it later lol
+        # this thing blocks the buttons?
+        Carousel:
+            # everytime you swipe, a kivy event runs
+            on_index: root.changebuttons("slide #{}".format(args[1]))
+            size_hint: 0.6, 0.6
+            pos_hint: {'center_x': 0.5, 'center_y': 0.675}
+            direction: "right"
+            AsyncImage:
+                source:'images/icons/ct/menu_1.png'
+            AsyncImage:
+                source:'images/icons/ct/menu_2.png'
+            AsyncImage:
+                source:'images/icons/ct/menu_3.png'
+            AsyncImage:
+                source:'images/icons/ct/menu_4.png'
+
         Button:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_release:
-                app.root.current = 'en_patientUp'
+                app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
                 size: self.parent.size
@@ -731,35 +760,88 @@ windowManager:
                 center_y: self.parent.center_y
 
         Button:
-            size_hint: (0.904, 0.0811)
+            id: 'button_1'
+            size_hint: (0.9, 0.1)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.42}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.44}
+            on_release:
+                root.returnMessage('label_1')
             Image:
-                source: 'images/icons/en/alarm_btn.png'
+                source: 'images/icons/general/label1.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-
-
-        Button:
-            size_hint: (0.904, 0.0811)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.30}
-            Image:
-                source: 'images/icons/en/alarm_btn.png'
-                size: self.parent.size
+            Label:
+                id: label_1
+                text: '水'
+                font_name: 'Noto'
+                font_size: 40
+                # below sets the color of the font
+                color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+        Button:
+            id: 'button_2'
+            size_hint: (0.9, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.32}
+            on_release:
+                root.returnMessage('label_2')
+            Image:
+                source: 'images/icons/general/label2.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+            Label:
+                id: label_2
+                text: '牛奶'
+                font_name: 'Noto'
+                font_size: 40
+                color: 0.33,0.33,0.33,1
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
         Button:
-            size_hint: (0.904, 0.0811)
+            id: 'button_3'
+            size_hint: (0.9, 0.1)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.18}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.20}
+            on_release:
+                root.returnMessage('label_3')
             Image:
-                source: 'images/icons/en/alarm_btn.png'
+                source: 'images/icons/general/label3.png'
                 size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+            Label:
+                id: label_3
+                text: '果汁'
+                font_name: 'Noto'
+                font_size: 40
+                color: 0.33,0.33,0.33,1
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: 'button_4'
+            size_hint: (0.9, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.08}
+            on_release:
+                root.returnMessage('label_4')
+            Image:
+                source: 'images/icons/general/label4.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+            Label:
+                id: label_4
+                text: '茶'
+                font_name: 'Noto'
+                font_size: 40
+                color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 <ct_caretakerScreen>:
