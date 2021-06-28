@@ -222,7 +222,52 @@ class en_patientUpScreen(Screen):
         tts.speak(message)
 
 class en_patientDownScreen(Screen):
-    pass
+    label_1 = ObjectProperty(None)
+    label_2 = ObjectProperty(None)
+    label_3 = ObjectProperty(None)
+    label_4 = ObjectProperty(None)
+
+    # the message below is what you want to be sent to the caretaker
+    def returnMessage(self,label_id):
+        if label_id == 'label_1':
+            message = self.label_1.text
+        elif label_id == 'label_2':
+            message = self.label_2.text
+        elif label_id == 'label_3':
+            message = self.label_3.text
+        elif label_id == 'label_4':
+            message = self.label_4.text
+        else:
+            pass
+        print(message)
+
+    def printtest(self,index_no):
+        # drinks menu
+        if index_no == 'slide #0':
+            self.label_1.text = 'Rice'
+            self.label_2.text = 'Noodles'
+            self.label_3.text = 'Soup'
+            self.label_4.text = 'Bread'
+        # food menu
+        elif index_no == 'slide #1':
+            self.label_1.text = 'Water'
+            self.label_2.text = 'Milk'
+            self.label_3.text = 'Juice'
+            self.label_4.text = 'Tea'
+        # food menu
+        elif index_no == 'slide #2':
+            self.label_1.text = 'Poop'
+            self.label_2.text = 'Urinate'
+            self.label_3.text = 'Feeling Unwell'
+            self.label_4.text = 'Other'
+        # food menu
+        elif index_no == 'slide #3':
+            self.label_1.text = 'Up'
+            self.label_2.text = 'Down'
+            self.label_3.text = 'Get On'
+            self.label_4.text = 'Get Off'
+
+
 class en_contactsScreen(Screen):
     pass
 
@@ -239,7 +284,16 @@ class ct_registerScreen(Screen):
     pass
 
 class ct_patientUpScreen(Screen):
-    pass
+    say_something = ObjectProperty(None)
+
+    def sound_alarm(self):
+        self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
+        self.sound.play()
+
+    def textInput_enter(self):
+        message = self.say_something.text
+        self.say_something.text = ''
+        tts.speak(message)
 
 class ct_patientDownScreen(Screen):
     pass

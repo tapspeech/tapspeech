@@ -28,6 +28,7 @@ class Requests(models.Model):
     request_specification = models.CharField(max_length=30)
     request_patient = models.CharField(max_length=30, default = '')
     request_time = models.DateTimeField('Time Created',default=now, editable=False)
+    text_input = models.Textfield()
 
     def date_created(self):
         current_datetime = dt.datetime.now()
