@@ -241,7 +241,7 @@ class en_patientDownScreen(Screen):
             pass
         print(message)
 
-    def printtest(self,index_no):
+    def changebuttons(self,index_no):
         # drinks menu
         if index_no == 'slide #0':
             self.label_1.text = 'Rice'
