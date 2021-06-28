@@ -6,15 +6,7 @@ import pandas as pd
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
 
-from tapSpeech_app.models import Patient
-
-print("---- Account Creation ----")
-x = input("input name pls ")
-y = input("input birthdate pls ")
-
-
-new_patient = Patient(patientFullName = x, patientBirthDate = y)
-new_patient.save()
+from tapSpeech_app.models import Patient, Requests
 
 class ReadSQL:
     def __init__(self, database):
@@ -59,12 +51,59 @@ class ReadSQL:
             else:
                 print("Name Check Failed")
 
-print("---- Database Search ----")
-changestest = input("Would you like to try and look for the account in the database? ")
-if changestest == "yes":
+    def request_puller(name):
+        timer = 0
+        # reqs = Requests.objects.all().filter(request_patient=name)
+        names = name
+        reqs = Requests.objects.all().filter(request_patient__in=names)
+        context = reqs.distinct().order_by('-request_time')
+        for i in range (3):
+            # models.py's __str__ function is unable to turn request_time to a string, which keeps it from being returned.
+            r_pat = context.values_list('request_patient', flat=True)[timer]
+            r_type = context.values_list('request_type', flat=True)[timer]
+            r_spec = context.values_list('request_specification', flat=True)[timer]
+            # r_time = Requests.objects.all().filter(request_patient=name).values_list('request_time', flat=True)[0]
+            print(r_pat + " " + r_type + " "  + r_spec)
+            timer=+1
+
+
+def account_creation():
+    print(" ")
+    print("---- Account Creation ----")
+    x = input("input name pls ")
+    y = input("input birthdate pls ")
+
+
+    new_patient = Patient(patientFullName = x, patientBirthDate = y)
+    new_patient.save()
+
+
+def account_search():
+    print(" ")
+    print("---- Account Search ----")
     name = input("input name pls ")
     birthday = input("input birthdate pls ")
     info_response = ReadSQL.check_infos(name, birthday)
     print(info_response)
-else:
-    print("Script Ended")
+
+def request_pull():
+    print(" ")
+    print("---- Request Search ----")
+    searchnamelist = []
+    name1 = input("input name 1 pls ")
+    searchnamelist.append(name1)
+    name2 = input("input name 2 pls ")
+    searchnamelist.append(name2)
+    print(searchnamelist)
+    ReadSQL.request_puller(searchnamelist)
+
+print(" ")
+print("Which Command would you like to test?")
+print("account_creation, account_search, request_pull")
+x = input()
+if x == "account_creation":
+    account_creation()
+elif x == "account_search":
+    account_search()
+elif x == "request_pull":
+    request_pull()
