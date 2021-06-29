@@ -323,6 +323,13 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+        Button:
+            size_hint: (0.30, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.9, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'en_information'
+
 <en_PatientDownScreen>:
     label_1: label_1
     label_2: label_2
@@ -465,6 +472,39 @@ windowManager:
             pos: self.pos
             size: self.size
             source: 'images/bg/ct/information.png'
+    FloatLayout:
+        Label:
+            id: Medical_History
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.40}
+            text:'Medical History'
+        Label:
+            id: Diagnosis
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.65}
+            text:'Diagnosis'
+        Label:
+            id: Medication
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.2, 'center_y': 0.85}
+            text:'Medication'
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'en_patientUp'
+            Image:
+                source: 'images/icons/en/back.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_caretakerUpScreen>:
     caretaker_name: caretaker_name
@@ -498,6 +538,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_release:
+                root.manager.transition.direction = 'down'
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
