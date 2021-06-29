@@ -24,6 +24,16 @@ windowManager:
     ct_caretakerUpScreen:
     ct_caretakerDownScreen:
 
+<contact_info@Popup>
+    size_hint: 0.6, 0.2
+
+    title:'yomama'
+    FloatLayout:
+        Button:
+            on_release: root.dismiss()
+            Label:
+                text:'close me'
+
 <en_welcomeScreen>:
     name: "en_welcome"
     canvas.before:
@@ -567,6 +577,14 @@ windowManager:
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.70}
             text:'Medical History'
+
+        TextInput:
+            id: medical_h
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.88,0.14)
+            pos_hint: {'center_x':0.5,'center_y':0.66}
+
         Label:
             id: Diagnosis
             font_name : "GalanoGrotesque"
@@ -574,6 +592,14 @@ windowManager:
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.48}
             text:'Diagnosis'
+
+        TextInput:
+            id: medical_h
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.88,0.14)
+            pos_hint: {'center_x':0.5,'center_y':0.45}
+
         Label:
             id: Medication
             font_name : "GalanoGrotesque"
@@ -581,6 +607,14 @@ windowManager:
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.26}
             text:'Medication'
+
+        TextInput:
+            id: medical_h
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.88,0.14)
+            pos_hint: {'center_x':0.5,'center_y':0.23}
+
         Button:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
@@ -627,7 +661,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_press:
-                app.root.transition = FadeTransition()
+                app.root.transition = SlideTransition(direction="up")
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
@@ -643,6 +677,20 @@ windowManager:
             color:0,0,0,1
             text: 'caretaker_name'
             font_size:30
+        Label:
+            id: caretaker_label
+            pos_hint: {'center_x': 0.5, 'center_y':0.72}
+            size_hint: (0.85, 0.85)
+            # font_name: 'GalanoGrotesque'
+            # text: 'caretaker_name'
+            font_size:30
+            Image:
+                source: 'images/icons/general/wagwan.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+
 
 
 <en_caretakerDownScreen>:
@@ -658,7 +706,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_press:
-                app.root.transition = FadeTransition()
+                app.root.transition = SlideTransition(direction="down")
                 app.root.current = 'en_caretakerUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
