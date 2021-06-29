@@ -371,7 +371,22 @@ class en_contactsScreen(Screen):
 
 
 class en_informationScreen(Screen):
-    pass
+    medical_history_input = ObjectProperty(None)
+    diagnosis_input = ObjectProperty(None)
+    medication_input = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_medical_info(self):
+        self.medical_history_input.text = 'medical_history_input'
+        self.diagnosis_input.text = 'diagnosis_input'
+        self.medication_input.text = 'medication_input'
+
+    # Save the new_emergency_contact_x_value into the database
+    def save_medical_info(self):
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(diagnosis_input=self.diagnosis_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
 
 class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)

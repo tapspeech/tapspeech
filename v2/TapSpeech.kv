@@ -579,7 +579,7 @@ windowManager:
             text:'Medical History'
 
         TextInput:
-            id: medical_h
+            id: medical_history_input
             font_name: 'Noto'
             text: ''
             size_hint: (0.704,0.112)
@@ -594,7 +594,7 @@ windowManager:
             text:'Diagnosis'
 
         TextInput:
-            id: medical_history
+            id: diagnosis_input
             font_name: 'Noto'
             text: ''
             size_hint: (0.704,0.112)
@@ -609,7 +609,7 @@ windowManager:
             text:'Medication'
 
         TextInput:
-            id: medical_h
+            id: medication_input
             font_name: 'Noto'
             text: ''
             size_hint: (0.704,0.112)
@@ -624,6 +624,20 @@ windowManager:
                 app.root.current = 'en_patientUp'
             Image:
                 source: 'images/icons/en/back.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: save_button
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.075}
+            on_press:
+                app.root.transition = FadeTransition()
+                root.save_medical_info()
+            Image:
+                source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
