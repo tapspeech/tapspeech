@@ -23,7 +23,7 @@ from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.layout import Layout
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -329,7 +329,8 @@ class en_patientDownScreen(Screen):
             self.label_4.text = 'Get Off'
             self.dots.source = 'images/icons/general/dots_4.png'
             self.request_type = 'Bed'
-
+class en_informationScreen(Screen):
+    pass
 
 class en_contactsScreen(Screen):
     pass
@@ -444,6 +445,7 @@ class tapSpeechApp(App):
         self.sm.add_widget(en_contactsScreen(name="en_contacts"))
         self.sm.add_widget(en_caretakerUpScreen(name="en_caretakerUp"))
         self.sm.add_widget(en_caretakerDownScreen(name="en_caretakerDown"))
+        self.sm.add_widget(en_informationScreen(name="en_information"))
 
         self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         self.sm.add_widget(ct_loginScreen(name="ct_login"))
