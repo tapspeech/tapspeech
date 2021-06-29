@@ -252,7 +252,7 @@ class en_registerScreen(Screen):
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
-    Hello_Name = ObjectProperty(None)
+    hello_name = ObjectProperty(None)
 
     # global global_patient_name
     # self.Hello_Name.text = global_patient_name
@@ -265,6 +265,10 @@ class en_patientUpScreen(Screen):
         message = self.say_something.text
         self.say_something.text = ''
         tts.speak(message)
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, '+global_patient_name
 
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)

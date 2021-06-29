@@ -236,7 +236,10 @@ windowManager:
 
 <en_PatientUpScreen>:
     say_something: say_something
-    # Hello_Name: Hello_Name
+    hello_name: hello_name
+
+    on_enter:
+        root.change_helloMessage()
 
     canvas.before:
         Rectangle:
@@ -273,7 +276,7 @@ windowManager:
 
         # Change this below so that it is custom to the dude
         Label:
-            id: Hello_Name
+            id: hello_name
             font_name: 'GalanoGrotesque'
             font_size:50
             color: 0.0745,0.31,0.357,1
