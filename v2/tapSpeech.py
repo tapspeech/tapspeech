@@ -4,8 +4,6 @@ from plyer import battery, tts, vibrator
 from validate_email import validate_email
 import sqlite3
 import os
-from datetime import datetime
-import pytz
 
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
@@ -263,7 +261,7 @@ class en_registerScreen(Screen):
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
-    Hello_Name = ObjectProperty(None)
+    hello_name = ObjectProperty(None)
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
@@ -273,6 +271,10 @@ class en_patientUpScreen(Screen):
         message = self.say_something.text
         self.say_something.text = ''
         tts.speak(message)
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, '+global_patient_name
 
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
@@ -297,14 +299,10 @@ class en_patientDownScreen(Screen):
             message = self.label_4.text
         else:
             pass
-        now = datetime.now()
-        tz_HK = pytz.timezone('Hongkong')
-        datetime_HK = datetime.now(tz_HK)
-        current_time = datetime_HK.strftime("%H:%M:%S")
+
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name)
         new_request.save()
-        print(new_request)
 
     def changebuttons(self,index_no):
         # drinks menu

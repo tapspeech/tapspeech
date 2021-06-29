@@ -2,8 +2,6 @@ import os
 import django
 import sqlite3
 import pandas as pd
-from datetime import datetime
-import pytz
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
 django.setup()
@@ -67,8 +65,8 @@ class ReadSQL:
             r_pat = context.values_list('request_patient', flat=True)[timer]
             r_type = context.values_list('request_type', flat=True)[timer]
             r_spec = context.values_list('request_specification', flat=True)[timer]
-            r_time = context.values_list('request_time', flat=True)[timer]
-            print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
+            # r_time = Requests.objects.all().filter(request_patient=name).values_list('request_time', flat=True)[0]
+            print(r_pat + " " + r_type + " "  + r_spec)
             timer=+1
             if timer == 3:
                 return

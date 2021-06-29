@@ -5,15 +5,18 @@ windowManager:
     en_registerScreen:
     en_patientUpScreen:
     en_patientDownScreen:
+    en_informationScreen:
     en_contactsScreen:
     en_caretakerUpScreen:
     en_caretakerDownScreen:
+
 
     ct_welcomeScreen:
     ct_loginScreen:
     ct_registerScreen:
     ct_patientUpScreen:
     ct_patientDownScreen:
+    ct_informationScreen:
     ct_contactsScreen:
     ct_caretakerUpScreen:
     ct_caretakerDownScreen:
@@ -236,7 +239,10 @@ windowManager:
 
 <en_PatientUpScreen>:
     say_something: say_something
-    # Hello_Name: Hello_Name
+    hello_name: hello_name
+
+    on_enter:
+        root.change_helloMessage()
 
     canvas.before:
         Rectangle:
@@ -273,7 +279,7 @@ windowManager:
 
         # Change this below so that it is custom to the dude
         Label:
-            id: Hello_Name
+            id: hello_name
             font_name: 'GalanoGrotesque'
             font_size:50
             color: 0.0745,0.31,0.357,1
@@ -452,7 +458,13 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-<en_ContactsScreen>:
+<en_informationScreen>:
+    name: "ct_information"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/information.png'
 
 <en_caretakerUpScreen>:
     canvas.before:
@@ -461,31 +473,32 @@ windowManager:
             size: self.size
             source: 'images/bg/en/CaretakerUp.png'
 
-    # below is the logout button
-    Button:
-        size_hint: (0.39, 0.053)
-        background_color:0,0,0,0
-        pos_hint: {'center_x': 0.5, 'center_y': 0.96}
-        on_release:
-            app.root.current = 'en_login'
-        Image:
-            source: 'images/icons/en/logout_button.png'
-            size: self.parent.size
-            center_x: self.parent.center_x
-            center_y: self.parent.center_y
+    FloatLayout:
+        # below is the logout button
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.96}
+            on_release:
+                app.root.current = 'en_login'
+            Image:
+                source: 'images/icons/en/logout_button.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
-    # below is the button to go to caretakerDown
-    Button:
-        size_hint: (0.0856, 0.0504)
-        background_color:0,0,0,0
-        pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-        on_release:
-            app.root.current = 'en_caretakerDown'
-        Image:
-            source: 'images/icons/en/down_btn.png'
-            size: self.parent.size
-            center_x: self.parent.center_x
-            center_y: self.parent.center_y
+        # below is the button to go to caretakerDown
+        Button:
+            size_hint: (0.0856, 0.0504)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.15}
+            on_release:
+                app.root.current = 'en_caretakerDown'
+            Image:
+                source: 'images/icons/en/down_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 
 <en_caretakerDownScreen>:
@@ -493,7 +506,20 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/CaretakerUp.png'
+            source: 'images/bg/en/CaretakerDown.png'
+
+    FloatLayout:
+        Button:
+            size_hint: (0.0856, 0.0218)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            on_release:
+                app.root.current = 'en_caretakerUp'
+            Image:
+                source: 'images/icons/en/up_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_CaretakerScreen>:
 
@@ -709,6 +735,17 @@ windowManager:
             source: 'images/bg/ct/patient_up.png'
 
     FloatLayout:
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'ct_login'
+            Image:
+                source: 'images/icons/ct/logout_button.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
