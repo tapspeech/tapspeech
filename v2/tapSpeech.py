@@ -4,8 +4,6 @@ from plyer import battery, tts, vibrator
 from validate_email import validate_email
 import sqlite3
 import os
-from datetime import datetime
-import pytz
 
 import django
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tapSpeech.settings')
@@ -289,14 +287,10 @@ class en_patientDownScreen(Screen):
             message = self.label_4.text
         else:
             pass
-        now = datetime.now()
-        tz_HK = pytz.timezone('Hongkong')
-        datetime_HK = datetime.now(tz_HK)
-        current_time = datetime_HK.strftime("%H:%M:%S")
+
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name)
         new_request.save()
-        print(new_request)
 
     def changebuttons(self,index_no):
         # drinks menu
