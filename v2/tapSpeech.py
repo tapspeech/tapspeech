@@ -42,6 +42,7 @@ LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
 
 global_patient_name = ''
+global_caretaker_name = ''
 
 def error(type):
     if type == 1:
