@@ -299,6 +299,27 @@ windowManager:
             # Left, Top, Right, Button
             padding:[40,30,240,20]
 
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            #background_color:0,0,0,0
+            pos_hint: {'center_x': 0.22, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            #background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            #background_color:0,0,0,0
+            pos_hint: {'center_x': 0.79, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
         Button:
             size_hint: (0.222, 0.053)
             background_color:0,0,0,0
@@ -779,6 +800,7 @@ windowManager:
             background_active: 'images/icons/en/say_something_textinput_active.png'
             # Left, Top, Right, Button
             padding:[40,30,240,20]
+
 
         Button:
             size_hint: (0.222, 0.053)

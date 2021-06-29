@@ -276,6 +276,14 @@ class en_patientUpScreen(Screen):
         global global_patient_name
         self.hello_name.text = 'Hello, '+global_patient_name
 
+    def contact_info(type):
+
+        window = Popup(title='Error',
+        content=Label(text='Emergency Contact Number:'),
+        size_hint=(None, None), size=(500, 300))
+
+        window.open()
+
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
     label_1 = ObjectProperty(None)
