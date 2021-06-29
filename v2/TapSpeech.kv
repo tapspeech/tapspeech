@@ -6,7 +6,8 @@ windowManager:
     en_patientUpScreen:
     en_patientDownScreen:
     en_contactsScreen:
-    en_caretakerScreen:
+    en_caretakerUpScreen:
+    en_caretakerDownScreen:
 
     ct_welcomeScreen:
     ct_loginScreen:
@@ -14,7 +15,8 @@ windowManager:
     ct_patientUpScreen:
     ct_patientDownScreen:
     ct_contactsScreen:
-    ct_caretakerScreen:
+    ct_caretakerUpScreen:
+    ct_caretakerDownScreen:
 
 <en_welcomeScreen>:
     name: "en_welcome"
@@ -452,8 +454,28 @@ windowManager:
 
 <en_ContactsScreen>:
 
-<en_caretakerScreen>:
+<en_caretakerUpScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/CaretakerUp.png'
 
+    # below is the logout button
+    Button:
+        size_hint: (0.39, 0.053)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.96}
+        on_release:
+            app.root.current = 'en_login'
+        Image:
+            source: 'images/icons/en/logout_button.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+
+<en_caretakerDownScreen>:
 
 <en_CaretakerScreen>:
 
@@ -726,6 +748,7 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
 <ct_PatientDownScreen>:
     label_1: label_1
     label_2: label_2
@@ -860,4 +883,7 @@ windowManager:
                 color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-<ct_caretakerScreen>:
+
+<ct_caretakerUpScreen>:
+
+<ct_caretakerDownScreen>:

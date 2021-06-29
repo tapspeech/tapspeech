@@ -125,7 +125,6 @@ class ReadSQL:
             accountexists = True
         return accountexists
 
-
 class en_loginScreen(Screen):
     username = ObjectProperty(None)
     password = ObjectProperty(None)
@@ -159,7 +158,15 @@ class en_loginScreen(Screen):
                     global global_patient_name
                     global_patient_name = self.username.text
                 elif completed_login == 'caretaker':
-                    error(3)
+                    App.get_running_app().sm.current = 'en_caretakerUp'
+
+                    '''
+                    I dont know what the two lines,
+                    remove this comment if those lines are necessary
+                    '''
+
+                    global global_caretaker_name
+                    global_caretaker_name = self.username.text
 
 class en_registerScreen(Screen):
     username = ObjectProperty(None)
@@ -182,6 +189,20 @@ class en_registerScreen(Screen):
                 # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
                 completed_registration = False
                 return completed_registration
+
+        # if user_type == 'caretaker':
+        #     infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+        #     if infocheckresult == False:
+        #         # if infocheckresult is False, it means that they are not registered in the database and can be added
+        #         new_caretaker = Caretaker(caretakerFullName = self.username.text, caretakerPassword = self.password.text)
+        #         new_caretaker.save()
+        #         completed_registration = True
+        #         return completed_registration
+        #     else:
+        #         # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+        #         completed_registration = False
+        #         return completed_registration
+
         # if the user_type is NOT equal to patient (which means they are caretaker), run the function to add to caretaker database
         else:
             infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
@@ -212,7 +233,19 @@ class en_registerScreen(Screen):
                     App.get_running_app().sm.current = 'en_patientUp'
                     global global_patient_name
                     global_patient_name = self.username.text
+                elif user_type == 'caretaker':
+                    print('running')
+                    App.get_running_app().sm.current = 'en_caretakerUp'
+
+                    '''
+                    I dont know what the two lines,
+                    remove this comment if those lines are necessary
+                    '''
+
+                    global global_caretaker_name
+                    global_caretaker_name = self.username.text
                 else:
+                    print('running error')
                     error(3)
 
 class en_patientUpScreen(Screen):
@@ -297,7 +330,10 @@ class en_patientDownScreen(Screen):
 class en_contactsScreen(Screen):
     pass
 
-class en_caretakerScreen(Screen):
+class en_caretakerUpScreen(Screen):
+    pass
+
+class en_caretakerDownScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
@@ -374,10 +410,14 @@ class ct_patientDownScreen(Screen):
 
 class en_contactsScreen(Screen):
     pass
+
 class ct_contactsScreen(Screen):
     pass
 
-class ct_caretakerScreen(Screen):
+class ct_caretakerUpScreen(Screen):
+    pass
+
+class ct_caretakerDownScreen(Screen):
     pass
 
 class windowManager(ScreenManager):
@@ -398,7 +438,8 @@ class tapSpeechApp(App):
         self.sm.add_widget(en_patientUpScreen(name="en_patientUp"))
         self.sm.add_widget(en_patientDownScreen(name="en_patientDown"))
         self.sm.add_widget(en_contactsScreen(name="en_contacts"))
-        self.sm.add_widget(en_caretakerScreen(name="en_caretaker"))
+        self.sm.add_widget(en_caretakerUpScreen(name="en_caretakerUp"))
+        self.sm.add_widget(en_caretakerDownScreen(name="en_caretakerDown"))
 
         self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         self.sm.add_widget(ct_loginScreen(name="ct_login"))
@@ -406,7 +447,8 @@ class tapSpeechApp(App):
         self.sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
         self.sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
         self.sm.add_widget(ct_contactsScreen(name="ct_contacts"))
-        self.sm.add_widget(ct_caretakerScreen(name="ct_caretaker"))
+        self.sm.add_widget(ct_caretakerUpScreen(name="ct_caretakerUp"))
+        self.sm.add_widget(ct_caretakerDownScreen(name="ct_caretakerDown"))
         self.sm.current = "en_welcome"
         return self.sm
 
