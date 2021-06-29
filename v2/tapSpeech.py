@@ -34,7 +34,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.boxlayout import BoxLayout
 
-Window.size = (360, 760)
+# Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
