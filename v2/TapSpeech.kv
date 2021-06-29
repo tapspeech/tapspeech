@@ -500,6 +500,13 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_contactsScreen>:
+    emergency_contact_1: emergency_contact_1
+    emergency_contact_2: emergency_contact_2
+    emergency_contact_3: emergency_contact_3
+
+    on_enter:
+        root.update_emergency_contacts()
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -522,34 +529,39 @@ windowManager:
     TextInput:
         id: emergency_contact_1
         font_name: 'Noto'
+        text: 'Name:\nNumber:'
         size_hint: (0.88,0.14)
         pos_hint: {'center_x':0.5,'center_y':0.66}
 
     TextInput:
         id: emergency_contact_2
         font_name: 'Noto'
+        text: 'Name:\nNumber:'
         size_hint: (0.88,0.14)
         pos_hint: {'center_x':0.5,'center_y':0.45}
 
     TextInput:
         id: emergency_contact_3
         font_name: 'Noto'
+        text: 'Name:\nNumber:'
         size_hint: (0.88,0.14)
         pos_hint: {'center_x':0.5,'center_y':0.25}
 
 
     Button:
+        id: save_button
         size_hint: (0.39, 0.053)
         background_color:0,0,0,0
         pos_hint: {'center_x': 0.5, 'center_y': 0.075}
         on_press:
             app.root.transition = FadeTransition()
-            app.root.current = 'en_patientUp'
+            root.save_Contacts()
         Image:
-            source: 'images/icons/en/back.png'
+            source: 'images/icons/en/save_btn.png'
             size: self.parent.size
             center_x: self.parent.center_x
             center_y: self.parent.center_y
+
 <en_informationScreen>:
     name: "ct_information"
     canvas.before:
