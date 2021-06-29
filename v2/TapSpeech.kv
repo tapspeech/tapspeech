@@ -5,15 +5,18 @@ windowManager:
     en_registerScreen:
     en_patientUpScreen:
     en_patientDownScreen:
+    en_informationScreen:
     en_contactsScreen:
     en_caretakerUpScreen:
     en_caretakerDownScreen:
+
 
     ct_welcomeScreen:
     ct_loginScreen:
     ct_registerScreen:
     ct_patientUpScreen:
     ct_patientDownScreen:
+    ct_informationScreen:
     ct_contactsScreen:
     ct_caretakerUpScreen:
     ct_caretakerDownScreen:
@@ -236,7 +239,10 @@ windowManager:
 
 <en_PatientUpScreen>:
     say_something: say_something
-    # Hello_Name: Hello_Name
+    hello_name: hello_name
+
+    on_enter:
+        root.change_helloMessage()
 
     canvas.before:
         Rectangle:
@@ -273,7 +279,7 @@ windowManager:
 
         # Change this below so that it is custom to the dude
         Label:
-            id: Hello_Name
+            id: hello_name
             font_name: 'GalanoGrotesque'
             font_size:50
             color: 0.0745,0.31,0.357,1
@@ -292,6 +298,27 @@ windowManager:
             background_active: 'images/icons/en/say_something_textinput_active.png'
             # Left, Top, Right, Button
             padding:[40,30,240,20]
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.22, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.79, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
 
         Button:
             size_hint: (0.222, 0.053)
@@ -316,6 +343,13 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.30, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.9, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'en_information'
 
 <en_PatientDownScreen>:
     label_1: label_1
@@ -452,9 +486,53 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-<en_ContactsScreen>:
+<en_informationScreen>:
+    name: "ct_information"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/information.png'
+    FloatLayout:
+        Label:
+            id: Medical_History
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.70}
+            text:'Medical History'
+        Label:
+            id: Diagnosis
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.48}
+            text:'Diagnosis'
+        Label:
+            id: Medication
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.26}
+            text:'Medication'
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'en_patientUp'
+            Image:
+                source: 'images/icons/en/back.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_caretakerUpScreen>:
+    caretaker_name: caretaker_name
+
+    on_enter:
+        root.display_caretaker_name()
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -481,12 +559,22 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_release:
+                root.manager.transition.direction = 'down'
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+
+        Label:
+            id: caretaker_name
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            font_name: 'Noto'
+            color:0,0,0,1
+            text: 'caretaker_name'
+            font_size:30
 
 
 <en_caretakerDownScreen>:
@@ -724,6 +812,17 @@ windowManager:
 
     FloatLayout:
         Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'ct_login'
+            Image:
+                source: 'images/icons/ct/logout_button.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+        Button:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
@@ -756,6 +855,7 @@ windowManager:
             background_active: 'images/icons/en/say_something_textinput_active.png'
             # Left, Top, Right, Button
             padding:[40,30,240,20]
+
 
         Button:
             size_hint: (0.222, 0.053)

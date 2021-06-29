@@ -23,7 +23,7 @@ from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.layout import Layout
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -125,6 +125,31 @@ class ReadSQL:
             accountexists = True
         return accountexists
 
+    def request_puller(name):
+        timer = 0
+        # reqs = Requests.objects.all().filter(request_patient=name)
+        names = name
+
+        reqs = Requests.objects.all().filter(request_patient__in=names)
+        context = reqs.distinct().order_by('-request_time')
+        context_len = len(context)
+
+        timer = 0
+        for i in range(context_len):
+            r_pat = context.values_list('request_patient', flat=True)[timer]
+            r_type = context.values_list('request_type', flat=True)[timer]
+            r_spec = context.values_list('request_specification', flat=True)[timer]
+            r_time = context.values_list('request_time', flat=True)[timer]
+            print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
+            timer=+1
+            if timer == 3:
+                return
+
+    def request_validator(name):
+        reqs = Requests.objects.all().filter(request_patient__in=name)
+        if len(reqs) == 0:
+            return False
+
 class en_loginScreen(Screen):
     username = ObjectProperty(None)
     password = ObjectProperty(None)
@@ -189,20 +214,6 @@ class en_registerScreen(Screen):
                 # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
                 completed_registration = False
                 return completed_registration
-
-        # if user_type == 'caretaker':
-        #     infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
-        #     if infocheckresult == False:
-        #         # if infocheckresult is False, it means that they are not registered in the database and can be added
-        #         new_caretaker = Caretaker(caretakerFullName = self.username.text, caretakerPassword = self.password.text)
-        #         new_caretaker.save()
-        #         completed_registration = True
-        #         return completed_registration
-        #     else:
-        #         # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
-        #         completed_registration = False
-        #         return completed_registration
-
         # if the user_type is NOT equal to patient (which means they are caretaker), run the function to add to caretaker database
         else:
             infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
@@ -250,10 +261,7 @@ class en_registerScreen(Screen):
 
 class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
-    Hello_Name = ObjectProperty(None)
-
-    # global global_patient_name
-    # self.Hello_Name.text = global_patient_name
+    hello_name = ObjectProperty(None)
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
@@ -263,6 +271,18 @@ class en_patientUpScreen(Screen):
         message = self.say_something.text
         self.say_something.text = ''
         tts.speak(message)
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, '+global_patient_name
+
+    def contact_info(type):
+
+        window = Popup(title='',
+        content=Label(text='Emergency Contact Number:'),
+        size_hint=(None, None), size=(500, 300))
+
+        window.open()
 
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
@@ -326,14 +346,21 @@ class en_patientDownScreen(Screen):
             self.dots.source = 'images/icons/general/dots_4.png'
             self.request_type = 'Bed'
 
-
 class en_contactsScreen(Screen):
     pass
 
 class en_caretakerUpScreen(Screen):
-    pass
+    caretaker_name = ObjectProperty(None)
+
+    def display_caretaker_name(self):
+        global global_caretaker_name
+        self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
 class en_caretakerDownScreen(Screen):
+    pass
+
+
+class en_informationScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
@@ -440,6 +467,7 @@ class tapSpeechApp(App):
         self.sm.add_widget(en_contactsScreen(name="en_contacts"))
         self.sm.add_widget(en_caretakerUpScreen(name="en_caretakerUp"))
         self.sm.add_widget(en_caretakerDownScreen(name="en_caretakerDown"))
+        self.sm.add_widget(en_informationScreen(name="en_information"))
 
         self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         self.sm.add_widget(ct_loginScreen(name="ct_login"))
