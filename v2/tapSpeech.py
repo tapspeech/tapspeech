@@ -102,6 +102,14 @@ class ReadSQL:
             accountexists = True
         return accountexists
 
+    def econtact_check(name):
+        pat = Patient.objects.all().filter(patientFullName=name)
+        econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
+        econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
+        econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+        econlist = [econ1, econ2, econ3]
+        return econlist
+
     def check_info_caretaker(name, password):
         #list to store emails
         names=[]
@@ -357,9 +365,11 @@ class en_contactsScreen(Screen):
 
     # Change below to use database values
     def update_emergency_contacts(self):
-        self.emergency_contact_1.text = 'emergency_contact_1'
-        self.emergency_contact_2.text = 'emergency_contact_2'
-        self.emergency_contact_3.text = 'emergency_contact_3'
+        global global_patient_name
+        econlist = ReadSQL.econtact_check(global_patient_name)
+        self.emergency_contact_1.text = econlist[0]
+        self.emergency_contact_2.text = econlist[1]
+        self.emergency_contact_3.text = econlist[2]
 
     # Save the new_emergency_contact_x_value into the database
     def save_Contacts(self):
