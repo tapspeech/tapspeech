@@ -5,15 +5,18 @@ windowManager:
     en_registerScreen:
     en_patientUpScreen:
     en_patientDownScreen:
+    en_informationScreen:
     en_contactsScreen:
     en_caretakerUpScreen:
     en_caretakerDownScreen:
+
 
     ct_welcomeScreen:
     ct_loginScreen:
     ct_registerScreen:
     ct_patientUpScreen:
     ct_patientDownScreen:
+    ct_informationScreen:
     ct_contactsScreen:
     ct_caretakerUpScreen:
     ct_caretakerDownScreen:
@@ -455,7 +458,13 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-<en_ContactsScreen>:
+<en_informationScreen>:
+    name: "ct_information"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/ct/information.png'
 
 <en_caretakerUpScreen>:
     canvas.before:
@@ -726,6 +735,17 @@ windowManager:
             source: 'images/bg/ct/patient_up.png'
 
     FloatLayout:
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_release:
+                app.root.current = 'ct_login'
+            Image:
+                source: 'images/icons/ct/logout_button.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
         Button:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
