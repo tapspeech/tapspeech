@@ -252,9 +252,6 @@ class en_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
     hello_name = ObjectProperty(None)
 
-    # global global_patient_name
-    # self.Hello_Name.text = global_patient_name
-
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
         self.sound.play()
@@ -330,12 +327,15 @@ class en_patientDownScreen(Screen):
             self.dots.source = 'images/icons/general/dots_4.png'
             self.request_type = 'Bed'
 
-
 class en_contactsScreen(Screen):
     pass
 
 class en_caretakerUpScreen(Screen):
-    pass
+    caretaker_name = ObjectProperty(None)
+
+    def display_caretaker_name(self):
+        global caretaker_name
+        self.caretaker_name.text = 'asdf'
 
 class en_caretakerDownScreen(Screen):
     pass
