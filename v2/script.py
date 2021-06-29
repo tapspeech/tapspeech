@@ -57,19 +57,27 @@ class ReadSQL:
         timer = 0
         # reqs = Requests.objects.all().filter(request_patient=name)
         names = name
+
         reqs = Requests.objects.all().filter(request_patient__in=names)
         context = reqs.distinct().order_by('-request_time')
-        for i in range (3):
-            #
-            # models.py's __str__ function is unable to turn request_time to a string, which keeps it from being returned.
-            #
+        context_len = len(context)
+
+        timer = 0
+        for i in range(context_len):
             r_pat = context.values_list('request_patient', flat=True)[timer]
             r_type = context.values_list('request_type', flat=True)[timer]
             r_spec = context.values_list('request_specification', flat=True)[timer]
             r_time = context.values_list('request_time', flat=True)[timer]
             print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
             timer=+1
+            if timer == 3:
+                return
 
+
+    def request_validator(name):
+        reqs = Requests.objects.all().filter(request_patient__in=name)
+        if len(reqs) == 0:
+            return False
 
 def account_creation():
     print(" ")
