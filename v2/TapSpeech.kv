@@ -507,6 +507,11 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_caretakerUpScreen>:
+    caretaker_name: caretaker_name
+
+    on_enter:
+        root.display_caretaker_name()
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -540,6 +545,15 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+
+        Label:
+            id: caretaker_name
+            size_hint: (0.354, 0.048)
+            pos_hint: {'center_x': 0.7, 'center_y': 0.8}
+            font: 'Noto'
+            text: 'caretaker_name'
+            #font_size:20
 
 
 <en_caretakerDownScreen>:

@@ -337,14 +337,16 @@ class en_patientDownScreen(Screen):
             self.label_4.text = 'Get Off'
             self.dots.source = 'images/icons/general/dots_4.png'
             self.request_type = 'Bed'
-class en_informationScreen(Screen):
-    pass
 
 class en_contactsScreen(Screen):
     pass
 
 class en_caretakerUpScreen(Screen):
-    pass
+    caretaker_name = ObjectProperty(None)
+
+    def display_caretaker_name(self):
+        global caretaker_name
+        self.caretaker_name.text = 'asdf'
 
 class en_caretakerDownScreen(Screen):
     pass
