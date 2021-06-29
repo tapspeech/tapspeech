@@ -363,12 +363,11 @@ class en_contactsScreen(Screen):
 
     # Save the new_emergency_contact_x_value into the database
     def save_Contacts(self):
-        new_emergency_contact_1_value = self.emergency_contact_1.text
-        new_emergency_contact_2_value = self.emergency_contact_2.text
-        new_emergency_contact_3_value = self.emergency_contact_3.text
-        print(new_emergency_contact_1_value)
-        print(new_emergency_contact_2_value)
-        print(new_emergency_contact_3_value)
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact=self.emergency_contact_1.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact2=self.emergency_contact_2.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact3=self.emergency_contact_3.text)
+
 
 
 class en_informationScreen(Screen):
