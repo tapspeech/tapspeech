@@ -34,7 +34,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.boxlayout import BoxLayout
 
-Window.size = (360, 760)
+# Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
@@ -278,7 +278,7 @@ class en_patientUpScreen(Screen):
 
     def contact_info(type):
 
-        window = Popup(title='Error',
+        window = Popup(title='',
         content=Label(text='Emergency Contact Number:'),
         size_hint=(None, None), size=(500, 300))
 
