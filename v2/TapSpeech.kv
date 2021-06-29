@@ -1,3 +1,4 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
 
 windowManager:
     en_welcomeScreen:
@@ -120,7 +121,7 @@ windowManager:
             size_hint: (0.52, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            on_press:
+            on_release:
                 root.validate()
             Image:
                 source: 'images/icons/en/login_login.png'
@@ -317,6 +318,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
             on_release:
                 app.root.current = 'en_patientDown'
+                app.root.transition = SlideTransition(direction="down")
             Image:
                 source: 'images/icons/en/down_btn.png'
                 size: self.parent.size
@@ -373,6 +375,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_release:
                 app.root.current = 'en_patientUp'
+                app.root.transition = SlideTransition(direction="up")
             Image:
                 source: 'images/icons/en/up_btn.png'
                 size: self.parent.size
@@ -471,7 +474,7 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/ct/information.png'
+            source: 'images/bg/en/information.png'
     FloatLayout:
         Label:
             id: Medical_History
@@ -538,7 +541,6 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_release:
-                root.manager.transition.direction = 'down'
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
