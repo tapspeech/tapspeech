@@ -590,7 +590,7 @@ windowManager:
             font_name : "GalanoGrotesque"
             font_size:50
             color: 0.0745,0.31,0.357,1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.48}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.53}
             text:'Diagnosis'
 
         TextInput:
@@ -598,14 +598,14 @@ windowManager:
             font_name: 'Noto'
             text: ''
             size_hint: (0.704,0.112)
-            pos_hint: {'center_x':0.5,'center_y':0.39}
+            pos_hint: {'center_x':0.5,'center_y':0.45}
 
         Label:
             id: Medication
             font_name : "GalanoGrotesque"
             font_size:50
             color: 0.0745,0.31,0.357,1
-            pos_hint: {'center_x': 0.5, 'center_y': 0.26}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.30}
             text:'Medication'
 
         TextInput:
@@ -613,7 +613,7 @@ windowManager:
             font_name: 'Noto'
             text: ''
             size_hint: (0.704,0.112)
-            pos_hint: {'center_x':0.5,'center_y':0.18}
+            pos_hint: {'center_x':0.5,'center_y':0.22}
 
         Button:
             size_hint: (0.39, 0.053)
@@ -632,7 +632,7 @@ windowManager:
             id: save_button
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.075}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.1}
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
