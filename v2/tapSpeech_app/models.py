@@ -27,9 +27,6 @@ class Requests(models.Model):
     request_type = models.CharField(max_length=30)
     request_specification = models.CharField(max_length=30)
     request_patient = models.CharField(max_length=30, default = '')
-    request_time = models.DateTimeField('Time Created',default=now, editable=False)
+    request_time = models.CharField(max_length=50, default = '')
 
-    def date_created(self):
-        current_datetime = dt.datetime.now()
-        current_time = (current_datetime.hour + ":" + current_datetime.minute + ":" + current_datetime.second)
-        return self.request_time == current_time
+    
