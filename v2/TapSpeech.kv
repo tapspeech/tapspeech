@@ -1,5 +1,25 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: import Factory kivy.factory.Factory
+
+#emergencycontact1:emergencycontact1
+
+
+<EmergencyContact1@Popup>:
+    title: 'Emergency contacts:'
+    font_size: 30
+    size_hint: 0.5,0.24
+    pos_hint: {'center_x':0.5,'centery':0.5}
+    TextInput:
+        id: emergencycontact1
+        text: 'write da thing my dude'
+        font_size: 24
+    Button:
+        pos_hint: {'center_x':0.5,'centery':0.4}
+        id: emergency_contact_save
+        text:'Save'
+        font_size:24
+
 
 windowManager:
     en_welcomeScreen:
@@ -320,26 +340,27 @@ windowManager:
             # Left, Top, Right, Button
             padding:[40,30,240,20]
 
-        Button: #enter 3
-            size_hint: (0.245, 0.116)
+        Button:
+            size_hint: (0.735, 0.116)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.22, 'center_y': 0.37}
-            on_press:
-                root.contact_info()
+            on_release:
+                app.root.current = ('en_contacts')
+                #root.contact_info()
 
-        Button: #enter 3
-            size_hint: (0.245, 0.116)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
-            on_press:
-                root.contact_info()
-
-        Button: #enter 3
-            size_hint: (0.245, 0.116)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.79, 'center_y': 0.37}
-            on_press:
-                root.contact_info()
+        # Button: #enter 2
+        #     size_hint: (0.245, 0.116)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+        #     on_release:
+        #         root.contact_info()
+        #
+        # Button: #enter 3
+        #     size_hint: (0.245, 0.116)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.79, 'center_y': 0.37}
+        #     on_release:
+        #         root.contact_info()
 
         Button:
             size_hint: (0.222, 0.053)
@@ -511,6 +532,13 @@ windowManager:
                 color: 0.33,0.33,0.33,1
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+<en_contactsScreen>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/contacts.png'
 
 <en_informationScreen>:
     name: "ct_information"
@@ -965,7 +993,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_press:
-                app.root.transition = FadeTransition()      
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
