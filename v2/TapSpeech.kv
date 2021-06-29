@@ -661,7 +661,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
             on_press:
-                app.root.transition = FadeTransition()
+                app.root.transition = SlideTransition(direction="up")
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
@@ -677,6 +677,20 @@ windowManager:
             color:0,0,0,1
             text: 'caretaker_name'
             font_size:30
+        Label:
+            id: caretaker_label
+            pos_hint: {'center_x': 0.5, 'center_y':0.72}
+            size_hint: (0.85, 0.85)
+            # font_name: 'GalanoGrotesque'
+            # text: 'caretaker_name'
+            font_size:30
+            Image:
+                source: 'images/icons/general/wagwan.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+
 
 
 <en_caretakerDownScreen>:
@@ -692,7 +706,7 @@ windowManager:
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_press:
-                app.root.transition = FadeTransition()
+                app.root.transition = SlideTransition(direction="down")
                 app.root.current = 'en_caretakerUp'
             Image:
                 source: 'images/icons/en/up_btn.png'

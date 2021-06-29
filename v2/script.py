@@ -53,57 +53,6 @@ class ReadSQL:
             else:
                 print("Name Check Failed")
 
-
-
-    # def request_puller(name):
-    #     names = name
-    #     broken_names = []
-    #
-    #     len_name = len(names)
-    #     timer0 = 0
-    #     for i in range(len_name):
-    #         reqs = Requests.objects.all().filter(request_patient__in=names[timer0])
-    #         len_reqs = len(reqs)
-    #         if len_reqs == 0:
-    #             broken_names.append(names[timer0])
-    #         timer0 =+ 1
-    #
-    #     len_broken_names = len(broken_names)
-    #     timer0 = 0
-    #     for i in range(len_broken_names):
-    #         names.remove(broken_names[timer0])
-    #         timer0 =+ 1
-    #
-    #
-    #     reqs = Requests.objects.all().filter(request_patient__in=names)
-    #     lenreq = len(reqs)
-    #
-    #     context = reqs.distinct().order_by('-request_time')
-    #     context_len = len(context)
-    #     timer = 0
-    #     for i in range(context_len):
-    #         r_pat = context.values_list('request_patient', flat=True)[timer]
-    #         r_type = context.values_list('request_type', flat=True)[timer]
-    #         r_spec = context.values_list('request_specification', flat=True)[timer]
-    #         r_time = context.values_list('request_time', flat=True)[timer]
-    #         print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
-    #         if timer == 0:
-    #             request0 = {timer: {r_pat, r_type, r_spec, r_type}}
-    #         elif timer == 1:
-    #             request1 = {timer: {r_pat, r_type, r_spec, r_type}}
-    #         elif timer == 2:
-    #             request2 = {timer: {r_pat, r_type, r_spec, r_type}}
-    #         timer=+1
-    #         if timer == 2:
-    #             print(request0)
-    #             print(request1)
-    #             print(request2)
-    #
-    # def request_validator(name):
-    #     reqs = Requests.objects.all().filter(request_patient__in=name)
-    #     if len(reqs) == 0:
-    #         return False
-
     def request_puller(name):
         names = name
         reqs = Requests.objects.all().filter(request_patient__in=names)
