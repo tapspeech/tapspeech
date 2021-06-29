@@ -300,6 +300,27 @@ windowManager:
             # Left, Top, Right, Button
             padding:[40,30,240,20]
 
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.22, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.79, 'center_y': 0.37}
+            on_release:
+                root.contact_info()
+
         Button:
             size_hint: (0.222, 0.053)
             background_color:0,0,0,0
@@ -479,21 +500,21 @@ windowManager:
         Label:
             id: Medical_History
             font_name : "GalanoGrotesque"
-            font_size:30
+            font_size:50
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.70}
             text:'Medical History'
         Label:
             id: Diagnosis
             font_name : "GalanoGrotesque"
-            font_size:30
+            font_size:50
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.48}
             text:'Diagnosis'
         Label:
             id: Medication
             font_name : "GalanoGrotesque"
-            font_size:30
+            font_size:50
             color: 0.0745,0.31,0.357,1
             pos_hint: {'center_x': 0.5, 'center_y': 0.26}
             text:'Medication'
@@ -551,11 +572,11 @@ windowManager:
 
         Label:
             id: caretaker_name
-            size_hint: (0.354, 0.048)
-            pos_hint: {'center_x': 0.7, 'center_y': 0.8}
-            font: 'Noto'
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            font_name: 'Noto'
+            color:0,0,0,1
             text: 'caretaker_name'
-            #font_size:20
+            font_size:30
 
 
 <en_caretakerDownScreen>:
@@ -836,6 +857,7 @@ windowManager:
             background_active: 'images/icons/en/say_something_textinput_active.png'
             # Left, Top, Right, Button
             padding:[40,30,240,20]
+
 
         Button:
             size_hint: (0.222, 0.053)

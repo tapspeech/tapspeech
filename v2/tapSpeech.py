@@ -34,7 +34,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.boxlayout import BoxLayout
 
-Window.size = (360, 760)
+# Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
@@ -276,6 +276,14 @@ class en_patientUpScreen(Screen):
         global global_patient_name
         self.hello_name.text = 'Hello, '+global_patient_name
 
+    def contact_info(type):
+
+        window = Popup(title='',
+        content=Label(text='Emergency Contact Number:'),
+        size_hint=(None, None), size=(500, 300))
+
+        window.open()
+
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
     label_1 = ObjectProperty(None)
@@ -348,10 +356,14 @@ class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
 
     def display_caretaker_name(self):
-        global caretaker_name
-        self.caretaker_name.text = 'asdf'
+        global global_caretaker_name
+        self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
 class en_caretakerDownScreen(Screen):
+    pass
+
+
+class en_informationScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
