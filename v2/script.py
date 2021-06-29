@@ -78,6 +78,13 @@ class ReadSQL:
             timer=+1
         return reqlist
 
+    def econtact_check(name):
+        pat = Patient.objects.all().filter(patientFullName=name)
+        econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
+        econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
+        econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+        print(econ1 + " "  + econ2 + " " + econ3)
+
 def account_creation():
     print(" ")
     print("---- Account Creation ----")
@@ -109,14 +116,22 @@ def request_pull():
     reqlist = ReadSQL.request_puller(searchnamelist)
     print(reqlist[0][0])
 
+def check_econtacts():
+    print(" ")
+    print("---- Emergency Contact Search ----")
+    name = input("input name pls ")
+    ReadSQL.econtact_check(name)
+
 
 print(" ")
-print("Which Command would you like to test?")
-print("account_creation, account_search, request_pull")
+print("Which Command would you like to test? (type the number)")
+print("1) account_creation, 2) account_search, 3) request_pull, 4) check_emer_contacts")
 x = input()
-if x == "account_creation":
+if x == "1":
     account_creation()
-elif x == "account_search":
+elif x == "2":
     account_search()
-elif x == "request_pull":
+elif x == "3":
     request_pull()
+elif x == "4":
+    check_econtacts()
