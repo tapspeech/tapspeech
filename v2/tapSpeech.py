@@ -13,6 +13,8 @@ from tapSpeech_app.models import Patient, Caretaker, Requests
 from kivy.uix.carousel import Carousel
 from kivy.uix.image import AsyncImage
 
+from datetime import datetime
+import pytz
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.core.text import LabelBase
@@ -74,7 +76,7 @@ class ReadSQL:
         return df
 
     def check_info_patient(name, birthday):
-        #list to store emails
+        #lists to store names and birthdays
         names=[]
         birthdays=[]
         namecheck = False
@@ -84,12 +86,12 @@ class ReadSQL:
         test = ReadSQL('db.sqlite3')
         df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
         df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientBirthDate'])
-        #adds all emails into the emails list
+        #adds all names and birthday into the emails list
         for number in range(len(df.index)):
             names.append(df.at[number,'patientFullName'])
         for number2 in range(len(df2.index)):
             birthdays.append(df2.at[number2,'patientBirthDate'])
-        #returns true if the email exists and false if it does not
+        #returns true if the names and birthday exists and false if it does not
         for i in range(len(names)):
             if name == names[i]:
                 namecheck = True
@@ -124,31 +126,6 @@ class ReadSQL:
         if namecheck and passwordcheck == True:
             accountexists = True
         return accountexists
-
-    def request_puller(name):
-        timer = 0
-        # reqs = Requests.objects.all().filter(request_patient=name)
-        names = name
-
-        reqs = Requests.objects.all().filter(request_patient__in=names)
-        context = reqs.distinct().order_by('-request_time')
-        context_len = len(context)
-
-        timer = 0
-        for i in range(context_len):
-            r_pat = context.values_list('request_patient', flat=True)[timer]
-            r_type = context.values_list('request_type', flat=True)[timer]
-            r_spec = context.values_list('request_specification', flat=True)[timer]
-            r_time = context.values_list('request_time', flat=True)[timer]
-            print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
-            timer=+1
-            if timer == 3:
-                return
-
-    def request_validator(name):
-        reqs = Requests.objects.all().filter(request_patient__in=name)
-        if len(reqs) == 0:
-            return False
 
 class en_loginScreen(Screen):
     username = ObjectProperty(None)
@@ -300,9 +277,14 @@ class en_patientDownScreen(Screen):
         else:
             pass
 
+        now = datetime.now()
+        tz_HK = pytz.timezone('Hongkong')
+        datetime_HK = datetime.now(tz_HK)
+        current_time = datetime_HK.strftime("%H:%M:%S")
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
         new_request.save()
+        print(new_request)
 
     def changebuttons(self,index_no):
         # drinks menu

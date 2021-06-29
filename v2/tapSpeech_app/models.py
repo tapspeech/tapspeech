@@ -19,6 +19,9 @@ class Patient(models.Model):
     patientEmergencyContact2 = models.CharField(max_length=30, default = '')
     patientEmergencyContactName3 = models.CharField(max_length=30, default = '')
     patientEmergencyContact3 = models.CharField(max_length=30, default = '')
+    patientMedicalHistory = models.TextField(max_length=5000, default = '')
+    patientDiagnosis = models.TextField(max_length=5000, default = '' )
+    patientMedication = models.TextField(max_length=5000, default = '')
 
     def __str__(self):
         return self.patientFullName
@@ -27,9 +30,4 @@ class Requests(models.Model):
     request_type = models.CharField(max_length=30)
     request_specification = models.CharField(max_length=30)
     request_patient = models.CharField(max_length=30, default = '')
-    request_time = models.DateTimeField('Time Created',default=now, editable=False)
-
-    def date_created(self):
-        current_datetime = dt.datetime.now()
-        current_time = (current_datetime.hour + ":" + current_datetime.minute + ":" + current_datetime.second)
-        return self.request_time == current_time
+    request_time = models.CharField(max_length=30, default = '')
