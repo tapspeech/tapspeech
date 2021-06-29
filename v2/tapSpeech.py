@@ -345,10 +345,14 @@ class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
 
     def display_caretaker_name(self):
-        global caretaker_name
-        self.caretaker_name.text = 'asdf'
+        global global_caretaker_name
+        self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
 class en_caretakerDownScreen(Screen):
+    pass
+
+
+class en_informationScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
