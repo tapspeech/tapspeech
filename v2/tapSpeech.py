@@ -278,7 +278,7 @@ class en_patientUpScreen(Screen):
 
     def contact_info(type):
 
-        window = Popup(title='Error',
+        window = Popup(title='',
         content=Label(text='Emergency Contact Number:'),
         size_hint=(None, None), size=(500, 300))
 
