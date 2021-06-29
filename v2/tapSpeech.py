@@ -127,6 +127,27 @@ class ReadSQL:
             accountexists = True
         return accountexists
 
+    #get patient medical history, diagnosis and medication info
+    def get_patient_info(name, type):
+        patient_no = none
+        #selects the database
+        test = ReadSQL('db.sqlite3')
+        df = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientMedicalHistory'])
+        df2 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientDiagnosis'])
+        df3 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientMedication'])
+        df4 = test.query_columns_to_dataframe('tapSpeech_app_patient', ['patientFullName'])
+        #adds all names and birthday into the emails list
+        for number in range(len(df.index)):
+            if name == df4.at[number,'patientFullName']:
+                patient_no = number
+        if type == 1:
+            return df.at[patient_no,'patientMedicalHistory']
+        if type == 2:
+            return df2.at[patient_no,'patientDiagnosis']
+        if type == 3:
+            return df3.at[patient_no,'patientMedication']
+
+
 class en_loginScreen(Screen):
     username = ObjectProperty(None)
     password = ObjectProperty(None)
