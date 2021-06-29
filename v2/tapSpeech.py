@@ -25,7 +25,7 @@ from kivy.properties import ObjectProperty, StringProperty
 
 from kivy.uix.layout import Layout
 from kivy.uix.widget import Widget
-from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
+from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition, SlideTransition
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 from kivy.uix.button import Button
@@ -253,6 +253,14 @@ class en_patientUpScreen(Screen):
         global global_patient_name
         self.hello_name.text = 'Hello, '+global_patient_name
 
+    def contact_info(type):
+
+        window = Popup(title='',
+        content=Label(text='Emergency Contact Number:'),
+        size_hint=(None, None), size=(500, 300))
+
+        window.open()
+
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
     label_1 = ObjectProperty(None)
@@ -320,14 +328,24 @@ class en_patientDownScreen(Screen):
             self.dots.source = 'images/icons/general/dots_4.png'
             self.request_type = 'Bed'
 
-
 class en_contactsScreen(Screen):
     pass
 
-class en_caretakerUpScreen(Screen):
+class en_informationScreen(Screen):
     pass
 
+class en_caretakerUpScreen(Screen):
+    caretaker_name = ObjectProperty(None)
+
+    def display_caretaker_name(self):
+        global global_caretaker_name
+        self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
+
 class en_caretakerDownScreen(Screen):
+    pass
+
+
+class en_informationScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
@@ -424,7 +442,7 @@ class tapSpeechApp(App):
 
     def build(self):
         # Bear witness to Matthew's sexy code below
-        self.sm = windowManager(transition=FadeTransition())
+        self.sm = windowManager()
 
         self.sm.add_widget(en_welcomeScreen(name="en_welcome"))
         self.sm.add_widget(en_loginScreen(name="en_login"))
@@ -434,7 +452,7 @@ class tapSpeechApp(App):
         self.sm.add_widget(en_contactsScreen(name="en_contacts"))
         self.sm.add_widget(en_caretakerUpScreen(name="en_caretakerUp"))
         self.sm.add_widget(en_caretakerDownScreen(name="en_caretakerDown"))
-
+        self.sm.add_widget(en_informationScreen(name="en_information"))
         self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         self.sm.add_widget(ct_loginScreen(name="ct_login"))
         self.sm.add_widget(ct_registerScreen(name="ct_register"))

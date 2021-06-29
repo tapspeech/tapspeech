@@ -1,3 +1,5 @@
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import FadeTransition kivy.uix.screenmanager.FadeTransition
 
 windowManager:
     en_welcomeScreen:
@@ -36,7 +38,9 @@ windowManager:
         Button:
             id: btn_login
             background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'en_login'
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'en_login'
             Image:
                 source: 'images/icons/en/login.png'
                 pos: self.parent.pos
@@ -48,7 +52,9 @@ windowManager:
         Button:
             id: btn_register
             background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'en_register'
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'en_register'
             Image:
                 source: 'images/icons/en/register.png'
                 pos: self.parent.pos
@@ -62,7 +68,9 @@ windowManager:
         size_hint: 0.2, 0.05
         pos_hint: {"right":0.6,"top":0.09}
         background_color: 0, 0, 0, 0
-        on_release: app.root.current = 'ct_welcome'
+        on_press:
+            app.root.transition = FadeTransition()
+            app.root.current = 'ct_welcome'
         Image:
             source: 'images/icons/en/lang_change.png'
             pos: self.parent.pos
@@ -131,7 +139,8 @@ windowManager:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_welcome'
             Image:
                 source: 'images/icons/en/back_btn.png'
@@ -203,7 +212,7 @@ windowManager:
             size_hint: (0.37, 0.085)
             background_color: 0,0,0,0
             pos_hint: {'center_x': 0.275, 'center_y': 0.35}
-            on_release:
+            on_press:
                 root.validate("patient")
             Image:
                 source: 'images/icons/en/reg_patient.png'
@@ -216,7 +225,7 @@ windowManager:
             size_hint: (0.37, 0.085)
             background_color: 0,0,0,0
             pos_hint: {'center_x': 0.725, 'center_y': 0.35}
-            on_release:
+            on_press:
                 root.validate("caretaker")
             Image:
                 source: 'images/icons/en/reg_caretaker.png'
@@ -228,7 +237,8 @@ windowManager:
             size_hint: (0.53, 0.072)
             background_color: 0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_welcome'
                 # conenct this to a function that registers the typed stuff into the data base
             Image:
@@ -257,7 +267,8 @@ windowManager:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.92}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_login'
             Image:
                 source: 'images/icons/en/logout_button.png'
@@ -269,7 +280,7 @@ windowManager:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-            on_release:
+            on_press:
                 root.sound_alarm()
             Image:
                 source: 'images/icons/en/alarm_btn.png'
@@ -299,11 +310,32 @@ windowManager:
             # Left, Top, Right, Button
             padding:[40,30,240,20]
 
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.22, 'center_y': 0.37}
+            on_press:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            on_press:
+                root.contact_info()
+
+        Button: #enter 3
+            size_hint: (0.245, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.79, 'center_y': 0.37}
+            on_press:
+                root.contact_info()
+
         Button:
             size_hint: (0.222, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.8, 'center_y': 0.20}
-            on_release:
+            on_press:
                 root.textInput_enter()
             Image:
                 source: 'images/icons/en/enter_btn.png'
@@ -315,13 +347,23 @@ windowManager:
             size_hint: (0.0856, 0.0504)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
-            on_release:
+            on_press:
+                app.root.transition = SlideTransition(direction="up")
                 app.root.current = 'en_patientDown'
+
             Image:
                 source: 'images/icons/en/down_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.30, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.9, 'center_y': 0.92}
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'en_information'
 
 <en_PatientDownScreen>:
     label_1: label_1
@@ -364,8 +406,10 @@ windowManager:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-            on_release:
+            on_press:
+                app.root.transition = SlideTransition(direction="down")
                 app.root.current = 'en_patientUp'
+
             Image:
                 source: 'images/icons/en/up_btn.png'
                 size: self.parent.size
@@ -377,7 +421,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.44}
-            on_release:
+            on_press:
                 root.returnMessage('label_1')
             Image:
                 source: 'images/icons/general/label1.png'
@@ -400,7 +444,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.32}
-            on_release:
+            on_press:
                 root.returnMessage('label_2')
             Image:
                 source: 'images/icons/general/label2.png'
@@ -421,7 +465,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.20}
-            on_release:
+            on_press:
                 root.returnMessage('label_3')
             Image:
                 source: 'images/icons/general/label3.png'
@@ -442,7 +486,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.08}
-            on_release:
+            on_press:
                 root.returnMessage('label_4')
             Image:
                 source: 'images/icons/general/label4.png'
@@ -464,9 +508,48 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/ct/information.png'
+            source: 'images/bg/en/information.png'
+    FloatLayout:
+        Label:
+            id: Medical_History
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.70}
+            text:'Medical History'
+        Label:
+            id: Diagnosis
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.48}
+            text:'Diagnosis'
+        Label:
+            id: Medication
+            font_name : "GalanoGrotesque"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.26}
+            text:'Medication'
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'en_patientUp'
+            Image:
+                source: 'images/icons/en/back.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
 
 <en_caretakerUpScreen>:
+    caretaker_name: caretaker_name
+
+    on_enter:
+        root.display_caretaker_name()
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -479,7 +562,8 @@ windowManager:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_login'
             Image:
                 source: 'images/icons/en/logout_button.png'
@@ -492,13 +576,23 @@ windowManager:
             size_hint: (0.0856, 0.0504)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.15}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+
+        Label:
+            id: caretaker_name
+            pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+            font_name: 'Noto'
+            color:0,0,0,1
+            text: 'caretaker_name'
+            font_size:30
 
 
 <en_caretakerDownScreen>:
@@ -513,7 +607,8 @@ windowManager:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'en_caretakerUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
@@ -538,7 +633,9 @@ windowManager:
         Button:
             id: btn_login
             background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'ct_login'
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'ct_login'
             Image:
                 source: 'images/icons/ct/login.png'
                 pos: self.parent.pos
@@ -550,7 +647,9 @@ windowManager:
         Button:
             id: btn_register
             background_color: 0, 0, 0, 0
-            on_release: app.root.current = 'ct_register'
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'ct_register'
             Image:
                 source: 'images/icons/ct/register.png'
                 pos: self.parent.pos
@@ -564,7 +663,9 @@ windowManager:
         size_hint: 0.2, 0.05
         pos_hint: {"right":0.6,"top":0.1}
         background_color: 0, 0, 0, 0
-        on_release: app.root.current = 'en_welcome'
+        on_press:
+            app.root.transition = FadeTransition()
+            app.root.current = 'en_welcome'
         Image:
             source: 'images/icons/ct/lang_change.png'
             pos: self.parent.pos
@@ -624,7 +725,8 @@ windowManager:
             #   a patient or a caretaker (using the database), then bring them
             #   to the appropriate screen, i.e. patient user is brought to
             #   patient screen, and caretaker user is brought to the caretaker screen
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/ct/login_login.png'
@@ -636,7 +738,8 @@ windowManager:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_welcome'
             Image:
                 source: 'images/icons/ct/back_btn.png'
@@ -691,7 +794,8 @@ windowManager:
             size_hint: (0.37, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.275, 'center_y': 0.35}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_login'
                 # conenct this to a function that registers the typed stuff into the data base
             Image:
@@ -704,7 +808,8 @@ windowManager:
             size_hint: (0.37, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.725, 'center_y': 0.35}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_login'
                 # conenct this to a function that registers the typed stuff into the data base
             Image:
@@ -717,7 +822,8 @@ windowManager:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_welcome'
                 # conenct this to a function that registers the typed stuff into the data base
             Image:
@@ -739,7 +845,8 @@ windowManager:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.92}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_login'
             Image:
                 source: 'images/icons/ct/logout_button.png'
@@ -750,7 +857,7 @@ windowManager:
             size_hint: (0.904, 0.0811)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.8}
-            on_release:
+            on_press:
                 root.sound_alarm()
             Image:
                 source: 'images/icons/ct/alarm_btn.png'
@@ -780,11 +887,12 @@ windowManager:
             # Left, Top, Right, Button
             padding:[40,30,240,20]
 
+
         Button:
             size_hint: (0.222, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.8, 'center_y': 0.20}
-            on_release:
+            on_press:
                 root.textInput_enter()
             Image:
                 source: 'images/icons/ct/enter_btn.png'
@@ -796,7 +904,8 @@ windowManager:
             size_hint: (0.0856, 0.0504)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()
                 app.root.current = 'ct_patientDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
@@ -845,7 +954,8 @@ windowManager:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
-            on_release:
+            on_press:
+                app.root.transition = FadeTransition()      
                 app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
@@ -858,7 +968,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.44}
-            on_release:
+            on_press:
                 root.returnMessage('label_1')
             Image:
                 source: 'images/icons/general/label1.png'
@@ -881,7 +991,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.32}
-            on_release:
+            on_press:
                 root.returnMessage('label_2')
             Image:
                 source: 'images/icons/general/label2.png'
@@ -902,7 +1012,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.20}
-            on_release:
+            on_press:
                 root.returnMessage('label_3')
             Image:
                 source: 'images/icons/general/label3.png'
@@ -923,7 +1033,7 @@ windowManager:
             size_hint: (0.9, 0.1)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.08}
-            on_release:
+            on_press:
                 root.returnMessage('label_4')
             Image:
                 source: 'images/icons/general/label4.png'
