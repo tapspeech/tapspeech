@@ -42,6 +42,7 @@ LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
 
 global_patient_name = ''
+global_caretaker_name = ''
 
 def error(type):
     if type == 1:
@@ -350,7 +351,25 @@ class en_patientDownScreen(Screen):
             self.request_type = 'Bed'
 
 class en_contactsScreen(Screen):
-    pass
+    emergency_contact_1 = ObjectProperty(None)
+    emergency_contact_2 = ObjectProperty(None)
+    emergency_contact_3 = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_emergency_contacts(self):
+        self.emergency_contact_1.text = 'emergency_contact_1'
+        self.emergency_contact_2.text = 'emergency_contact_2'
+        self.emergency_contact_3.text = 'emergency_contact_3'
+
+    # Save the new_emergency_contact_x_value into the database
+    def save_Contacts(self):
+        new_emergency_contact_1_value = self.emergency_contact_1.text
+        new_emergency_contact_2_value = self.emergency_contact_2.text
+        new_emergency_contact_3_value = self.emergency_contact_3.text
+        print(new_emergency_contact_1_value)
+        print(new_emergency_contact_2_value)
+        print(new_emergency_contact_3_value)
+
 
 class en_informationScreen(Screen):
     pass
@@ -440,9 +459,6 @@ class ct_patientDownScreen(Screen):
             self.label_3.text = '上床'
             self.label_4.text = '下床'
             self.dots.source = 'images/icons/general/dots_4.png'
-
-class en_contactsScreen(Screen):
-    pass
 
 class ct_contactsScreen(Screen):
     pass

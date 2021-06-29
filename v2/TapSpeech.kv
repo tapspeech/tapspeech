@@ -2,25 +2,6 @@
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #: import Factory kivy.factory.Factory
 
-#emergencycontact1:emergencycontact1
-
-
-<EmergencyContact1@Popup>:
-    title: 'Emergency contacts:'
-    font_size: 30
-    size_hint: 0.5,0.24
-    pos_hint: {'center_x':0.5,'centery':0.5}
-    TextInput:
-        id: emergencycontact1
-        text: 'write da thing my dude'
-        font_size: 24
-    Button:
-        pos_hint: {'center_x':0.5,'centery':0.4}
-        id: emergency_contact_save
-        text:'Save'
-        font_size:24
-
-
 windowManager:
     en_welcomeScreen:
     en_loginScreen:
@@ -331,26 +312,11 @@ windowManager:
             padding:[40,30,240,20]
 
         Button:
-            size_hint: (0.735, 0.116)
+            size_hint: (0.8, 0.116)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.22, 'center_y': 0.37}
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
             on_release:
                 app.root.current = ('en_contacts')
-                #root.contact_info()
-
-        # Button: #enter 2
-        #     size_hint: (0.245, 0.116)
-        #     background_color:0,0,0,0
-        #     pos_hint: {'center_x': 0.5, 'center_y': 0.37}
-        #     on_release:
-        #         root.contact_info()
-        #
-        # Button: #enter 3
-        #     size_hint: (0.245, 0.116)
-        #     background_color:0,0,0,0
-        #     pos_hint: {'center_x': 0.79, 'center_y': 0.37}
-        #     on_release:
-        #         root.contact_info()
 
         Button:
             size_hint: (0.222, 0.053)
@@ -524,11 +490,67 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_contactsScreen>:
+    emergency_contact_1: emergency_contact_1
+    emergency_contact_2: emergency_contact_2
+    emergency_contact_3: emergency_contact_3
+
+    on_enter:
+        root.update_emergency_contacts()
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/contacts.png'
+
+    Button:
+        size_hint: (0.39, 0.053)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.93}
+        on_press:
+            app.root.transition = FadeTransition()
+            app.root.current = 'en_patientUp'
+        Image:
+            source: 'images/icons/en/back.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+    TextInput:
+        id: emergency_contact_1
+        font_name: 'Noto'
+        text: 'Name:\nNumber:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.66}
+
+    TextInput:
+        id: emergency_contact_2
+        font_name: 'Noto'
+        text: 'Name:\nNumber:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.45}
+
+    TextInput:
+        id: emergency_contact_3
+        font_name: 'Noto'
+        text: 'Name:\nNumber:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.25}
+
+
+    Button:
+        id: save_button
+        size_hint: (0.39, 0.053)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.075}
+        on_press:
+            app.root.transition = FadeTransition()
+            root.save_Contacts()
+        Image:
+            source: 'images/icons/en/save_btn.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
 <en_informationScreen>:
     name: "ct_information"
