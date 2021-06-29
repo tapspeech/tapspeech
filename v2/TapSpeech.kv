@@ -21,6 +21,16 @@ windowManager:
     ct_caretakerUpScreen:
     ct_caretakerDownScreen:
 
+<contact_info@Popup>
+    size_hint: 0.6, 0.2
+    
+    title:'yomama'
+    FloatLayout:
+        Button:
+            on_release: root.dismiss()
+            Label:
+                text:'close me'
+
 <en_welcomeScreen>:
     name: "en_welcome"
     canvas.before:
