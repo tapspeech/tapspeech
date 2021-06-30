@@ -373,7 +373,7 @@ class en_contactsScreen(Screen):
     # Change below to use database values
     def update_emergency_contacts(self):
         global global_patient_name
-        econlist = ReadSQL.item_check(econ, global_patient_name)
+        econlist = ReadSQL.item_check('econ', global_patient_name)
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
@@ -398,7 +398,7 @@ class en_informationScreen(Screen):
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
-        medhislist = ReadSQL.item_check(medhis, global_patient_name)
+        medhislist = ReadSQL.item_check('medhis', global_patient_name)
         self.medical_history_input.text = medhislist[0]
         self.diagnosis_input.text = medhislist[1]
         self.medication_input.text = medhislist[2]
