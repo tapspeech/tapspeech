@@ -567,12 +567,15 @@ windowManager:
     diagnosis_input: diagnosis_input
     medication_input: medication_input
 
-    #name: "ct_information"
+    on_enter:
+        root.update_medical_info()
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/information.png'
+
     FloatLayout:
         Label:
             id: Medical_History
@@ -1029,6 +1032,14 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+        Button:
+            size_hint: (0.30, 0.1)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.9, 'center_y': 0.92}
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'ct_information'
+
 <ct_PatientDownScreen>:
     label_1: label_1
     label_2: label_2
@@ -1162,6 +1173,90 @@ windowManager:
                 font_name: 'Noto'
                 font_size: 40
                 color: 0.33,0.33,0.33,1
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+<ct_informationScreen>:
+    medical_history_input: medical_history_input
+    diagnosis_input: diagnosis_input
+    medication_input: medication_input
+
+    #name: "ct_information"
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/information.png'
+    FloatLayout:
+        Label:
+            id: Medical_History
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.70}
+            text:'病人歷史'
+
+        TextInput:
+            id: medical_history_input
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.704,0.112)
+            pos_hint: {'center_x':0.5,'center_y':0.61}
+
+        Label:
+            id: Diagnosis
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.50}
+            text:'診斷'
+
+        TextInput:
+            id: diagnosis_input
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.704,0.112)
+            pos_hint: {'center_x':0.5,'center_y':0.42}
+
+        Label:
+            id: Medication
+            font_name : "Noto"
+            font_size:50
+            color: 0.0745,0.31,0.357,1
+            pos_hint: {'center_x': 0.5, 'center_y': 0.30}
+            text:'藥物'
+
+        TextInput:
+            id: medication_input
+            font_name: 'Noto'
+            text: ''
+            size_hint: (0.704,0.112)
+            pos_hint: {'center_x':0.5,'center_y':0.22}
+
+        Button:
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'ct_patientUp'
+            Image:
+                source: 'images/icons/en/back.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: save_button
+            size_hint: (0.39, 0.053)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.11}
+            on_press:
+                app.root.transition = FadeTransition()
+                root.save_medical_info()
+            Image:
+                source: 'images/icons/en/save_btn.png'
+                size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
