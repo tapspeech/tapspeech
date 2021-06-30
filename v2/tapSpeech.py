@@ -561,7 +561,6 @@ class en_updatepatientlistScreen(Screen):
 
         if addorremove == 'add':
             if validate(self.patient_username.text, self.patient_password.text) == True:
-                global global_caretaker_name
                 avalibleslots = checkslots(global_caretaker_name)
                 avalibleslots_len = len(avalibleslots)
                 if avalibleslots_len == 0:
@@ -585,7 +584,6 @@ class en_updatepatientlistScreen(Screen):
 
         elif addorremove == 'remove':
             if validate(self.patient_username.text, self.patient_password.text) == True:
-                global global_caretaker_name
                 filledslots = checkfilledslots(global_caretaker_name)
                 usedslots_len = len(filledslots)
                 if usedslots_len == 0:
