@@ -420,10 +420,6 @@ class en_caretakerUpScreen(Screen):
 class en_caretakerDownScreen(Screen):
     pass
 
-
-class en_informationScreen(Screen):
-    pass
-
 class ct_welcomeScreen(Screen):
     pass
 
