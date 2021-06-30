@@ -643,6 +643,7 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'en_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
@@ -1125,6 +1126,11 @@ windowManager:
 
 <ct_PatientUpScreen>:
     say_something: say_something
+    hello_name: hello_name
+
+    on_enter:
+        root.change_helloMessage()
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -1158,7 +1164,7 @@ windowManager:
 
         # Change this below so that it is custom to the dude
         Label:
-            id: Hello_Name
+            id: hello_name
             font_name : "Noto"
             font_size:50
             color: 0.0745,0.31,0.357,1
@@ -1433,6 +1439,7 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
@@ -1496,6 +1503,7 @@ windowManager:
         on_press:
             app.root.transition = FadeTransition()
             root.save_Contacts()
+            app.root.current = 'en_patientUp'
         Image:
             source: 'images/icons/en/save_btn.png'
             size: self.parent.size

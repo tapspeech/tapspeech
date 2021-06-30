@@ -105,15 +105,33 @@ class ReadSQL:
     def item_check(search, name):
         pat = Patient.objects.all().filter(patientFullName=name)
         if search == 'econ':
-            econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
-            econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
-            econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+            if pat.values_list('patientEmergencyContact', flat=True).exists():
+                econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
+            else:
+                econ1 = 'Contact Name / Contact Number'
+            if pat.values_list('patientEmergencyContact2', flat=True).exists():
+                econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
+            else:
+                econ2 = 'Contact Name / Contact Number'
+            if pat.values_list('patientEmergencyContact3', flat=True).exists():
+                econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+            else:
+                econ3 = 'Contact Name / Contact Number'
             econlist = [econ1, econ2, econ3]
             return econlist
         if search == 'medhis':
-            medhis1 = pat.values_list('patientMedicalHistory', flat=True)[0]
-            medhis2 = pat.values_list('patientDiagnosis', flat=True)[0]
-            medhis3 = pat.values_list('patientMedication', flat=True)[0]
+            if pat.values_list('patientMedicalHistory', flat=True).exists():
+                medhis1 = pat.values_list('patientMedicalHistory', flat=True)[0]
+            else:
+                medhis1 = 'Medical History'
+            if pat.values_list('patientDiagnosis', flat=True).exists():
+                medhis2 = pat.values_list('patientDiagnosis', flat=True)[0]
+            else:
+                medhis2 = 'Patient Diagnosis'
+            if pat.values_list('patientMedication', flat=True).exists():
+                medhis3 = pat.values_list('patientMedication', flat=True)[0]
+            else:
+                medhis3 = 'Patient Medication'
             medhislist = [medhis1, medhis2, medhis3]
             return medhislist
 
@@ -290,14 +308,6 @@ class en_patientUpScreen(Screen):
         global global_patient_name
         self.hello_name.text = 'Hello, '+global_patient_name
 
-    def contact_info(type):
-
-        window = Popup(title='',
-        content=Label(text='Emergency Contact Number:'),
-        size_hint=(None, None), size=(500, 300))
-
-        window.open()
-
 class en_patientDownScreen(Screen):
     dots = ObjectProperty(None)
     label_1 = ObjectProperty(None)
@@ -424,14 +434,82 @@ class ct_loginScreen(Screen):
     pass
 
 class ct_registerScreen(Screen):
-    pass
+    username = ObjectProperty(None)
+    password = ObjectProperty(None)
+
+    def register_user(self, user_type):
+        return_data = [self.username.text, self.password.text, user_type]
+        print(return_data)
+        completed_registration = False
+        # if the user_type is equal to patient, run the function to add to patient database
+        if user_type == 'patient':
+            infocheckresult = ReadSQL.check_info_patient(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_patient = Patient(patientFullName = self.username.text, patientBirthDate = self.password.text)
+                new_patient.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+        # if the user_type is NOT equal to patient (which means they are caretaker), run the function to add to caretaker database
+        else:
+            infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_caretaker = Caretaker(caretakerFullName = self.username.text, caretakerPassword = self.password.text, listedPatients = '')
+                new_caretaker.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+
+    def validate(self, user_type):
+        # error 1 - check if they've input something
+        if (not self.username.text) or (not self.password.text):
+            error(1)
+        # error 2 - check if account already exists
+        # else if ReadSQL.check_info(self.username.text, self.password.text) == False:
+        #   error(2)
+        else:
+            completed_registration = self.register_user(user_type)
+            if completed_registration == False:
+                error(1)
+            else:
+                if user_type == 'patient':
+                    App.get_running_app().sm.current = 'en_patientUp'
+                    global global_patient_name
+                    global_patient_name = self.username.text
+                elif user_type == 'caretaker':
+                    print('running')
+                    App.get_running_app().sm.current = 'en_caretakerUp'
+
+                    '''
+                    I dont know what the two lines,
+                    remove this comment if those lines are necessary
+                    '''
+
+                    global global_caretaker_name
+                    global_caretaker_name = self.username.text
+                else:
+                    print('running error')
+                    error(3)
 
 class ct_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
+    hello_name = ObjectProperty(None)
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
         self.sound.play()
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, ' + global_patient_name
 
     def textInput_enter(self):
         message = self.say_something.text
@@ -505,9 +583,9 @@ class ct_informationScreen(Screen):
     # Save the new medical_info into the database
     def save_medical_info(self):
         global global_patient_name
-        Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(diagnosis_input=self.diagnosis_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedicalHistory=self.medical_history_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientDiagnosis=self.diagnosis_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedication=self.medication_input.text)
 
 class ct_contactsScreen(Screen):
     emergency_contact_1 = ObjectProperty(None)
