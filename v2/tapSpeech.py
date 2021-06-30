@@ -516,7 +516,17 @@ class ct_informationScreen(Screen):
         Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
 
 class ct_contactsScreen(Screen):
-    pass
+    emergency_contact_1 = ObjectProperty(None)
+    emergency_contact_2 = ObjectProperty(None)
+    emergency_contact_3 = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_emergency_contacts(self):
+        global global_patient_name
+        econlist = ReadSQL.item_check('econ', global_patient_name)
+        self.emergency_contact_1.text = econlist[0]
+        self.emergency_contact_2.text = econlist[1]
+        self.emergency_contact_3.text = econlist[2]
 
 class ct_caretakerUpScreen(Screen):
     pass
@@ -535,7 +545,7 @@ class tapSpeechApp(App):
     def build(self):
         # Bear witness to Matthew's sexy code below
         self.sm = windowManager()
- 
+
         self.sm.add_widget(en_welcomeScreen(name="en_welcome"))
         self.sm.add_widget(en_loginScreen(name="en_login"))
         self.sm.add_widget(en_registerScreen(name="en_register"))
