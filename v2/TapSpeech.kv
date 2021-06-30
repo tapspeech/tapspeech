@@ -699,21 +699,121 @@ windowManager:
             color:0,0,0,1
             text: 'caretaker_name'
             font_size:30
+
         Label:
-            id: caretaker_label
+            id: patient_1_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
             pos_hint: {'center_x': 0.5, 'center_y':0.72}
-            size_hint: (0.85, 0.85)
-            # font_name: 'GalanoGrotesque'
-            # text: 'caretaker_name'
-            font_size:30
-            Image:
-                source: 'images/icons/general/wagwan.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            # Left, Top, Right, Button
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_2_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.64}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_3_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.56}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_4_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.48}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+
+        Label:
+            id: patient_5_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.40}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+
+        Label:
+            id: patient_6_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.32}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
 <en_caretakerDownScreen>:
     canvas.before:
