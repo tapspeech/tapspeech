@@ -102,13 +102,20 @@ class ReadSQL:
             accountexists = True
         return accountexists
 
-    def econtact_check(name):
+    def item_check(search, name):
         pat = Patient.objects.all().filter(patientFullName=name)
-        econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
-        econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
-        econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
-        econlist = [econ1, econ2, econ3]
-        return econlist
+        if search == 'econ':
+            econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
+            econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
+            econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+            econlist = [econ1, econ2, econ3]
+            return econlist
+        if search == 'medhis':
+            medhis1 = pat.values_list('patientMedicalHistory', flat=True)[0]
+            medhis2 = pat.values_list('patientDiagnosis', flat=True)[0]
+            medhis3 = pat.values_list('patientMedication', flat=True)[0]
+            medhislist = [medhis1, medhis2, medhis3]
+            return medhislist
 
     def check_info_caretaker(name, password):
         #list to store emails
@@ -366,13 +373,7 @@ class en_contactsScreen(Screen):
     # Change below to use database values
     def update_emergency_contacts(self):
         global global_patient_name
-        econlist = ReadSQL.econtact_check(global_patient_name)
-        if econlist[0] == '':
-            econlist[0] = 'Name:\nNumber:'
-        if econlist[1] == '':
-            econlist[1] = 'Name:\nNumber:'
-        if econlist[2] == '':
-            econlist[2] = 'Name:\nNumber:'
+        econlist = ReadSQL.item_check(econ, global_patient_name)
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
@@ -391,16 +392,16 @@ class en_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
+    #=============================================================================#
+    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
+    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
-        print('trying to run this')
         global global_patient_name
-        medical_info_list = ReadSQL.econtact_check(global_patient_name)
-        #self.medical_info_list.text =
-
-        self.medical_history_input.text = 'medical_history_input'
-        self.diagnosis_input.text = 'diagnosis_input'
-        self.medication_input.text = 'medication_input'
+        medhislist = ReadSQL.item_check('medhis', global_patient_name)
+        self.medical_history_input.text = medhislist[0]
+        self.diagnosis_input.text = medhislist[1]
+        self.medication_input.text = medhislist[2]
 
     # Save the new medical_info into the database
     def save_medical_info(self):
