@@ -442,7 +442,70 @@ class ct_loginScreen(Screen):
     pass
 
 class ct_registerScreen(Screen):
-    pass
+    username = ObjectProperty(None)
+    password = ObjectProperty(None)
+
+    def register_user(self, user_type):
+        return_data = [self.username.text, self.password.text, user_type]
+        print(return_data)
+        completed_registration = False
+        # if the user_type is equal to patient, run the function to add to patient database
+        if user_type == 'patient':
+            infocheckresult = ReadSQL.check_info_patient(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_patient = Patient(patientFullName = self.username.text, patientBirthDate = self.password.text)
+                new_patient.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+        # if the user_type is NOT equal to patient (which means they are caretaker), run the function to add to caretaker database
+        else:
+            infocheckresult = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+            if infocheckresult == False:
+                # if infocheckresult is False, it means that they are not registered in the database and can be added
+                new_caretaker = Caretaker(caretakerFullName = self.username.text, caretakerPassword = self.password.text, listedPatients = '')
+                new_caretaker.save()
+                completed_registration = True
+                return completed_registration
+            else:
+                # if infocheckresult is True, it means that they are already registered in the database and can't be added, return an error
+                completed_registration = False
+                return completed_registration
+
+    def validate(self, user_type):
+        # error 1 - check if they've input something
+        if (not self.username.text) or (not self.password.text):
+            error(1)
+        # error 2 - check if account already exists
+        # else if ReadSQL.check_info(self.username.text, self.password.text) == False:
+        #   error(2)
+        else:
+            completed_registration = self.register_user(user_type)
+            if completed_registration == False:
+                error(1)
+            else:
+                if user_type == 'patient':
+                    App.get_running_app().sm.current = 'en_patientUp'
+                    global global_patient_name
+                    global_patient_name = self.username.text
+                elif user_type == 'caretaker':
+                    print('running')
+                    App.get_running_app().sm.current = 'en_caretakerUp'
+
+                    '''
+                    I dont know what the two lines,
+                    remove this comment if those lines are necessary
+                    '''
+
+                    global global_caretaker_name
+                    global_caretaker_name = self.username.text
+                else:
+                    print('running error')
+                    error(3)
 
 class ct_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
@@ -454,7 +517,7 @@ class ct_patientUpScreen(Screen):
 
     def change_helloMessage(self):
         global global_patient_name
-        self.hello_name.text = 'Hello, '+global_patient_name
+        self.hello_name.text = 'Hello, ' + global_patient_name
 
     def textInput_enter(self):
         message = self.say_something.text
