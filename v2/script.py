@@ -77,7 +77,7 @@ class ReadSQL:
                 elif timer == 2:
                     req2 = [r_pat, r_type, r_spec, r_time]
                     reqlist.append(req2)
-                timer=+1
+                timer+=1
             return reqlist
         else:
             requests_exists = False
@@ -89,6 +89,70 @@ class ReadSQL:
         econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
         econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
         print(econ1 + " "  + econ2 + " " + econ3)
+
+    def new_request_puller(name):
+        names = name
+        names_len = len(names)
+        timer = 0
+        reqlist = []
+        for i in range(names_len):
+            success = False
+            print(timer)
+            reqs = Requests.objects.all().filter(request_patient=names[timer])
+            context = reqs.distinct().order_by('-request_time')
+            if context.values_list('request_patient', flat=True).exists():
+                r_pat = context.values_list('request_patient', flat=True)[0]
+                r_type = context.values_list('request_type', flat=True)[0]
+                r_spec = context.values_list('request_specification', flat=True)[0]
+                r_time = context.values_list('request_time', flat=True)[0]
+                success = True
+            else:
+                success = False
+
+            if timer == 0:
+                if success == True:
+                    req0 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req0 = ['None', 'None', 'None', 'None']
+                reqlist.append(req0)
+            if timer == 1:
+                if success == True:
+                    req1 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req1 = ['None', 'None', 'None', 'None']
+                reqlist.append(req1)
+            if timer == 2:
+                if success == True:
+                    req2 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req2 = ['None', 'None', 'None', 'None']
+                reqlist.append(req2)
+            if timer == 3:
+                if success == True:
+                    req3 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req3 = ['None', 'None', 'None', 'None']
+                reqlist.append(req3)
+            if timer == 4:
+                if success == True:
+                    req4 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req4 = ['None', 'None', 'None', 'None']
+                reqlist.append(req4)
+            if timer == 5:
+                if success == True:
+                    req5 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req5 = ['None', 'None', 'None', 'None']
+                reqlist.append(req5)
+            timer += 1
+        return reqlist
+
+
+
+
+
+
 
 def account_creation():
     print(" ")
@@ -130,10 +194,27 @@ def check_econtacts():
     name = input("input name pls ")
     ReadSQL.econtact_check(name)
 
+def new_request_pull():
+    print(" ")
+    print("---- Emergency Contact Search ----")
+    answ = input("would you like the use the test list? (jesus, thomas, ron, john, monty, carl), yes or no")
+    if answ == 'yes':
+        list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
+        reqlist = ReadSQL.new_request_puller(list)
+        print("This should print their name and most recent request's specifications")
+        print(reqlist[0][0] + " " + reqlist[0][2])
+        print(reqlist[1][0] + " " + reqlist[1][2])
+        print(reqlist[2][0] + " " + reqlist[2][2])
+        print(reqlist[3][0] + " " + reqlist[3][2])
+        print(reqlist[4][0] + " " + reqlist[4][2])
+        print(reqlist[5][0] + " " + reqlist[5][2])
+    if answ == 'no':
+        return
+
 
 print(" ")
 print("Which Command would you like to test? (type the number)")
-print("1) account_creation, 2) account_search, 3) request_pull, 4) check_emer_contacts")
+print("1) account_creation, 2) account_search, 3) request_pull, 4) new_request_pull, 5) check_emer_contacts")
 x = input()
 if x == "1":
     account_creation()
@@ -142,4 +223,6 @@ elif x == "2":
 elif x == "3":
     request_pull()
 elif x == "4":
+    new_request_pull()
+elif x == "5":
     check_econtacts()
