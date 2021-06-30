@@ -114,7 +114,7 @@ def request_pull():
     searchnamelist.append(name2)
     print(searchnamelist)
     reqlist = ReadSQL.request_puller(searchnamelist)
-    print(reqlist[0][0])
+    print(reqlist)
 
 def check_econtacts():
     print(" ")
