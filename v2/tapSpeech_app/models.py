@@ -29,5 +29,5 @@ class Patient(models.Model):
 class Requests(models.Model):
     request_type = models.CharField(max_length=30)
     request_specification = models.CharField(max_length=30)
-    request_patient = models.CharField(max_length=30, default = '')
+    request_patient = models.CharField(max_length=30, default = 'Untitled')
     request_time = models.CharField(max_length=30, default = '')
