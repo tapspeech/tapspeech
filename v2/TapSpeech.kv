@@ -699,120 +699,192 @@ windowManager:
             text: 'caretaker_name'
             font_size:30
 
+        Image:
+            id: Label_1_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.72}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
+        Image:
+            id: Label_2_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.64}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
+        Image:
+            id: Label_3_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.56}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
+        Image:
+            id: Label_4_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.48}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
+        Image:
+            id: Label_5_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.40}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
+        Image:
+            id: Label_6_bg
+            pos_hint: {'center_x': 0.5, 'center_y':0.32}
+            size_hint: (0.861, 0.0737)
+            source: 'images/icons/general/caretakerUp_labelBgs.png'
+
         Label:
             id: patient_1_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.72}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.72}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
-            text: 'placeholdertext'
+            text: 'placeholdertextplaceholdertextplaceholdertextplaceholdertextplaceholdertextplaceholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            # Left, Top, Right, Button
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
 
         Label:
             id: patient_2_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.64}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.64}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
             text: 'placeholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
 
         Label:
             id: patient_3_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.56}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.56}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
             text: 'placeholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
 
         Label:
             id: patient_4_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.48}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.48}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
             text: 'placeholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
 
         Label:
             id: patient_5_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.40}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.40}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
             text: 'placeholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
 
         Label:
             id: patient_6_request
             halign: 'left'
             valign: 'middle'
             background_color: (0.753,0.816,0.839,1)
-            pos_hint: {'center_x': 0.5, 'center_y':0.32}
-            size_hint: (0.861, 0.0737)
+            pos_hint: {'center_x': 0.45, 'center_y':0.32}
+            size_hint: (0.663, 0.0737)
             font_name: 'Noto'
             text: 'placeholdertext'
             text_size: self.size
             text_color: (1,1,1,1)
-            padding: (30,30)
-            canvas.before:
-                Color:
-                    rgba: self.background_color
-                RoundedRectangle:
-                    size: self.size
-                    pos: self.pos
+
+        Button:
+            id: clear_button_1
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.72}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: clear_button_2
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.64}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: clear_button_3
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.56}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: clear_button_4
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.48}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: clear_button_5
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.4}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            id: clear_button_6
+            size_hint: (0.0742, 0.0350)
+            pos_hint: {'center_x': 0.85, 'center_y': 0.32}
+            background_color:0,0,0,0
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/general/clear_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
 
 <en_caretakerDownScreen>:
     canvas.before:
