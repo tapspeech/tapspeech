@@ -105,15 +105,33 @@ class ReadSQL:
     def item_check(search, name):
         pat = Patient.objects.all().filter(patientFullName=name)
         if search == 'econ':
-            econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
-            econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
-            econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+            if pat.values_list('patientEmergencyContact', flat=True).exists():
+                econ1 = pat.values_list('patientEmergencyContact', flat=True)[0]
+            else:
+                econ1 = 'Contact Name / Contact Number'
+            if pat.values_list('patientEmergencyContact2', flat=True).exists():
+                econ2 = pat.values_list('patientEmergencyContact2', flat=True)[0]
+            else:
+                econ2 = 'Contact Name / Contact Number'
+            if pat.values_list('patientEmergencyContact3', flat=True).exists():
+                econ3 = pat.values_list('patientEmergencyContact3', flat=True)[0]
+            else:
+                econ3 = 'Contact Name / Contact Number'
             econlist = [econ1, econ2, econ3]
             return econlist
         if search == 'medhis':
-            medhis1 = pat.values_list('patientMedicalHistory', flat=True)[0]
-            medhis2 = pat.values_list('patientDiagnosis', flat=True)[0]
-            medhis3 = pat.values_list('patientMedication', flat=True)[0]
+            if pat.values_list('patientMedicalHistory', flat=True).exists():
+                medhis1 = pat.values_list('patientMedicalHistory', flat=True)[0]
+            else:
+                medhis1 = 'Medical History'
+            if pat.values_list('patientDiagnosis', flat=True).exists():
+                medhis2 = pat.values_list('patientDiagnosis', flat=True)[0]
+            else:
+                medhis2 = 'Patient Diagnosis'
+            if pat.values_list('patientMedication', flat=True).exists():
+                medhis3 = pat.values_list('patientMedication', flat=True)[0]
+            else:
+                medhis3 = 'Patient Medication'
             medhislist = [medhis1, medhis2, medhis3]
             return medhislist
 
@@ -392,9 +410,6 @@ class en_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
-    #=============================================================================#
-    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
-    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
@@ -431,10 +446,15 @@ class ct_registerScreen(Screen):
 
 class ct_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
+    hello_name = ObjectProperty(None)
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
         self.sound.play()
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, '+global_patient_name
 
     def textInput_enter(self):
         message = self.say_something.text
@@ -497,9 +517,6 @@ class ct_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
-    #=============================================================================#
-    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
-    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
@@ -511,12 +528,28 @@ class ct_informationScreen(Screen):
     # Save the new medical_info into the database
     def save_medical_info(self):
         global global_patient_name
-        Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(diagnosis_input=self.diagnosis_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedicalHistory=self.medical_history_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientDiagnosis=self.diagnosis_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedication=self.medication_input.text)
 
 class ct_contactsScreen(Screen):
-    pass
+    emergency_contact_1 = ObjectProperty(None)
+    emergency_contact_2 = ObjectProperty(None)
+    emergency_contact_3 = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_emergency_contacts(self):
+        global global_patient_name
+        econlist = ReadSQL.item_check('econ', global_patient_name)
+        self.emergency_contact_1.text = econlist[0]
+        self.emergency_contact_2.text = econlist[1]
+        self.emergency_contact_3.text = econlist[2]
+#
+    def save_Contacts(self):
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact=self.emergency_contact_1.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact2=self.emergency_contact_2.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact3=self.emergency_contact_3.text)
 
 class ct_caretakerUpScreen(Screen):
     pass
@@ -535,7 +568,7 @@ class tapSpeechApp(App):
     def build(self):
         # Bear witness to Matthew's sexy code below
         self.sm = windowManager()
- 
+
         self.sm.add_widget(en_welcomeScreen(name="en_welcome"))
         self.sm.add_widget(en_loginScreen(name="en_login"))
         self.sm.add_widget(en_registerScreen(name="en_register"))

@@ -643,6 +643,7 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'en_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
@@ -698,21 +699,121 @@ windowManager:
             color:0,0,0,1
             text: 'caretaker_name'
             font_size:30
+
         Label:
-            id: caretaker_label
+            id: patient_1_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
             pos_hint: {'center_x': 0.5, 'center_y':0.72}
-            size_hint: (0.85, 0.85)
-            # font_name: 'GalanoGrotesque'
-            # text: 'caretaker_name'
-            font_size:30
-            Image:
-                source: 'images/icons/general/wagwan.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            # Left, Top, Right, Button
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_2_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.64}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_3_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.56}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
+        Label:
+            id: patient_4_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.48}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+
+        Label:
+            id: patient_5_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.40}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
+
+        Label:
+            id: patient_6_request
+            halign: 'left'
+            valign: 'middle'
+            background_color: (0.753,0.816,0.839,1)
+            pos_hint: {'center_x': 0.5, 'center_y':0.32}
+            size_hint: (0.861, 0.0737)
+            font_name: 'Noto'
+            text: 'placeholdertext'
+            text_size: self.size
+            text_color: (1,1,1,1)
+            padding: (30,30)
+            canvas.before:
+                Color:
+                    rgba: self.background_color
+                RoundedRectangle:
+                    size: self.size
+                    pos: self.pos
 
 <en_caretakerDownScreen>:
     canvas.before:
@@ -953,6 +1054,7 @@ windowManager:
 
 <ct_PatientUpScreen>:
     say_something: say_something
+    hello_name: hello_name
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -1031,6 +1133,13 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.8, 0.116)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.5, 'center_y': 0.37}
+            on_release:
+                app.root.current = ('ct_contacts')
 
         Button:
             size_hint: (0.30, 0.1)
@@ -1254,11 +1363,76 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+<ct_contactsScreen>:
+    emergency_contact_1: emergency_contact_1
+    emergency_contact_2: emergency_contact_2
+    emergency_contact_3: emergency_contact_3
+
+    on_enter:
+        root.update_emergency_contacts()
+
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: 'images/bg/en/contacts.png'
+
+    Button:
+        size_hint: (0.39, 0.053)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.93}
+        on_press:
+            app.root.transition = FadeTransition()
+            app.root.current = 'ct_patientUp'
+        Image:
+            source: 'images/icons/en/back.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
+
+    TextInput:
+        id: emergency_contact_1
+        font_name: 'Noto'
+        text: '名字:\n數字:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.66}
+
+    TextInput:
+        id: emergency_contact_2
+        font_name: 'Noto'
+        text: '名字:\n數字:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.45}
+
+    TextInput:
+        id: emergency_contact_3
+        font_name: 'Noto'
+        text: '名字:\n數字:'
+        size_hint: (0.88,0.14)
+        pos_hint: {'center_x':0.5,'center_y':0.25}
+
+
+    Button:
+        id: save_button
+        size_hint: (0.39, 0.053)
+        background_color:0,0,0,0
+        pos_hint: {'center_x': 0.5, 'center_y': 0.075}
+        on_press:
+            app.root.transition = FadeTransition()
+            root.save_Contacts()
+            app.root.current = 'en_patientUp'
+        Image:
+            source: 'images/icons/en/save_btn.png'
+            size: self.parent.size
+            center_x: self.parent.center_x
+            center_y: self.parent.center_y
 
 <ct_caretakerUpScreen>:
 
