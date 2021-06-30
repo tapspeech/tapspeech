@@ -734,6 +734,15 @@ class ct_patientDownScreen(Screen):
             pass
         print(message)
 
+        now = datetime.now()
+        tz_HK = pytz.timezone('Hongkong')
+        datetime_HK = datetime.now(tz_HK)
+        current_time = datetime_HK.strftime("%H:%M:%S")
+        print(message + " " + self.request_type)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request.save()
+        print(new_request)
+
     def changebuttons(self,index_no):
         # drinks menu
         if index_no == 'slide #0':
