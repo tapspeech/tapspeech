@@ -921,6 +921,9 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_updatepatientlistScreen>:
+    patient_username: patient_username
+    patient_password: patient_password
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -951,6 +954,20 @@ windowManager:
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
+
+        TextInput:
+            id: patient_username
+            font_name: 'Noto'
+            text: 'Name:\nNumber:'
+            size_hint: (0.86,0.14)
+            pos_hint: {'center_x':0.5,'center_y':0.62}
+
+        TextInput:
+            id: patient_password
+            font_name: 'Noto'
+            text: 'Name:\nNumber:'
+            size_hint: (0.86,0.14)
+            pos_hint: {'center_x':0.5,'center_y':0.42}
 
 
 <en_CaretakerScreen>:
