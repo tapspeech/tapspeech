@@ -937,7 +937,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.92}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_caretakerUp'
+                app.root.current = 'en_caretakerDown'
             Image:
                 source: 'images/icons/en/back.png'
                 size: self.parent.size
@@ -947,9 +947,9 @@ windowManager:
         Button:
             size_hint: (0.408, 0.0672)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.25, 'center_y': 0.2}
+            pos_hint: {'center_x': 0.25, 'center_y': 0.25}
             on_press:
-                pass
+                root.addorremove_patient('add')
             Image:
                 source: 'images/icons/en/addContact_btn.png'
                 size: self.parent.size
@@ -959,9 +959,9 @@ windowManager:
         Button:
             size_hint: (0.408, 0.0672)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.75, 'center_y': 0.2}
+            pos_hint: {'center_x': 0.75, 'center_y': 0.25}
             on_press:
-                pass
+                root.addorremove_patient('remove')
             Image:
                 source: 'images/icons/en/RemoveContact_btn.png'
                 size: self.parent.size
@@ -971,14 +971,12 @@ windowManager:
         TextInput:
             id: patient_username
             font_name: 'Noto'
-            text: 'Name:\nNumber:'
             size_hint: (0.86,0.14)
             pos_hint: {'center_x':0.5,'center_y':0.62}
 
         TextInput:
             id: patient_password
             font_name: 'Noto'
-            text: 'Name:\nNumber:'
             size_hint: (0.86,0.14)
             pos_hint: {'center_x':0.5,'center_y':0.42}
 

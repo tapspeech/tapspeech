@@ -499,7 +499,17 @@ class en_caretakerDownScreen(Screen):
     pass
 
 class en_updatepatientlistScreen(Screen):
-    pass
+    patient_username = ObjectProperty(None)
+    patient_password = ObjectProperty(None)
+
+    def addorremove_patient(self, addorremove):
+        username_value = self.patient_username.text
+        password_value = self.patient_password.text
+
+        self.patient_username.text = ''
+        self.patient_password.text = ''
+
+        if addorremove ==
 
 class ct_welcomeScreen(Screen):
     pass
