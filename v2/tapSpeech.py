@@ -403,7 +403,7 @@ class en_informationScreen(Screen):
         self.diagnosis_input.text = medhislist[1]
         self.medication_input.text = medhislist[2]
 
-    # Save the new_emergency_contact_x_value into the database
+    # Save the new medical_info into the database
     def save_medical_info(self):
         global global_patient_name
         Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
