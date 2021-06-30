@@ -908,6 +908,18 @@ windowManager:
                 center_y: self.parent.center_y
 
         Button:
+            size_hint: (0.4, 0.20)
+            #background_color:0,0,0,0
+            pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+            on_press:
+                app.root.transition = FadeTransition()
+                app.root.current = 'en_updatepatientlist'
+            Image:
+                source: 'images/icons/en/UpdatePatientList_btn.png'
+                size: self.parent.size
+
+
+        Button:
             size_hint: (0.682, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
