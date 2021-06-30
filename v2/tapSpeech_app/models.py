@@ -8,7 +8,12 @@ from django.contrib.auth.models import User
 class Caretaker(models.Model):
     caretakerFullName = models.CharField(max_length=30, default = '')
     caretakerPassword = models.CharField(max_length=30, default = '')
-    listedPatients = models.JSONField()
+    listedPatients = models.CharField(max_length=30, default = '')
+    listedPatients2 = models.CharField(max_length=30, default = '')
+    listedPatients3 = models.CharField(max_length=30, default = '')
+    listedPatients4 = models.CharField(max_length=30, default = '')
+    listedPatients5 = models.CharField(max_length=30, default = '')
+    listedPatients6 = models.CharField(max_length=30, default = '')
 
 class Patient(models.Model):
     patientFullName = models.CharField(max_length=30, default = '')
