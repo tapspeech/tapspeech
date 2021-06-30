@@ -720,19 +720,22 @@ class ct_patientDownScreen(Screen):
     label_3 = ObjectProperty(None)
     label_4 = ObjectProperty(None)
 
+    request_specification = ''
+    request_type = 'Liquid'
+
     # the message below is what you want to be sent to the caretaker
     def returnMessage(self,label_id):
-        if label_id == 'label_1ct':
+        global global_patient_name
+        if label_id == 'label_1':
             message = self.label_1.text
-        elif label_id == 'label_2ct':
+        elif label_id == 'label_2':
             message = self.label_2.text
-        elif label_id == 'label_3ct':
+        elif label_id == 'label_3':
             message = self.label_3.text
-        elif label_id == 'label_4ct':
+        elif label_id == 'label_4':
             message = self.label_4.text
         else:
             pass
-        print(message)
 
         now = datetime.now()
         tz_HK = pytz.timezone('Hongkong')
