@@ -367,6 +367,12 @@ class en_contactsScreen(Screen):
     def update_emergency_contacts(self):
         global global_patient_name
         econlist = ReadSQL.econtact_check(global_patient_name)
+        if econlist[0] == '':
+            econlist[0] = 'Name:\nNumber:'
+        if econlist[1] == '':
+            econlist[1] = 'Name:\nNumber:'
+        if econlist[2] == '':
+            econlist[2] = 'Name:\nNumber:'
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
@@ -406,10 +412,6 @@ class en_caretakerUpScreen(Screen):
         self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
 class en_caretakerDownScreen(Screen):
-    pass
-
-
-class en_informationScreen(Screen):
     pass
 
 class ct_welcomeScreen(Screen):
