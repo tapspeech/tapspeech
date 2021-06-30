@@ -373,7 +373,7 @@ class en_contactsScreen(Screen):
     # Change below to use database values
     def update_emergency_contacts(self):
         global global_patient_name
-        econlist = ReadSQL.item_check(econ, global_patient_name)
+        econlist = ReadSQL.item_check('econ', global_patient_name)
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
@@ -392,9 +392,6 @@ class en_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
-    #=============================================================================#
-    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
-    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
@@ -492,8 +489,44 @@ class ct_patientDownScreen(Screen):
             self.label_4.text = '下床'
             self.dots.source = 'images/icons/general/dots_4.png'
 
+class ct_informationScreen(Screen):
+    medical_history_input = ObjectProperty(None)
+    diagnosis_input = ObjectProperty(None)
+    medication_input = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_medical_info(self):
+        global global_patient_name
+        medhislist = ReadSQL.item_check(medhis, global_patient_name)
+        self.medical_history_input.text = medhislist[0]
+        self.diagnosis_input.text = medhislist[1]
+        self.medication_input.text = medhislist[2]
+
+    # Save the new medical_info into the database
+    def save_medical_info(self):
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(diagnosis_input=self.diagnosis_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
+
 class ct_contactsScreen(Screen):
-    pass
+    emergency_contact_1 = ObjectProperty(None)
+    emergency_contact_2 = ObjectProperty(None)
+    emergency_contact_3 = ObjectProperty(None)
+
+    # Change below to use database values
+    def update_emergency_contacts(self):
+        global global_patient_name
+        econlist = ReadSQL.item_check('econ', global_patient_name)
+        self.emergency_contact_1.text = econlist[0]
+        self.emergency_contact_2.text = econlist[1]
+        self.emergency_contact_3.text = econlist[2]
+#
+    def save_Contacts(self):
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact=self.emergency_contact_1.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact2=self.emergency_contact_2.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact3=self.emergency_contact_3.text)
 
 class ct_caretakerUpScreen(Screen):
     pass
@@ -527,6 +560,7 @@ class tapSpeechApp(App):
         self.sm.add_widget(ct_registerScreen(name="ct_register"))
         self.sm.add_widget(ct_patientUpScreen(name="ct_patientUp"))
         self.sm.add_widget(ct_patientDownScreen(name="ct_patientDown"))
+        self.sm.add_widget(ct_informationScreen(name="ct_information"))
         self.sm.add_widget(ct_contactsScreen(name="ct_contacts"))
         self.sm.add_widget(ct_caretakerUpScreen(name="ct_caretakerUp"))
         self.sm.add_widget(ct_caretakerDownScreen(name="ct_caretakerDown"))
