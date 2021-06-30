@@ -393,6 +393,11 @@ class en_informationScreen(Screen):
 
     # Change below to use database values
     def update_medical_info(self):
+        print('trying to run this')
+        global global_patient_name
+        medical_info_list = ReadSQL.econtact_check(global_patient_name)
+        #self.medical_info_list.text =
+
         self.medical_history_input.text = 'medical_history_input'
         self.diagnosis_input.text = 'diagnosis_input'
         self.medication_input.text = 'medication_input'
@@ -400,9 +405,9 @@ class en_informationScreen(Screen):
     # Save the new medical_info into the database
     def save_medical_info(self):
         global global_patient_name
-        Patient.objects.filter(patientFullName=global_patient_name).update(medical_history_input=self.medical_history_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(diagnosis_input=self.diagnosis_input.text)
-        Patient.objects.filter(patientFullName=global_patient_name).update(medication_input=self.medication_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedicalHistory=self.medical_history_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientDiagnosis=self.diagnosis_input.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientMedication=self.medication_input.text)
 
 class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
