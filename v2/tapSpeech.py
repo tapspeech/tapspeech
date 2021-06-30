@@ -428,10 +428,15 @@ class ct_registerScreen(Screen):
 
 class ct_patientUpScreen(Screen):
     say_something = ObjectProperty(None)
+    hello_name = ObjectProperty(None)
 
     def sound_alarm(self):
         self.sound = SoundLoader.load(os.path.join('audio','ios_ringtone.mp3'))
         self.sound.play()
+
+    def change_helloMessage(self):
+        global global_patient_name
+        self.hello_name.text = 'Hello, '+global_patient_name
 
     def textInput_enter(self):
         message = self.say_something.text
