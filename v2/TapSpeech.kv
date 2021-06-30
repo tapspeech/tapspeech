@@ -886,7 +886,6 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-
 <en_caretakerDownScreen>:
     canvas.before:
         Rectangle:
@@ -930,14 +929,25 @@ windowManager:
 
     FloatLayout:
         Button:
-            size_hint: (0.39, 0.053)
+            size_hint: (0.408, 0.0672)
             background_color:0,0,0,0
-            pos_hint: {'center_x': 0.5, 'center_y': 0.92}
+            pos_hint: {'center_x': 0.25, 'center_y': 0.2}
             on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_caretakerDown'
+                pass
             Image:
-                source: 'images/icons/en/back.png'
+                source: 'images/icons/en/addContact_btn.png'
+                size: self.parent.size
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+        Button:
+            size_hint: (0.408, 0.0672)
+            background_color:0,0,0,0
+            pos_hint: {'center_x': 0.75, 'center_y': 0.2}
+            on_press:
+                pass
+            Image:
+                source: 'images/icons/en/RemoveContact_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
