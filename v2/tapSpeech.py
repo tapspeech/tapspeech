@@ -509,7 +509,25 @@ class en_updatepatientlistScreen(Screen):
         self.patient_username.text = ''
         self.patient_password.text = ''
 
-        if addorremove ==
+        '''
+        run the validate user email and password function here
+        check if the username and password overlap
+        '''
+
+        '''
+        also make an if else statement that checks if the caretaker has 6 patients already (maximum)
+        '''
+
+        if addorremove == 'add':
+            #add the username
+            pass
+        elif addorremove == 'remove':
+            '''
+            check if the user is already under the caretaker
+                if so, remove them
+                otherwise, return an error (for now just make it do nothing lol)
+            '''
+            pass
 
 class ct_welcomeScreen(Screen):
     pass
