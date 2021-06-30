@@ -57,26 +57,31 @@ class ReadSQL:
         names = name
         reqs = Requests.objects.all().filter(request_patient__in=names)
         context = reqs.distinct().order_by('-request_time')[:3]
-        context_len = len(context)
-        timer = 0
-        reqlist = []
-        for i in range(context_len):
-            r_pat = context.values_list('request_patient', flat=True)[timer]
-            r_type = context.values_list('request_type', flat=True)[timer]
-            r_spec = context.values_list('request_specification', flat=True)[timer]
-            r_time = context.values_list('request_time', flat=True)[timer]
-            print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
-            if timer == 0:
-                req0 = [r_pat, r_type, r_spec, r_time]
-                reqlist.append(req0)
-            elif timer == 1:
-                req1 = [r_pat, r_type, r_spec, r_time]
-                reqlist.append(req1)
-            elif timer == 2:
-                req2 = [r_pat, r_type, r_spec, r_time]
-                reqlist.append(req2)
-            timer=+1
-        return reqlist
+        requests_exists = True
+        if context.values_list('request_patient', flat=True).exists():
+            context_len = len(context)
+            timer = 0
+            reqlist = []
+            for i in range(context_len):
+                r_pat = context.values_list('request_patient', flat=True)[timer]
+                r_type = context.values_list('request_type', flat=True)[timer]
+                r_spec = context.values_list('request_specification', flat=True)[timer]
+                r_time = context.values_list('request_time', flat=True)[timer]
+                print(r_pat + " " + r_type + " "  + r_spec + " "  + r_time)
+                if timer == 0:
+                    req0 = [r_pat, r_type, r_spec, r_time]
+                    reqlist.append(req0)
+                elif timer == 1:
+                    req1 = [r_pat, r_type, r_spec, r_time]
+                    reqlist.append(req1)
+                elif timer == 2:
+                    req2 = [r_pat, r_type, r_spec, r_time]
+                    reqlist.append(req2)
+                timer=+1
+            return reqlist
+        else:
+            requests_exists = False
+            return requests_exists
 
     def econtact_check(name):
         pat = Patient.objects.all().filter(patientFullName=name)
@@ -114,7 +119,10 @@ def request_pull():
     searchnamelist.append(name2)
     print(searchnamelist)
     reqlist = ReadSQL.request_puller(searchnamelist)
-    print(reqlist)
+    if reqlist == False:
+        print('No Functions')
+    else:
+        print(reqlist[0][0])
 
 def check_econtacts():
     print(" ")

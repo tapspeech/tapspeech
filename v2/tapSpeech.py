@@ -392,9 +392,6 @@ class en_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
-    #=============================================================================#
-    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
-    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
@@ -497,9 +494,6 @@ class ct_informationScreen(Screen):
     diagnosis_input = ObjectProperty(None)
     medication_input = ObjectProperty(None)
 
-    #=============================================================================#
-    # BROKEN LINK BETWEEN FRONT END AND BACK END THAT KEEPS THE CODE FROM WORKING #
-    #=============================================================================#
     # Change below to use database values
     def update_medical_info(self):
         global global_patient_name
