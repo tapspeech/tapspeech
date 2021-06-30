@@ -656,11 +656,11 @@ class ct_loginScreen(Screen):
                 error(1)
             else:
                 if completed_login == 'patient':
-                    App.get_running_app().sm.current = 'en_patientUp'
+                    App.get_running_app().sm.current = 'ct_patientUp'
                     global global_patient_name
                     global_patient_name = self.username.text
                 elif completed_login == 'caretaker':
-                    App.get_running_app().sm.current = 'en_caretakerUp'
+                    App.get_running_app().sm.current = 'ct_caretakerUp'
 
                     '''
                     I dont know what the two lines,
@@ -718,12 +718,12 @@ class ct_registerScreen(Screen):
                 error(1)
             else:
                 if user_type == 'patient':
-                    App.get_running_app().sm.current = 'en_patientUp'
+                    App.get_running_app().sm.current = 'ct_patientUp'
                     global global_patient_name
                     global_patient_name = self.username.text
                 elif user_type == 'caretaker':
                     print('running')
-                    App.get_running_app().sm.current = 'en_caretakerUp'
+                    App.get_running_app().sm.current = 'ct_caretakerUp'
 
                     '''
                     I dont know what the two lines,
