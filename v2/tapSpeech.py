@@ -395,8 +395,6 @@ class en_contactsScreen(Screen):
         Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact2=self.emergency_contact_2.text)
         Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact3=self.emergency_contact_3.text)
 
-
-
 class en_informationScreen(Screen):
     medical_history_input = ObjectProperty(None)
     diagnosis_input = ObjectProperty(None)
@@ -423,6 +421,9 @@ class en_caretakerUpScreen(Screen):
     def display_caretaker_name(self):
         global global_caretaker_name
         self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
+
+    def update_requests(self):
+        pass
 
 class en_caretakerDownScreen(Screen):
     pass
