@@ -567,12 +567,15 @@ windowManager:
     diagnosis_input: diagnosis_input
     medication_input: medication_input
 
-    #name: "ct_information"
+    on_enter:
+        root.update_medical_info()
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/information.png'
+
     FloatLayout:
         Label:
             id: Medical_History
