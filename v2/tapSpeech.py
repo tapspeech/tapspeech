@@ -535,7 +535,7 @@ class tapSpeechApp(App):
     def build(self):
         # Bear witness to Matthew's sexy code below
         self.sm = windowManager()
-
+ 
         self.sm.add_widget(en_welcomeScreen(name="en_welcome"))
         self.sm.add_widget(en_loginScreen(name="en_login"))
         self.sm.add_widget(en_registerScreen(name="en_register"))
