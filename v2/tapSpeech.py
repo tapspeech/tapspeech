@@ -181,63 +181,63 @@ class ReadSQL:
         if type == 3:
             return df3.at[patient_no,'patientMedication']
 
-        def new_request_puller(name):
-            names = name
-            names_len = len(names)
-            timer = 0
-            reqlist = []
-            for i in range(names_len):
+    def new_request_puller(name):
+        names = name
+        names_len = len(names)
+        timer = 0
+        reqlist = []
+        for i in range(names_len):
+            success = False
+            print(timer)
+            reqs = Requests.objects.all().filter(request_patient=names[timer])
+            context = reqs.distinct().order_by('-request_time')
+            if context.values_list('request_patient', flat=True).exists():
+                r_pat = context.values_list('request_patient', flat=True)[0]
+                r_type = context.values_list('request_type', flat=True)[0]
+                r_spec = context.values_list('request_specification', flat=True)[0]
+                r_time = context.values_list('request_time', flat=True)[0]
+                success = True
+            else:
                 success = False
-                print(timer)
-                reqs = Requests.objects.all().filter(request_patient=names[timer])
-                context = reqs.distinct().order_by('-request_time')
-                if context.values_list('request_patient', flat=True).exists():
-                    r_pat = context.values_list('request_patient', flat=True)[0]
-                    r_type = context.values_list('request_type', flat=True)[0]
-                    r_spec = context.values_list('request_specification', flat=True)[0]
-                    r_time = context.values_list('request_time', flat=True)[0]
-                    success = True
-                else:
-                    success = False
 
-                if timer == 0:
-                    if success == True:
-                        req0 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req0 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req0)
-                if timer == 1:
-                    if success == True:
-                        req1 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req1 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req1)
-                if timer == 2:
-                    if success == True:
-                        req2 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req2 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req2)
-                if timer == 3:
-                    if success == True:
-                        req3 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req3 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req3)
-                if timer == 4:
-                    if success == True:
-                        req4 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req4 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req4)
-                if timer == 5:
-                    if success == True:
-                        req5 = [r_pat, r_type, r_spec, r_time]
-                    if success == False:
-                        req5 = ['None', 'None', 'None', 'None']
-                    reqlist.append(req5)
-                timer += 1
-            return reqlist
+            if timer == 0:
+                if success == True:
+                    req0 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req0 = ['None', 'None', 'None', 'None']
+                reqlist.append(req0)
+            if timer == 1:
+                if success == True:
+                    req1 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req1 = ['None', 'None', 'None', 'None']
+                reqlist.append(req1)
+            if timer == 2:
+                if success == True:
+                    req2 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req2 = ['None', 'None', 'None', 'None']
+                reqlist.append(req2)
+            if timer == 3:
+                if success == True:
+                    req3 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req3 = ['None', 'None', 'None', 'None']
+                reqlist.append(req3)
+            if timer == 4:
+                if success == True:
+                    req4 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req4 = ['None', 'None', 'None', 'None']
+                reqlist.append(req4)
+            if timer == 5:
+                if success == True:
+                    req5 = [r_pat, r_type, r_spec, r_time]
+                if success == False:
+                    req5 = ['None', 'None', 'None', 'None']
+                reqlist.append(req5)
+            timer += 1
+        return reqlist
 
 
 class en_loginScreen(Screen):
@@ -483,9 +483,9 @@ class en_caretakerUpScreen(Screen):
     def update_requests(self):
         pass
 
-    def new_request_pull():
-        list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
-        reqlist = ReadSQL.new_request_puller(list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
+    def new_request_pull(self):
+        caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
+        reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
         print("This should print their name and most recent request's specifications")
         # NAME + TYPE + SPECIFICATION + TIME
         print(reqlist[0][0] + " " + reqlist[0][1] + " " + reqlist[0][2] + " " + reqlist[0][3])
@@ -494,6 +494,17 @@ class en_caretakerUpScreen(Screen):
         print(reqlist[3][0] + " " + reqlist[3][1] + " " + reqlist[3][2] + " " + reqlist[3][3])
         print(reqlist[4][0] + " " + reqlist[4][1] + " " + reqlist[4][2] + " " + reqlist[4][3])
         print(reqlist[5][0] + " " + reqlist[5][1] + " " + reqlist[5][2] + " " + reqlist[5][3])
+        return(reqlist)
+
+    def refresh(self):
+        reqlist = self.new_request_pull()
+        print(reqlist)
+        while len(reqlist) < 6:
+            reqlist.append(['','','',''])
+        print(reqlist)
+
+
+
 
 class en_caretakerDownScreen(Screen):
     pass
