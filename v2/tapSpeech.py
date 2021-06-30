@@ -527,6 +527,12 @@ class ct_contactsScreen(Screen):
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
+#
+    def save_Contacts(self):
+        global global_patient_name
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact=self.emergency_contact_1.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact2=self.emergency_contact_2.text)
+        Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact3=self.emergency_contact_3.text)
 
 class ct_caretakerUpScreen(Screen):
     pass
