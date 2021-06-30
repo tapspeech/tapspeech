@@ -428,6 +428,9 @@ class en_caretakerUpScreen(Screen):
 class en_caretakerDownScreen(Screen):
     pass
 
+class en_updatepatientlistScreen(Screen):
+    pass
+
 class ct_welcomeScreen(Screen):
     pass
 
@@ -634,6 +637,7 @@ class tapSpeechApp(App):
         self.sm.add_widget(en_caretakerUpScreen(name="en_caretakerUp"))
         self.sm.add_widget(en_caretakerDownScreen(name="en_caretakerDown"))
         self.sm.add_widget(en_informationScreen(name="en_information"))
+        self.sm.add_widget(en_updatepatientlistScreen(name="en_updatepatientlist"))
         self.sm.add_widget(ct_welcomeScreen(name="ct_welcome"))
         self.sm.add_widget(ct_loginScreen(name="ct_login"))
         self.sm.add_widget(ct_registerScreen(name="ct_register"))
