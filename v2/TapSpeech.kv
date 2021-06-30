@@ -1109,16 +1109,19 @@ windowManager:
             height: self.parent.width/self.image_ratio
 
 <ct_loginScreen>:
+    username: username
+    password: password
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/ct/login.png'
+            source: 'images/bg/en/login.png'
+
     FloatLayout:
 		TextInput:
 			id : username
 			multiline : False
-			font_name : "Noto"
+			font_name : "GalanoGrotesque"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
@@ -1135,7 +1138,7 @@ windowManager:
 		TextInput:
 			id : password
 			multiline : False
-			font_name : "Noto"
+			font_name : "GalanoGrotesque"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
@@ -1153,46 +1156,38 @@ windowManager:
             size_hint: (0.52, 0.085)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.35}
-            # as of now, this login button sets it so that the user is redirected to the patients ui screen
-            # in the future, change this to run a function to detect if the user is
-            #   a patient or a caretaker (using the database), then bring them
-            #   to the appropriate screen, i.e. patient user is brought to
-            #   patient screen, and caretaker user is brought to the caretaker screen
             on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_patientUp'
+                root.validate()
             Image:
-                source: 'images/icons/ct/login_login.png'
+                source: 'images/icons/en/login_login.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
         Button:
             size_hint: (0.53, 0.072)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'ct_welcome'
+                app.root.current = 'en_welcome'
             Image:
-                source: 'images/icons/ct/back_btn.png'
+                source: 'images/icons/en/back_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
-
 <ct_registerScreen>:
+    username: username
+    password: password
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/ct/register.png'
-
-        # Fix below line from button to text field
+            source: 'images/bg/en/register.png'
     FloatLayout:
-		TextInput:
+        TextInput:
 			id : username
 			multiline : False
-			font_name : "Noto"
+			font_name : "GalanoGrotesque"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.55}
@@ -1209,7 +1204,7 @@ windowManager:
 		TextInput:
 			id : password
 			multiline : False
-			font_name : "Noto"
+			font_name : "GalanoGrotesque"
 			font_size : 40
 			size_hint : 0.8, 0.08
 			pos_hint : {'center_x': 0.5, 'center_y': 0.45}
@@ -1223,44 +1218,58 @@ windowManager:
             on_touch_move:
                 opacity: 1
 
+        TextInput:
+            id : password
+            multiline : False
+            font_name : "GalanoGrotesque"
+            font_size : 40
+            size_hint : 0.8, 0.08
+            pos_hint : {'center_x': 0.5, 'center_y': 0.45}
+            background: 0,0,0,0
+            background_normal: 'images/icons/en/login_textinput_active.png'
+            hint_text: 'PASSWORD'
+            hint_text_color: (0.325,0.415,0.4549,0.7)
+            foreground_color: (0.325,0.415,0.4549,1)
+            cursor_color: (0.325,0.415,0.4549,1)
+            padding: 30, 30, 30, 30
+            on_touch_move:
+                opacity: 1
         Button:
+            id: patient
             size_hint: (0.37, 0.085)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.275, 'center_y': 0.35}
             on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_login'
-                # conenct this to a function that registers the typed stuff into the data base
+                root.validate("patient")
             Image:
-                source: 'images/icons/ct/reg_patient.png'
+                source: 'images/icons/en/reg_patient.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
         Button:
+            id: caretaker
             size_hint: (0.37, 0.085)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.725, 'center_y': 0.35}
             on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_login'
-                # conenct this to a function that registers the typed stuff into the data base
+                root.validate("caretaker")
             Image:
-                source: 'images/icons/ct/reg_caretaker.png'
+                source: 'images/icons/en/reg_caretaker.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
         Button:
             size_hint: (0.53, 0.072)
-            background_color:0,0,0,0
+            background_color: 0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.25}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'ct_welcome'
+                app.root.current = 'en_welcome'
                 # conenct this to a function that registers the typed stuff into the data base
             Image:
-                source: 'images/icons/ct/back_btn.png'
+                source: 'images/icons/en/back_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y

@@ -628,7 +628,47 @@ class ct_welcomeScreen(Screen):
     pass
 
 class ct_loginScreen(Screen):
-    pass
+    username = ObjectProperty(None)
+    password = ObjectProperty(None)
+
+    def check_for_login(self, username, password):
+        is_caretaker = False
+        is_patient = False
+
+        is_caretaker = ReadSQL.check_info_caretaker(self.username.text, self.password.text)
+        if is_caretaker == False:
+            is_patient = ReadSQL.check_info_patient(self.username.text, self.password.text)
+        if is_caretaker == True:
+            return 'caretaker'
+        if is_patient == True:
+            return 'patient'
+        if is_caretaker and is_patient == False:
+            return 'role not assigned'
+
+    def validate(self):
+        # error 1 - check if they've input something
+        if (not self.username.text) or (not self.password.text):
+            error(1)
+        # error 2 - check if account already exists
+        else:
+            completed_login = self.check_for_login(self.username.text, self.password.text)
+            if completed_login == 'none':
+                error(1)
+            else:
+                if completed_login == 'patient':
+                    App.get_running_app().sm.current = 'en_patientUp'
+                    global global_patient_name
+                    global_patient_name = self.username.text
+                elif completed_login == 'caretaker':
+                    App.get_running_app().sm.current = 'en_caretakerUp'
+
+                    '''
+                    I dont know what the two lines,
+                    remove this comment if those lines are necessary
+                    '''
+
+                    global global_caretaker_name
+                    global_caretaker_name = self.username.text
 
 class ct_registerScreen(Screen):
     username = ObjectProperty(None)
@@ -706,7 +746,7 @@ class ct_patientUpScreen(Screen):
 
     def change_helloMessage(self):
         global global_patient_name
-        self.hello_name.text = 'Hello, ' + global_patient_name
+        self.hello_name.text = '你好,' + global_patient_name
 
     def textInput_enter(self):
         message = self.say_something.text
