@@ -643,6 +643,7 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'en_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
@@ -1261,6 +1262,7 @@ windowManager:
             on_press:
                 app.root.transition = FadeTransition()
                 root.save_medical_info()
+                app.root.current = 'ct_patientUp'
             Image:
                 source: 'images/icons/en/save_btn.png'
                 size: self.parent.size
@@ -1324,6 +1326,7 @@ windowManager:
         on_press:
             app.root.transition = FadeTransition()
             root.save_Contacts()
+            app.root.current = 'en_patientUp'
         Image:
             source: 'images/icons/en/save_btn.png'
             size: self.parent.size
