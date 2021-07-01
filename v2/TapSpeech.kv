@@ -1666,16 +1666,16 @@ windowManager:
             source: 'images/bg/en/CaretakerUp.png'
 
     FloatLayout:
-        # below is the logout button
+        # below is the chinese logout button
         Button:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_login'
+                app.root.current = 'ct_login'
             Image:
-                source: 'images/icons/en/logout_button.png'
+                source: 'images/icons/ct/logout_button.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -1929,7 +1929,7 @@ windowManager:
             pos_hint: {'center_x': 0.27, 'center_y': 0.66}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
         Button: #top right
             size_hint: (0.4, 0.20)
@@ -1937,7 +1937,7 @@ windowManager:
             pos_hint: {'center_x': 0.73, 'center_y': 0.66}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
         Button: #mid left
             size_hint: (0.4, 0.20)
@@ -1945,7 +1945,7 @@ windowManager:
             pos_hint: {'center_x': 0.27, 'center_y': 0.43}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
         Button: #mid right
             size_hint: (0.4, 0.20)
@@ -1953,7 +1953,7 @@ windowManager:
             pos_hint: {'center_x': 0.73, 'center_y': 0.43}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
         Button: #bottom left
             size_hint: (0.4, 0.20)
@@ -1961,7 +1961,7 @@ windowManager:
             pos_hint: {'center_x': 0.27, 'center_y': 0.20}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
         Button: #bottom right
             size_hint: (0.4, 0.20)
@@ -1969,7 +1969,7 @@ windowManager:
             pos_hint: {'center_x': 0.73, 'center_y': 0.20}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
 
 
         Button:
@@ -1978,7 +1978,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+                app.root.current = 'ct_updatepatientlist'
             Image:
                 source: 'images/icons/en/UpdatePatientList_btn.png'
                 size: self.parent.size
@@ -2002,7 +2002,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.92}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'en_caretakerDown'
+                app.root.current = 'ct_caretakerDown'
             Image:
                 source: 'images/icons/en/back.png'
                 size: self.parent.size
