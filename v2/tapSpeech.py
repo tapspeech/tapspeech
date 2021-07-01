@@ -865,7 +865,7 @@ class ct_caretakerDownScreen(Screen):
 class ct_updatepatientlistScreen(Screen):
     patient_username = ObjectProperty(None)
     patient_password = ObjectProperty(None)
-    #validates if password is correct for a username
+    #validates if password is correct for a username  
     def validate(name, password):
         passwordcorrect = False
         pat = Patient.objects.all().filter(patientFullName=name)
