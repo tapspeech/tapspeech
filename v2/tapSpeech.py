@@ -886,7 +886,7 @@ class ct_informationScreen(Screen):
 
 
 class ct_caretakerUpScreen(Screen):
-    pass
+    print('one')
 
 class ct_caretakerDownScreen(Screen):
     pass
