@@ -641,7 +641,6 @@ class en_caretakerUpScreen(Screen):
         '''
         ok jacob go do ur magic with reformatted_message
         '''
-                
 
 class en_caretakerDownScreen(Screen):
     pass
