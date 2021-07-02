@@ -476,6 +476,27 @@ class en_informationScreen(Screen):
 class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
 
+    Label_1_bg = ObjectProperty(None)
+    Label_2_bg = ObjectProperty(None)
+    Label_3_bg = ObjectProperty(None)
+    Label_4_bg = ObjectProperty(None)
+    Label_5_bg = ObjectProperty(None)
+    Label_6_bg = ObjectProperty(None)
+
+    patient_1_request = ObjectProperty(None)
+    patient_2_request = ObjectProperty(None)
+    patient_3_request = ObjectProperty(None)
+    patient_4_request = ObjectProperty(None)
+    patient_5_request = ObjectProperty(None)
+    patient_6_request = ObjectProperty(None)
+
+    clear_button_1 = ObjectProperty(None)
+    clear_button_2 = ObjectProperty(None)
+    clear_button_3 = ObjectProperty(None)
+    clear_button_4 = ObjectProperty(None)
+    clear_button_5 = ObjectProperty(None)
+    clear_button_6 = ObjectProperty(None)
+
     def display_caretaker_name(self):
         global global_caretaker_name
         self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
@@ -484,7 +505,8 @@ class en_caretakerUpScreen(Screen):
         pass
 
     def new_request_pull(self):
-        caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
+        # caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
+        caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty']
         reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
         print("This should print their name and most recent request's specifications")
         # NAME + TYPE + SPECIFICATION + TIME
@@ -493,14 +515,23 @@ class en_caretakerUpScreen(Screen):
         print(reqlist[2][0] + " " + reqlist[2][1] + " " + reqlist[2][2] + " " + reqlist[2][3])
         print(reqlist[3][0] + " " + reqlist[3][1] + " " + reqlist[3][2] + " " + reqlist[3][3])
         print(reqlist[4][0] + " " + reqlist[4][1] + " " + reqlist[4][2] + " " + reqlist[4][3])
-        print(reqlist[5][0] + " " + reqlist[5][1] + " " + reqlist[5][2] + " " + reqlist[5][3])
+        #print(reqlist[5][0] + " " + reqlist[5][1] + " " + reqlist[5][2] + " " + reqlist[5][3])
         return(reqlist)
 
     def refresh(self):
         reqlist = self.new_request_pull()
+        number_of_requests = len(reqlist)
         print(reqlist)
-        while len(reqlist) < 6:
-            reqlist.append(['','','',''])
+        # while len(reqlist) < 6:
+        #     reqlist.append(['','','',''])
+        processed_request = 0
+        while number_of_requests < 6:
+            if processed_request == 0:
+                self.Label_6_bg.size_hint == (0.861, 0)
+                self.patient_6_request.size_hint == (0.861, 0)
+                self.clear_button_6.size_hint == (0.861, 0)
+            processed_request = processed_request + 1
+
         print(reqlist)
 
 
