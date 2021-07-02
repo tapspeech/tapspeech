@@ -952,84 +952,149 @@ windowManager:
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
+        Image:
+            id: top_left_image
+            pos_hint: {'center_x': 0.27, 'center_y': 0.66}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: top_right_image
+            pos_hint: {'center_x': 0.73, 'center_y': 0.66}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: mid_left_image
+            pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: mid_right_image
+            pos_hint: {'center_x': 0.73, 'center_y': 0.43}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: bottom_left_image
+            pos_hint: {'center_x': 0.27, 'center_y': 0.20}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: bottom_right_image
+            pos_hint: {'center_x': 0.73, 'center_y': 0.20}
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Label:
+            id: top_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.66}
+            text: 'placeholdertext'
+
+        Label:
+            id: top_right_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.66}
+            text: 'placeholdertext'
+
+        Label:
+            id: mid_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+            text: 'placeholdertext'
+
+        Label:
+            id: mid_right_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.43}
+            text: 'placeholdertext'
+
+        Label:
+            id: bottom_left_label
+            background_color:1,1,1,
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.20}
+            text: 'placeholdertext'
+
+        Label:
+            id: bottom_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.20}
+            text: 'placeholdertext'
+
         Button: #top left
+            id: top_left_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.27, 'center_y': 0.66}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
 
         Button: #top right
+            id: top_right_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.73, 'center_y': 0.66}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
-
 
         Button: #mid left
+            id: mid_left_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.27, 'center_y': 0.43}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
 
         Button: #mid right
+            id: top_right_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.73, 'center_y': 0.43}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
 
         Button: #bottom left
+            id: bottom_left_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.27, 'center_y': 0.20}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
 
         Button: #bottom right
+            id: bottom_right_button
             size_hint: (0.4, 0.20)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.73, 'center_y': 0.20}
             on_press:
                 app.root.transition = FadeTransition()
                 app.root.current = 'en_updatepatientlist'
-            Image:
-                source: 'images/icons/general/user_btn_background.png'
-                size: self.parent.size
-                center_x: self.parent.center_x
-                center_y: self.parent.center_y
 
         Button:
             size_hint: (0.682, 0.053)
