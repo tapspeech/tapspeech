@@ -1139,6 +1139,7 @@ windowManager:
             pos_hint: {'center_x': 0.25, 'center_y': 0.25}
             on_press:
                 root.addorremove_patient('add')
+                app.root.current='en_caretakerDown'
             Image:
                 source: 'images/icons/en/addContact_btn.png'
                 size: self.parent.size
@@ -1151,6 +1152,7 @@ windowManager:
             pos_hint: {'center_x': 0.75, 'center_y': 0.25}
             on_press:
                 root.addorremove_patient('remove')
+                app.root.current='en_caretakerDown'
             Image:
                 source: 'images/icons/en/RemoveContact_btn.png'
                 size: self.parent.size
@@ -1776,8 +1778,30 @@ windowManager:
 <ct_caretakerUpScreen>:
     caretaker_name: caretaker_name
 
+    label_1_bg: label_1_bg
+    label_2_bg: label_2_bg
+    label_3_bg: label_3_bg
+    label_4_bg: label_4_bg
+    label_5_bg: label_5_bg
+    label_6_bg: label_6_bg
+
+    patient_1_request: patient_1_request
+    patient_2_request: patient_2_request
+    patient_3_request: patient_3_request
+    patient_4_request: patient_4_request
+    patient_5_request: patient_5_request
+    patient_6_request: patient_6_request
+
+    clear_button_1: clear_button_1
+    clear_button_2: clear_button_2
+    clear_button_3: clear_button_3
+    clear_button_4: clear_button_4
+    clear_button_5: clear_button_5
+    clear_button_6: clear_button_6
+
     on_enter:
         root.display_caretaker_name()
+        root.refresh()
 
     canvas.before:
         Rectangle:
@@ -1786,14 +1810,14 @@ windowManager:
             source: 'images/bg/en/CaretakerUp.png'
 
     FloatLayout:
-        # below is the chinese logout button
+        # below is the logout button
         Button:
             size_hint: (0.39, 0.053)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.96}
             on_press:
                 app.root.transition = FadeTransition()
-                app.root.current = 'ct_login'
+                app.root.current = 'en_login'
             Image:
                 source: 'images/icons/ct/logout_button.png'
                 size: self.parent.size
@@ -1807,7 +1831,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.2}
             on_press:
                 root.refresh()
-                pass
+
             Image:
                 source: 'images/icons/en/Refresh_btn.png'
                 size: self.parent.size
@@ -1837,37 +1861,37 @@ windowManager:
             font_size:30
 
         Image:
-            id: Label_1_bg
+            id: label_1_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.72}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
 
         Image:
-            id: Label_2_bg
+            id: label_2_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.64}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
 
         Image:
-            id: Label_3_bg
+            id: label_3_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.56}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
 
         Image:
-            id: Label_4_bg
+            id: label_4_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.48}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
 
         Image:
-            id: Label_5_bg
+            id: label_5_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.40}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
 
         Image:
-            id: Label_6_bg
+            id: label_6_bg
             pos_hint: {'center_x': 0.5, 'center_y':0.32}
             size_hint: (0.861, 0.0737)
             source: 'images/icons/general/caretakerUp_labelBgs.png'
@@ -1950,7 +1974,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.72}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(1)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -1963,7 +1987,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.64}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(2)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -1976,7 +2000,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.56}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(3)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -1989,7 +2013,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.48}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(4)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -2002,7 +2026,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.4}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(5)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -2015,7 +2039,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.32}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(6)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -2135,6 +2159,7 @@ windowManager:
             pos_hint: {'center_x': 0.25, 'center_y': 0.25}
             on_press:
                 root.addorremove_patient('add')
+                app.root.current='en_caretakerDown'
             Image:
                 source: 'images/icons/en/addContact_btn.png'
                 size: self.parent.size
@@ -2147,6 +2172,7 @@ windowManager:
             pos_hint: {'center_x': 0.75, 'center_y': 0.25}
             on_press:
                 root.addorremove_patient('remove')
+                app.root.current='en_caretakerDown'
             Image:
                 source: 'images/icons/en/RemoveContact_btn.png'
                 size: self.parent.size
