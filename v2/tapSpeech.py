@@ -40,6 +40,7 @@ Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
+LabelBase.register(name='Metropolis', fn_regular='Metropolis-Light.woff')
 
 global_patient_name = ''
 global_caretaker_name = ''
