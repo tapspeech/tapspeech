@@ -1,6 +1,7 @@
 #: import SlideTransition kivy.uix.screenmanager.SlideTransition
 #: import FadeTransition kivy.uix.screenmanager.FadeTransition
 #: import Factory kivy.factory.Factory
+#:import C kivy.utils.get_color_from_hex
 
 windowManager:
     en_welcomeScreen:
@@ -26,10 +27,12 @@ windowManager:
     ct_caretakerDownScreen:
     ct_updatepatientlistScreen:
 
+
+
 <contact_info@Popup>
     size_hint: 0.6, 0.2
 
-    title:'yomama'
+    title:'jomama'
     FloatLayout:
         Button:
             on_release: root.dismiss()
@@ -590,7 +593,7 @@ windowManager:
 
         TextInput:
             id: medical_history_input
-            font_name: 'Noto'
+            font_name: 'Metropolis'
             text: ''
             size_hint: (0.704,0.112)
             cursor_color: 0,0,0,1
@@ -606,7 +609,7 @@ windowManager:
 
         TextInput:
             id: diagnosis_input
-            font_name: 'Noto'
+            font_name: 'Metropolis'
             text: ''
             size_hint: (0.704,0.112)
             cursor_color: 0,0,0,1
@@ -622,11 +625,12 @@ windowManager:
 
         TextInput:
             id: medication_input
-            font_name: 'Noto'
+            font_name: 'Metropolis'
             text: ''
             cursor_color: 0,0,0,1
             size_hint: (0.704,0.112)
             pos_hint: {'center_x':0.5,'center_y':0.22}
+
 
         Button:
             size_hint: (0.39, 0.053)

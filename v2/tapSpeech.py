@@ -40,6 +40,7 @@ Window.size = (360, 760)
 
 LabelBase.register(name='GalanoGrotesque', fn_regular='GalanoGrotesque.otf')
 LabelBase.register(name='Noto', fn_regular='NotoSans.otf')
+LabelBase.register(name='Metropolis', fn_regular='Metropolis-Light.woff')
 
 global_patient_name = ''
 global_caretaker_name = ''
@@ -190,7 +191,7 @@ class ReadSQL:
             success = False
             print(timer)
             reqs = Requests.objects.all().filter(request_patient=names[timer])
-            context = reqs.distinct().order_by('-request_time')
+            context = reqs.distinct().order_by('-request_date', '-request_time')
             if context.values_list('request_patient', flat=True).exists():
                 r_pat = context.values_list('request_patient', flat=True)[0]
                 r_type = context.values_list('request_type', flat=True)[0]
@@ -390,12 +391,13 @@ class en_patientDownScreen(Screen):
         else:
             pass
 
-        now = datetime.now()
         tz_HK = pytz.timezone('Hongkong')
         datetime_HK = datetime.now(tz_HK)
+        current_day = datetime_HK.strftime("%d/%m/%Y")
         current_time = datetime_HK.strftime("%H:%M:%S")
+        print(current_day)
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time, request_date = current_day)
         new_request.save()
         print(new_request)
 
@@ -653,7 +655,6 @@ class en_updatepatientlistScreen(Screen):
 
     def validate(name, password):
         passwordcorrect = False
-        print(name + " " + password)
         pat = Patient.objects.all().filter(patientFullName=name)
         if pat.values_list('patientBirthDate', flat=True).exists():
             corrpassword = pat.values_list('patientBirthDate', flat=True)[0]
@@ -976,12 +977,13 @@ class ct_patientDownScreen(Screen):
         else:
             pass
 
-        now = datetime.now()
         tz_HK = pytz.timezone('Hongkong')
         datetime_HK = datetime.now(tz_HK)
+        current_day = datetime_HK.strftime("%d/%m/%Y")
         current_time = datetime_HK.strftime("%H:%M:%S")
+        print(current_day)
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time, request_date = current_day)
         new_request.save()
         print(new_request)
 
