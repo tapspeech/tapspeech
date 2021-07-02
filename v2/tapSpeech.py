@@ -521,21 +521,127 @@ class en_caretakerUpScreen(Screen):
     def refresh(self):
         reqlist = self.new_request_pull()
         number_of_requests = len(reqlist)
-        print(reqlist)
-        # while len(reqlist) < 6:
-        #     reqlist.append(['','','',''])
+
         processed_request = 0
+        # Sets default for all labels to be visible
         while processed_request < 6:
             if processed_request == 0:
-                self.label_6_bg.size_hint == (0.861, 0)
-                self.patient_6_request.size_hint == (0.861, 0)
-                self.clear_button_6.size_hint == (0.861, 0)
-                print('should have cleared everything')
+                self.label_6_bg.size_hint = (0.861, 0.0737)
+                self.patient_6_request.size_hint = (0.663, 0.0737)
+                self.patient_6_request.text = ''
+                self.clear_button_6.size_hint = (0.0742, 0.0350)
+            elif processed_request == 1:
+                self.label_5_bg.size_hint = (0.861, 0.0737)
+                self.patient_5_request.size_hint = (0.663, 0.0737)
+                self.patient_5_request.text = ''
+                self.clear_button_5.size_hint = (0.0742, 0.0350)
+            elif processed_request == 2:
+                self.label_4_bg.size_hint = (0.861, 0.0737)
+                self.patient_4_request.size_hint = (0.663, 0.0737)
+                self.patient_4_request.text = ''
+                self.clear_button_4.size_hint = (0.0742, 0.0350)
+            elif processed_request == 3:
+                self.label_3_bg.size_hint = (0.861, 0.0737)
+                self.patient_3_request.size_hint = (0.663, 0.0737)
+                self.patient_3_request.text = ''
+                self.clear_button_3.size_hint = (0.0742, 0.0350)
+            elif processed_request == 4:
+                self.label_2_bg.size_hint = (0.861, 0.0737)
+                self.patient_2_request.size_hint = (0.663, 0.0737)
+                self.patient_2_request.text = ''
+                self.clear_button_2.size_hint = (0.0742, 0.0350)
+            elif processed_request == 5:
+                self.label_1_bg.size_hint = (0.861, 0.0737)
+                self.patient_1_request.size_hint = (0.663, 0.0737)
+                self.patient_1_request.text = ''
+                self.clear_button_1.size_hint = (0.0742, 0.0350)
             processed_request = processed_request + 1
-            print(processed_request)
 
-        print(reqlist)
+        processed_request = 0
+        # Deletes all empty request slots
+        while processed_request < 6-number_of_requests:
+            if processed_request == 0:
+                self.label_6_bg.size_hint = (0.861, 0)
+                self.patient_6_request.size_hint = (0.861, 0)
+                self.patient_6_request.text = ''
+                self.clear_button_6.size_hint = (0.861, 0)
+            elif processed_request == 1:
+                self.label_5_bg.size_hint = (0.861, 0)
+                self.patient_5_request.size_hint = (0.861, 0)
+                self.patient_5_request.text = ''
+                self.clear_button_5.size_hint = (0.861, 0)
+            elif processed_request == 2:
+                self.label_4_bg.size_hint = (0.861, 0)
+                self.patient_4_request.size_hint = (0.861, 0)
+                self.patient_4_request.text = ''
+                self.clear_button_4.size_hint = (0.861, 0)
+            elif processed_request == 3:
+                self.label_3_bg.size_hint = (0.861, 0)
+                self.patient_3_request.size_hint = (0.861, 0)
+                self.patient_3_request.text = ''
+                self.clear_button_3.size_hint = (0.861, 0)
+            elif processed_request == 4:
+                self.label_2_bg.size_hint = (0.861, 0)
+                self.patient_2_request.size_hint = (0.861, 0)
+                self.patient_2_request.text = ''
+                self.clear_button_2.size_hint = (0.861, 0)
+            elif processed_request == 5:
+                self.label_1_bg.size_hint = (0.861, 0)
+                self.patient_1_request.size_hint = (0.861, 0)
+                self.patient_1_request.text = ''
+                self.clear_button_1.size_hint = (0.861, 0)
+            else:
+                pass
+            processed_request = processed_request + 1
 
+        processed_request = 0
+        # Fills the proper requests into the UI:
+        while processed_request < number_of_requests:
+            request = reqlist[processed_request]
+            print(request)
+            request = request[3] + ' | ' + request[0] + ' | ' + request[1] + ': ' + request[2]
+            if processed_request == 0:
+                self.patient_1_request.text = request
+            elif processed_request == 1:
+                self.patient_2_request.text = request
+            elif processed_request == 2:
+                self.patient_3_request.text = request
+            elif processed_request == 3:
+                self.patient_4_request.text = request
+            elif processed_request == 4:
+                self.patient_5_request.text = request
+            elif processed_request == 5:
+                self.patient_6_request.text = request
+            processed_request = processed_request + 1
+
+    def delete_request(self,label_number):
+        if label_number == 1:
+            message = self.patient_1_request.text
+        elif label_number == 2:
+            message = self.patient_2_request.text
+        elif label_number == 3:
+            message = self.patient_3_request.text
+        elif label_number == 4:
+            message = self.patient_4_request.text
+        elif label_number == 5:
+            message = self.patient_5_request.text
+        elif label_number == 6:
+            message = self.patient_6_request.text
+
+        message = message.split(' | ')
+        message_specification_split = message[2].split(': ')
+        reformatted_message = []
+        reformatted_message.append(message[1])
+        reformatted_message.append(message_specification_split[0])
+        reformatted_message.append(message_specification_split[1])
+        reformatted_message.append(message[0])
+
+        print(reformatted_message)
+
+        '''
+        ok jacob go do ur magic with reformatted_message
+        '''
+                
 
 class en_caretakerDownScreen(Screen):
     pass

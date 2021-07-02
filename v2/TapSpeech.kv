@@ -682,6 +682,7 @@ windowManager:
 
     on_enter:
         root.display_caretaker_name()
+        root.refresh()
 
     canvas.before:
         Rectangle:
@@ -854,7 +855,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.72}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(1)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -867,7 +868,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.64}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(2)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -880,7 +881,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.56}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(3)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -893,7 +894,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.48}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(4)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -906,7 +907,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.4}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(5)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
@@ -919,7 +920,7 @@ windowManager:
             pos_hint: {'center_x': 0.85, 'center_y': 0.32}
             background_color:0,0,0,0
             on_press:
-                pass
+                root.delete_request(6)
             Image:
                 source: 'images/icons/general/clear_btn.png'
                 size: self.parent.size
