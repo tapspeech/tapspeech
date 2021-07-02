@@ -655,7 +655,6 @@ class en_updatepatientlistScreen(Screen):
 
     def validate(name, password):
         passwordcorrect = False
-        print(name + " " + password)
         pat = Patient.objects.all().filter(patientFullName=name)
         if pat.values_list('patientBirthDate', flat=True).exists():
             corrpassword = pat.values_list('patientBirthDate', flat=True)[0]
