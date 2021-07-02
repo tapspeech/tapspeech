@@ -476,12 +476,12 @@ class en_informationScreen(Screen):
 class en_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
 
-    Label_1_bg = ObjectProperty(None)
-    Label_2_bg = ObjectProperty(None)
-    Label_3_bg = ObjectProperty(None)
-    Label_4_bg = ObjectProperty(None)
-    Label_5_bg = ObjectProperty(None)
-    Label_6_bg = ObjectProperty(None)
+    label_1_bg = ObjectProperty(None)
+    label_2_bg = ObjectProperty(None)
+    label_3_bg = ObjectProperty(None)
+    label_4_bg = ObjectProperty(None)
+    label_5_bg = ObjectProperty(None)
+    label_6_bg = ObjectProperty(None)
 
     patient_1_request = ObjectProperty(None)
     patient_2_request = ObjectProperty(None)
@@ -525,12 +525,14 @@ class en_caretakerUpScreen(Screen):
         # while len(reqlist) < 6:
         #     reqlist.append(['','','',''])
         processed_request = 0
-        while number_of_requests < 6:
+        while processed_request < 6:
             if processed_request == 0:
-                self.Label_6_bg.size_hint == (0.861, 0)
+                self.label_6_bg.size_hint == (0.861, 0)
                 self.patient_6_request.size_hint == (0.861, 0)
                 self.clear_button_6.size_hint == (0.861, 0)
+                print('should have cleared everything')
             processed_request = processed_request + 1
+            print(processed_request)
 
         print(reqlist)
 
