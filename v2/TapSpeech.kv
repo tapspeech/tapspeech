@@ -1130,6 +1130,9 @@ windowManager:
             height: self.parent.width/self.image_ratio
 
 <ct_loginScreen>:
+    username: username
+    password: password
+
     canvas.before:
         Rectangle:
             pos: self.pos
@@ -1180,8 +1183,7 @@ windowManager:
             #   to the appropriate screen, i.e. patient user is brought to
             #   patient screen, and caretaker user is brought to the caretaker screen
             on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_patientUp'
+                root.validate()
             Image:
                 source: 'images/icons/ct/login_login.png'
                 size: self.parent.size

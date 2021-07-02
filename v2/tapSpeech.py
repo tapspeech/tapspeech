@@ -640,6 +640,9 @@ class en_caretakerUpScreen(Screen):
 
         Requests.objects.filter(request_patient=reformatted_message[0], request_type=reformatted_message[1], request_specification=reformatted_message[2], request_time=reformatted_message[3]).delete()
 
+        '''
+        ok jacob go do ur magic with reformatted_message
+        '''
 
 class en_caretakerDownScreen(Screen):
     pass
