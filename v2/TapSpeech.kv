@@ -932,11 +932,28 @@ windowManager:
                 center_y: self.parent.center_y
 
 <en_caretakerDownScreen>:
+    top_left_image: top_left_image
+    top_right_image: top_right_image
+    mid_left_image: mid_left_image
+    mid_right_image: mid_right_image
+    bottom_left_image: bottom_left_image
+    bottom_right_image: bottom_right_image
+
+    top_left_label: top_left_label
+    top_right_image: top_right_image
+    mid_left_image: mid_left_image
+    mid_right_image: mid_right_image
+    bottom_left_image: bottom_left_image
+    bottom_right_image: bottom_right_image
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
             source: 'images/bg/en/CaretakerDown.png'
+
+    on_press:
+        root.update_screen()
 
     FloatLayout:
         Button:
@@ -1042,59 +1059,59 @@ windowManager:
             pos_hint: {'center_x': 0.73, 'center_y': 0.20}
             text: 'placeholdertext'
 
-        Button: #top left
-            id: top_left_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.27, 'center_y': 0.66}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
-
-        Button: #top right
-            id: top_right_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.73, 'center_y': 0.66}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
-
-        Button: #mid left
-            id: mid_left_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.27, 'center_y': 0.43}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
-
-        Button: #mid right
-            id: top_right_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.73, 'center_y': 0.43}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
-
-        Button: #bottom left
-            id: bottom_left_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.27, 'center_y': 0.20}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
-
-        Button: #bottom right
-            id: bottom_right_button
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
-            pos_hint: {'center_x': 0.73, 'center_y': 0.20}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'en_updatepatientlist'
+        # Button: #top left
+        #     id: top_left_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.66}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
+        #
+        # Button: #top right
+        #     id: top_right_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.66}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
+        #
+        # Button: #mid left
+        #     id: mid_left_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
+        #
+        # Button: #mid right
+        #     id: top_right_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.43}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
+        #
+        # Button: #bottom left
+        #     id: bottom_left_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.20}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
+        #
+        # Button: #bottom right
+        #     id: bottom_right_button
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.20}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'en_updatepatientlist'
 
         Button:
             size_hint: (0.682, 0.053)

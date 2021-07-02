@@ -669,7 +669,27 @@ class en_caretakerUpScreen(Screen):
         self.refresh()
 
 class en_caretakerDownScreen(Screen):
-    pass
+    top_left_image = ObjectProperty(None)
+    top_right_image = ObjectProperty(None)
+    mid_left_image = ObjectProperty(None)
+    mid_right_image = ObjectProperty(None)
+    bottom_left_image = ObjectProperty(None)
+    bottom_right_image = ObjectProperty(None)
+
+    top_left_label = ObjectProperty(None)
+    top_right_image = ObjectProperty(None)
+    mid_left_image = ObjectProperty(None)
+    mid_right_image = ObjectProperty(None)
+    bottom_left_image = ObjectProperty(None)
+    bottom_right_image = ObjectProperty(None)
+
+    '''
+    jacob
+    '''
+
+    def update_screen(self):
+        pass
+
 
 class en_updatepatientlistScreen(Screen):
     patient_username = ObjectProperty(None)
