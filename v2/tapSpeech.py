@@ -501,26 +501,28 @@ class en_caretakerUpScreen(Screen):
         global global_caretaker_name
         self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
-    def update_requests(self):
-        pass
-
     def new_request_pull(self):
         # caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
-        caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty']
+        caretakers_patient_list = ['thomas', 'ron', 'john', 'monty']
         reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
-        print("This should print their name and most recent request's specifications")
-        # NAME + TYPE + SPECIFICATION + TIME
-        print(reqlist[0][0] + " " + reqlist[0][1] + " " + reqlist[0][2] + " " + reqlist[0][3])
-        print(reqlist[1][0] + " " + reqlist[1][1] + " " + reqlist[1][2] + " " + reqlist[1][3])
-        print(reqlist[2][0] + " " + reqlist[2][1] + " " + reqlist[2][2] + " " + reqlist[2][3])
-        print(reqlist[3][0] + " " + reqlist[3][1] + " " + reqlist[3][2] + " " + reqlist[3][3])
-        print(reqlist[4][0] + " " + reqlist[4][1] + " " + reqlist[4][2] + " " + reqlist[4][3])
-        #print(reqlist[5][0] + " " + reqlist[5][1] + " " + reqlist[5][2] + " " + reqlist[5][3])
         return(reqlist)
 
     def refresh(self):
         reqlist = self.new_request_pull()
+
+        # Checks if there are no requests and deltes them
+        new_reqlist = []
+        processed_range = 0
+        while processed_range < len(reqlist):
+            if reqlist[processed_range][0] == 'None' and reqlist[processed_range][1] == 'None' and reqlist[processed_range][2] == 'None' and reqlist[processed_range][3] == 'None':
+                pass
+            else:
+                new_reqlist.append(reqlist[processed_range])
+            processed_range = processed_range + 1
+        reqlist = new_reqlist
+
         number_of_requests = len(reqlist)
+        print(reqlist)
 
         processed_request = 0
         # Sets default for all labels to be visible
@@ -640,9 +642,7 @@ class en_caretakerUpScreen(Screen):
 
         Requests.objects.filter(request_patient=reformatted_message[0], request_type=reformatted_message[1], request_specification=reformatted_message[2], request_time=reformatted_message[3]).delete()
 
-        '''
-        ok jacob go do ur magic with reformatted_message
-        '''
+        self.refresh()
 
 class en_caretakerDownScreen(Screen):
     pass
