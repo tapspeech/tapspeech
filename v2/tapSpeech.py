@@ -390,12 +390,13 @@ class en_patientDownScreen(Screen):
         else:
             pass
 
-        now = datetime.now()
         tz_HK = pytz.timezone('Hongkong')
         datetime_HK = datetime.now(tz_HK)
+        current = datetime_HK.strftime("%d/%m/%Y")
         current_time = datetime_HK.strftime("%H:%M:%S")
+        print(current_day)
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time, request_date = current_day)
         new_request.save()
         print(new_request)
 
@@ -976,12 +977,13 @@ class ct_patientDownScreen(Screen):
         else:
             pass
 
-        now = datetime.now()
         tz_HK = pytz.timezone('Hongkong')
         datetime_HK = datetime.now(tz_HK)
+        current = datetime_HK.strftime("%d/%m/%Y")
         current_time = datetime_HK.strftime("%H:%M:%S")
+        print(current_day)
         print(message + " " + self.request_type)
-        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time)
+        new_request = Requests(request_type = self.request_type, request_specification = message, request_patient = global_patient_name, request_time = current_time, request_date = current_day)
         new_request.save()
         print(new_request)
 
