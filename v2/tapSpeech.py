@@ -504,8 +504,6 @@ class en_caretakerUpScreen(Screen):
         print(reqlist)
 
 
-
-
 class en_caretakerDownScreen(Screen):
     pass
 
@@ -865,7 +863,7 @@ class ct_caretakerDownScreen(Screen):
 class ct_updatepatientlistScreen(Screen):
     patient_username = ObjectProperty(None)
     patient_password = ObjectProperty(None)
-    #validates if password is correct for a username  
+    #validates if password is correct for a username
     def validate(name, password):
         passwordcorrect = False
         pat = Patient.objects.all().filter(patientFullName=name)
@@ -980,7 +978,7 @@ class windowManager(ScreenManager):
     pass
 
 class tapSpeechApp(App):
-    #kv = Builder.load_file("tapSpeech.kv")
+    #kv = Builder.load_file("tapspeech.kv")
     #Window.clearcolor = (0.88,0.92,0.92,1)
     Window.clearcolor = (1,1,1,1)
 
