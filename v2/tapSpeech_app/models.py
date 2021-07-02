@@ -36,3 +36,4 @@ class Requests(models.Model):
     request_specification = models.CharField(max_length=30)
     request_patient = models.CharField(max_length=30, default = 'Untitled')
     request_time = models.CharField(max_length=30, default = '')
+    request_date = models.CharField(max_length=30, default = '')

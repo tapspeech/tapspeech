@@ -631,17 +631,15 @@ class en_caretakerUpScreen(Screen):
         message = message.split(' | ')
         message_specification_split = message[2].split(': ')
         reformatted_message = []
-        reformatted_message.append(message[1])
-        reformatted_message.append(message_specification_split[0])
-        reformatted_message.append(message_specification_split[1])
-        reformatted_message.append(message[0])
+        reformatted_message.append(message[1]) # NAME
+        reformatted_message.append(message_specification_split[0]) # TYPE
+        reformatted_message.append(message_specification_split[1]) # SPEC
+        reformatted_message.append(message[0]) # TIME
 
-        print(reformatted_message)
+        print(reformatted_message[3])
 
-        '''
-        ok jacob go do ur magic with reformatted_message
-        '''
-                
+        Requests.objects.filter(request_patient=reformatted_message[0], request_type=reformatted_message[1], request_specification=reformatted_message[2], request_time=reformatted_message[3]).delete()
+
 
 class en_caretakerDownScreen(Screen):
     pass
