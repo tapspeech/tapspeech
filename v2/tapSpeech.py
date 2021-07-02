@@ -503,9 +503,31 @@ class en_caretakerUpScreen(Screen):
         global global_caretaker_name
         self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
 
+    def update_requests(self):
+        pass
+
+    def build_patient_list():
+        caretakers_patient_list = []
+        ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
+        if ct.values_list('listedPatients', flat=True).exists():
+            lpat = ct.values_list('listedPatients', flat=True)[0]
+            caretakers_patient_list.append(lpat)
+        if ct.values_list('listedPatients2', flat=True).exists():
+            lpat2 = ct.values_list('listedPatients2', flat=True)[0]
+            caretakers_patient_list.append(lpat2)
+        if ct.values_list('listedPatients3', flat=True).exists():
+            lpat3 = ct.values_list('listedPatients3', flat=True)[0]
+            caretakers_patient_list.append(lpat3)
+        if ct.values_list('listedPatients4', flat=True).exists():
+            lpat4 = ct.values_list('listedPatients4', flat=True)[0]
+            caretakers_patient_list.append(lpat4)
+        if ct.values_list('listedPatients5', flat=True).exists():
+            lpat5 = ct.values_list('listedPatients5', flat=True)[0]
+            caretakers_patient_list.append(lpat5)
+        return caretakers_patient_list
+
     def new_request_pull(self):
-        # caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
-        caretakers_patient_list = ['thomas', 'ron', 'john', 'monty']
+        caretakers_patient_list = en_caretakerUpScreen.build_patient_list()
         reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
         return(reqlist)
 
@@ -1088,9 +1110,28 @@ class ct_caretakerUpScreen(Screen):
     def update_requests(self):
         pass
 
+    def build_patient_list():
+        caretakers_patient_list = []
+        ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
+        if ct.values_list('listedPatients', flat=True).exists():
+            lpat = ct.values_list('listedPatients', flat=True)[0]
+            caretakers_patient_list.append(lpat)
+        if ct.values_list('listedPatients2', flat=True).exists():
+            lpat2 = ct.values_list('listedPatients2', flat=True)[0]
+            caretakers_patient_list.append(lpat2)
+        if ct.values_list('listedPatients3', flat=True).exists():
+            lpat3 = ct.values_list('listedPatients3', flat=True)[0]
+            caretakers_patient_list.append(lpat3)
+        if ct.values_list('listedPatients4', flat=True).exists():
+            lpat4 = ct.values_list('listedPatients4', flat=True)[0]
+            caretakers_patient_list.append(lpat4)
+        if ct.values_list('listedPatients5', flat=True).exists():
+            lpat5 = ct.values_list('listedPatients5', flat=True)[0]
+            caretakers_patient_list.append(lpat5)
+        return caretakers_patient_list
+
     def new_request_pull(self):
-        # caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty', 'carl']
-        caretakers_patient_list = ['jesus', 'thomas', 'ron', 'john', 'monty']
+        caretakers_patient_list = ct_caretakerUpScreen.build_patient_list()
         reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
         print("This should print their name and most recent request's specifications")
         # NAME + TYPE + SPECIFICATION + TIME
