@@ -546,54 +546,109 @@ class en_updatepatientlistScreen(Screen):
 
     def validate(name, password):
         passwordcorrect = False
+        print(name + " " + password)
         pat = Patient.objects.all().filter(patientFullName=name)
-        corrpassword = pat.values_list('patientBirthDate', flat=True)[0]
-        if password == corrpassword:
-            passwordcorrect = True
-        return passwordcorrect
+        if pat.values_list('patientBirthDate', flat=True).exists():
+            corrpassword = pat.values_list('patientBirthDate', flat=True)[0]
+            if password == corrpassword:
+                passwordcorrect = True
+            return passwordcorrect
+        else:
+            passwordcorrect = False
+
 
     def checkslots(ctname):
         emptyslots = [1, 2, 3, 4, 5, 6]
+        ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
         if ct.values_list('listedPatients', flat=True).exists():
-            emptyslots.remove(1)
+            es1 = ct.values_list('listedPatients', flat=True)[0]
+            if es1 != "":
+                emptyslots.remove(1)
         if ct.values_list('listedPatients2', flat=True).exists():
-            emptyslots.remove(2)
+            es2 = ct.values_list('listedPatients2', flat=True)[0]
+            if es2 != "":
+                emptyslots.remove(2)
         if ct.values_list('listedPatients3', flat=True).exists():
-            emptyslots.remove(3)
+            es3 = ct.values_list('listedPatients3', flat=True)[0]
+            if es3 != "":
+                emptyslots.remove(3)
         if ct.values_list('listedPatients4', flat=True).exists():
-            emptyslots.remove(4)
+            es4 = ct.values_list('listedPatients4', flat=True)[0]
+            if es4 != "":
+                emptyslots.remove(4)
         if ct.values_list('listedPatients5', flat=True).exists():
-            emptyslots.remove(5)
+            es5 = ct.values_list('listedPatients5', flat=True)[0]
+            if es5 != "":
+                emptyslots.remove(5)
         if ct.values_list('listedPatients6', flat=True).exists():
-            emptyslots.remove(6)
+            es6 = ct.values_list('listedPatients6', flat=True)[0]
+            if es6 != "":
+                emptyslots.remove(6)
         return emptyslots
 
     def checkfilledslots(ctname):
         filledslots = [ ]
+        ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
         if ct.values_list('listedPatients', flat=True).exists():
-            filledslots.remove(1)
+            es1 = ct.values_list('listedPatients', flat=True)[0]
+            if es1 != "":
+                filledslots.append(1)
         if ct.values_list('listedPatients2', flat=True).exists():
-            filledslots.remove(2)
+            es2 = ct.values_list('listedPatients2', flat=True)[0]
+            if es2 != "":
+                filledslots.append(2)
         if ct.values_list('listedPatients3', flat=True).exists():
-            filledslots.remove(3)
+            es3 = ct.values_list('listedPatients3', flat=True)[0]
+            if es3 != "":
+                filledslots.append(3)
         if ct.values_list('listedPatients4', flat=True).exists():
-            filledslots.remove(4)
+            es4 = ct.values_list('listedPatients4', flat=True)[0]
+            if es4 != "":
+                filledslots.append(4)
         if ct.values_list('listedPatients5', flat=True).exists():
-            filledslots.remove(5)
+            es5 = ct.values_list('listedPatients5', flat=True)[0]
+            if es5 != "":
+                filledslots.append(5)
         if ct.values_list('listedPatients6', flat=True).exists():
-            filledslots.remove(6)
+            es6 = ct.values_list('listedPatients6', flat=True)[0]
+            if es6 != "":
+                filledslots.append(6)
         return filledslots
+
+    def checkforcopies(ctname, ptname):
+        nocopies = True
+        ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
+        if ct.values_list('listedPatients', flat=True).exists():
+            es1 = ct.values_list('listedPatients', flat=True)[0]
+            if es1 == ptname:
+                nocopies = False
+        if ct.values_list('listedPatients2', flat=True).exists():
+            es2 = ct.values_list('listedPatients2', flat=True)[0]
+            if es2 == ptname:
+                nocopies = False
+        if ct.values_list('listedPatients3', flat=True).exists():
+            es3 = ct.values_list('listedPatients3', flat=True)[0]
+            if es3 == ptname:
+                nocopies = False
+        if ct.values_list('listedPatients4', flat=True).exists():
+            es4 = ct.values_list('listedPatients4', flat=True)[0]
+            if es4 == ptname:
+                nocopies = False
+        if ct.values_list('listedPatients5', flat=True).exists():
+            es5 = ct.values_list('listedPatients5', flat=True)[0]
+            if es5 == ptname:
+                nocopies = False
+        if ct.values_list('listedPatients6', flat=True).exists():
+            es6 = ct.values_list('listedPatients6', flat=True)[0]
+            if es6 == ptname:
+                nocopies = False
+        return nocopies
 
     def addorremove_patient(self, addorremove):
         username_value = self.patient_username.text
         password_value = self.patient_password.text
-
         self.patient_username.text = ''
         self.patient_password.text = ''
-
-
-
-
 
         '''
         also make an if else statement that checks if the caretaker has 6 patients already (maximum)
@@ -602,55 +657,61 @@ class en_updatepatientlistScreen(Screen):
         ct = Caretaker.objects.all().filter(caretakerFullName = global_caretaker_name)
 
         if addorremove == 'add':
-            if validate(self.patient_username.text, self.patient_password.text) == True:
-                avalibleslots = checkslots(global_caretaker_name)
-                avalibleslots_len = len(avalibleslots)
-                if avalibleslots_len == 0:
-                    error(1) # IF THERE ARE NO AVALIBLE SLOTS
-                else:
-                    if avalibleslots[0] == 1:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients=self.patient_username.text)
-                    if avalibleslots[0] == 2:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients2=self.patient_username.text)
-                    if avalibleslots[0] == 3:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients3=self.patient_username.text)
-                    if avalibleslots[0] == 4:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients4=self.patient_username.text)
-                    if avalibleslots[0] == 5:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients5=self.patient_username.text)
-                    if avalibleslots[0] == 6:
-                        Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients6=self.patient_username.text)
+            if en_updatepatientlistScreen.checkforcopies(global_caretaker_name, username_value):
+                    if en_updatepatientlistScreen.validate(username_value, password_value) == True:
+                        avalibleslots = en_updatepatientlistScreen.checkslots(global_caretaker_name)
+                        print(avalibleslots)
+                        avalibleslots_len = len(avalibleslots)
+                        if avalibleslots_len == 0:
+                            error(1) # IF THERE ARE NO AVALIBLE SLOTS
+                        else:
+                            if avalibleslots[0] == 1:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients=username_value)
+                            if avalibleslots[0] == 2:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients2=username_value)
+                            if avalibleslots[0] == 3:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients3=username_value)
+                            if avalibleslots[0] == 4:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients4=username_value)
+                            if avalibleslots[0] == 5:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients5=username_value)
+                            if avalibleslots[0] == 6:
+                                Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients6=username_value)
+                    else:
+                        error(1) # IF NAME IS ALREADY LISTED
             else:
                 error(1) # IF THE USERNAME AND PASSWORD DOESN'T EXIST / DOESN'T MATCH
 
 
         elif addorremove == 'remove':
-            if validate(self.patient_username.text, self.patient_password.text) == True:
-                filledslots = checkfilledslots(global_caretaker_name)
+            if en_updatepatientlistScreen.validate(username_value, password_value) == True:
+                filledslots = en_updatepatientlistScreen.checkfilledslots(global_caretaker_name)
                 usedslots_len = len(filledslots)
                 if usedslots_len == 0:
                     error(1) # IF THERE ARE NO AVALIBLE SLOTS
                 else:
                     if ct.values_list('listedPatients', flat=True).exists():
                         lpat = ct.values_list('listedPatients', flat=True)[0]
-                        if lpat == self.patient_username.text:
+                        if lpat == username_value:
                             Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients='')
                     if ct.values_list('listedPatients2', flat=True).exists():
                         lpat = ct.values_list('listedPatients2', flat=True)[0]
-                        if lpat == self.patient_username.text:
+                        if lpat == username_value:
                             Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients2='')
                     if ct.values_list('listedPatients3', flat=True).exists():
                         lpat = ct.values_list('listedPatients3', flat=True)[0]
-                        if lpat == self.patient_username.text:
+                        if lpat == username_value:
                             Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients3='')
                     if ct.values_list('listedPatients4', flat=True).exists():
                         lpat = ct.values_list('listedPatients4', flat=True)[0]
-                        if lpat == self.patient_username.text:
+                        if lpat == username_value:
                             Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients4='')
                     if ct.values_list('listedPatients5', flat=True).exists():
                         lpat = ct.values_list('listedPatients5', flat=True)[0]
-                        if lpat == self.patient_username.text:
+                        if lpat == username_value:
                             Caretaker.objects.filter(caretakerFullName=global_caretaker_name).update(listedPatients5='')
+                    self.patient_username.text = ''
+                    self.patient_password.text = ''
             else:
                 error(1)
 
