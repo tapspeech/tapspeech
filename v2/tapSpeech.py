@@ -683,9 +683,8 @@ class en_caretakerDownScreen(Screen):
     bottom_left_image = ObjectProperty(None)
     bottom_right_image = ObjectProperty(None)
 
-    '''
-    jacob
-    '''
+    ''
+
 
     def update_screen(self):
         pass
@@ -1102,30 +1101,30 @@ class ct_informationScreen(Screen):
 class ct_caretakerUpScreen(Screen):
     caretaker_name = ObjectProperty(None)
 
-    # Label_1_bg = ObjectProperty(None)
-    # Label_2_bg = ObjectProperty(None)
-    # Label_3_bg = ObjectProperty(None)
-    # Label_4_bg = ObjectProperty(None)
-    # Label_5_bg = ObjectProperty(None)
-    # Label_6_bg = ObjectProperty(None)
-    #
-    # patient_1_request = ObjectProperty(None)
-    # patient_2_request = ObjectProperty(None)
-    # patient_3_request = ObjectProperty(None)
-    # patient_4_request = ObjectProperty(None)
-    # patient_5_request = ObjectProperty(None)
-    # patient_6_request = ObjectProperty(None)
-    #
-    # clear_button_1 = ObjectProperty(None)
-    # clear_button_2 = ObjectProperty(None)
-    # clear_button_3 = ObjectProperty(None)
-    # clear_button_4 = ObjectProperty(None)
-    # clear_button_5 = ObjectProperty(None)
-    # clear_button_6 = ObjectProperty(None)
+    Label_1_bg = ObjectProperty(None)
+    Label_2_bg = ObjectProperty(None)
+    Label_3_bg = ObjectProperty(None)
+    Label_4_bg = ObjectProperty(None)
+    Label_5_bg = ObjectProperty(None)
+    Label_6_bg = ObjectProperty(None)
+
+    patient_1_request = ObjectProperty(None)
+    patient_2_request = ObjectProperty(None)
+    patient_3_request = ObjectProperty(None)
+    patient_4_request = ObjectProperty(None)
+    patient_5_request = ObjectProperty(None)
+    patient_6_request = ObjectProperty(None)
+
+    clear_button_1 = ObjectProperty(None)
+    clear_button_2 = ObjectProperty(None)
+    clear_button_3 = ObjectProperty(None)
+    clear_button_4 = ObjectProperty(None)
+    clear_button_5 = ObjectProperty(None)
+    clear_button_6 = ObjectProperty(None)
 
     def display_caretaker_name(self):
         global global_caretaker_name
-        self.caretaker_name.text = 'Caretaker: '+global_caretaker_name
+        self.caretaker_name.text = '看護人：'+global_caretaker_name
 
     def update_requests(self):
         pass
@@ -1151,37 +1150,165 @@ class ct_caretakerUpScreen(Screen):
         return caretakers_patient_list
 
     def new_request_pull(self):
-        caretakers_patient_list = ct_caretakerUpScreen.build_patient_list()
+        caretakers_patient_list = en_caretakerUpScreen.build_patient_list()
         reqlist = ReadSQL.new_request_puller(caretakers_patient_list) # 'LIST' SHOULD EVENTUALLY BE REPLACED WITH THE CARETAKER'S ACTUAL PATIENT LIST
-        print("This should print their name and most recent request's specifications")
-        # NAME + TYPE + SPECIFICATION + TIME
-        print(reqlist[0][0] + " " + reqlist[0][1] + " " + reqlist[0][2] + " " + reqlist[0][3])
-        print(reqlist[1][0] + " " + reqlist[1][1] + " " + reqlist[1][2] + " " + reqlist[1][3])
-        print(reqlist[2][0] + " " + reqlist[2][1] + " " + reqlist[2][2] + " " + reqlist[2][3])
-        print(reqlist[3][0] + " " + reqlist[3][1] + " " + reqlist[3][2] + " " + reqlist[3][3])
-        print(reqlist[4][0] + " " + reqlist[4][1] + " " + reqlist[4][2] + " " + reqlist[4][3])
-        #print(reqlist[5][0] + " " + reqlist[5][1] + " " + reqlist[5][2] + " " + reqlist[5][3])
         return(reqlist)
 
     def refresh(self):
         reqlist = self.new_request_pull()
+
+        # Checks if there are no requests and deltes them
+        new_reqlist = []
+        processed_range = 0
+        while processed_range < len(reqlist):
+            if reqlist[processed_range][0] == 'None' and reqlist[processed_range][1] == 'None' and reqlist[processed_range][2] == 'None' and reqlist[processed_range][3] == 'None':
+                pass
+            else:
+                new_reqlist.append(reqlist[processed_range])
+            processed_range = processed_range + 1
+        reqlist = new_reqlist
+
         number_of_requests = len(reqlist)
         print(reqlist)
-        # while len(reqlist) < 6:
-        #     reqlist.append(['','','',''])
+
         processed_request = 0
-        while number_of_requests < 6:
+        # Sets default for all labels to be visible
+        while processed_request < 6:
             if processed_request == 0:
-                self.Label_6_bg.size_hint == (0.861, 0)
-                self.patient_6_request.size_hint == (0.861, 0)
-                self.clear_button_6.size_hint == (0.861, 0)
+                self.label_6_bg.size_hint = (0.861, 0.0737)
+                self.patient_6_request.size_hint = (0.663, 0.0737)
+                self.patient_6_request.text = ''
+                self.clear_button_6.size_hint = (0.0742, 0.0350)
+            elif processed_request == 1:
+                self.label_5_bg.size_hint = (0.861, 0.0737)
+                self.patient_5_request.size_hint = (0.663, 0.0737)
+                self.patient_5_request.text = ''
+                self.clear_button_5.size_hint = (0.0742, 0.0350)
+            elif processed_request == 2:
+                self.label_4_bg.size_hint = (0.861, 0.0737)
+                self.patient_4_request.size_hint = (0.663, 0.0737)
+                self.patient_4_request.text = ''
+                self.clear_button_4.size_hint = (0.0742, 0.0350)
+            elif processed_request == 3:
+                self.label_3_bg.size_hint = (0.861, 0.0737)
+                self.patient_3_request.size_hint = (0.663, 0.0737)
+                self.patient_3_request.text = ''
+                self.clear_button_3.size_hint = (0.0742, 0.0350)
+            elif processed_request == 4:
+                self.label_2_bg.size_hint = (0.861, 0.0737)
+                self.patient_2_request.size_hint = (0.663, 0.0737)
+                self.patient_2_request.text = ''
+                self.clear_button_2.size_hint = (0.0742, 0.0350)
+            elif processed_request == 5:
+                self.label_1_bg.size_hint = (0.861, 0.0737)
+                self.patient_1_request.size_hint = (0.663, 0.0737)
+                self.patient_1_request.text = ''
+                self.clear_button_1.size_hint = (0.0742, 0.0350)
             processed_request = processed_request + 1
 
-        print(reqlist)
+        processed_request = 0
+        # Deletes all empty request slots
+        while processed_request < 6-number_of_requests:
+            if processed_request == 0:
+                self.label_6_bg.size_hint = (0.861, 0)
+                self.patient_6_request.size_hint = (0.861, 0)
+                self.patient_6_request.text = ''
+                self.clear_button_6.size_hint = (0.861, 0)
+            elif processed_request == 1:
+                self.label_5_bg.size_hint = (0.861, 0)
+                self.patient_5_request.size_hint = (0.861, 0)
+                self.patient_5_request.text = ''
+                self.clear_button_5.size_hint = (0.861, 0)
+            elif processed_request == 2:
+                self.label_4_bg.size_hint = (0.861, 0)
+                self.patient_4_request.size_hint = (0.861, 0)
+                self.patient_4_request.text = ''
+                self.clear_button_4.size_hint = (0.861, 0)
+            elif processed_request == 3:
+                self.label_3_bg.size_hint = (0.861, 0)
+                self.patient_3_request.size_hint = (0.861, 0)
+                self.patient_3_request.text = ''
+                self.clear_button_3.size_hint = (0.861, 0)
+            elif processed_request == 4:
+                self.label_2_bg.size_hint = (0.861, 0)
+                self.patient_2_request.size_hint = (0.861, 0)
+                self.patient_2_request.text = ''
+                self.clear_button_2.size_hint = (0.861, 0)
+            elif processed_request == 5:
+                self.label_1_bg.size_hint = (0.861, 0)
+                self.patient_1_request.size_hint = (0.861, 0)
+                self.patient_1_request.text = ''
+                self.clear_button_1.size_hint = (0.861, 0)
+            else:
+                pass
+            processed_request = processed_request + 1
+
+        processed_request = 0
+        # Fills the proper requests into the UI:
+        while processed_request < number_of_requests:
+            request = reqlist[processed_request]
+            print(request)
+            request = request[3] + ' | ' + request[0] + ' | ' + request[1] + ': ' + request[2]
+            if processed_request == 0:
+                self.patient_1_request.text = request
+            elif processed_request == 1:
+                self.patient_2_request.text = request
+            elif processed_request == 2:
+                self.patient_3_request.text = request
+            elif processed_request == 3:
+                self.patient_4_request.text = request
+            elif processed_request == 4:
+                self.patient_5_request.text = request
+            elif processed_request == 5:
+                self.patient_6_request.text = request
+            processed_request = processed_request + 1
+
+    def delete_request(self,label_number):
+        if label_number == 1:
+            message = self.patient_1_request.text
+        elif label_number == 2:
+            message = self.patient_2_request.text
+        elif label_number == 3:
+            message = self.patient_3_request.text
+        elif label_number == 4:
+            message = self.patient_4_request.text
+        elif label_number == 5:
+            message = self.patient_5_request.text
+        elif label_number == 6:
+            message = self.patient_6_request.text
+
+        message = message.split(' | ')
+        message_specification_split = message[2].split(': ')
+        reformatted_message = []
+        reformatted_message.append(message[1]) # NAME
+        reformatted_message.append(message_specification_split[0]) # TYPE
+        reformatted_message.append(message_specification_split[1]) # SPEC
+        reformatted_message.append(message[0]) # TIME
+
+        print(reformatted_message[3])
+
+        Requests.objects.filter(request_patient=reformatted_message[0], request_type=reformatted_message[1], request_specification=reformatted_message[2], request_time=reformatted_message[3]).delete()
+
+        self.refresh()
 
 
 class ct_caretakerDownScreen(Screen):
-    pass
+    top_left_image = ObjectProperty(None)
+    top_right_image = ObjectProperty(None)
+    mid_left_image = ObjectProperty(None)
+    mid_right_image = ObjectProperty(None)
+    bottom_left_image = ObjectProperty(None)
+    bottom_right_image = ObjectProperty(None)
+
+    top_left_label = ObjectProperty(None)
+    top_right_image = ObjectProperty(None)
+    mid_left_image = ObjectProperty(None)
+    mid_right_image = ObjectProperty(None)
+    bottom_left_image = ObjectProperty(None)
+    bottom_right_image = ObjectProperty(None)
+
+    def update_screen(self):
+        pass
 
 class ct_updatepatientlistScreen(Screen):
     patient_username = ObjectProperty(None)

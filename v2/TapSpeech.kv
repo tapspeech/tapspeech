@@ -1824,7 +1824,7 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/CaretakerUp.png'
+            source: 'images/bg/ct/CaretakerUp.png'
 
     FloatLayout:
         # below is the logout button
@@ -1862,7 +1862,7 @@ windowManager:
             pos_hint: {'center_x': 0.5, 'center_y': 0.05}
             on_press:
                 app.root.transition = SlideTransition(direction="up")
-                app.root.current = 'en_caretakerDown'
+                app.root.current = 'ct_caretakerDown'
             Image:
                 source: 'images/icons/en/down_btn.png'
                 size: self.parent.size
@@ -2064,73 +2064,194 @@ windowManager:
                 center_y: self.parent.center_y
 
 <ct_caretakerDownScreen>:
+    top_left_image: top_left_image
+    top_right_image: top_right_image
+    mid_left_image: mid_left_image
+    mid_right_image: mid_right_image
+    bottom_left_image: bottom_left_image
+    bottom_right_image: bottom_right_image
+
+    top_left_label: top_left_label
+    top_right_image: top_right_image
+    mid_left_image: mid_left_image
+    mid_right_image: mid_right_image
+    bottom_left_image: bottom_left_image
+    bottom_right_image: bottom_right_image
+
     canvas.before:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/CaretakerDown.png'
+            source: 'images/bg/ct/CaretakerDown.png'
+
+    # on_press:
+    #     root.update_screen()
 
     FloatLayout:
+
         Button:
             size_hint: (0.0856, 0.0218)
             background_color:0,0,0,0
             pos_hint: {'center_x': 0.5, 'center_y': 0.9}
             on_press:
                 app.root.transition = SlideTransition(direction="down")
-                app.root.current = 'en_caretakerUp'
+                app.root.current = 'ct_caretakerUp'
             Image:
                 source: 'images/icons/en/up_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
 
-        Button: #top left
-            size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+        Image:
+            id: top_left_image
             pos_hint: {'center_x': 0.27, 'center_y': 0.66}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
-
-        Button: #top right
             size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: top_right_image
             pos_hint: {'center_x': 0.73, 'center_y': 0.66}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
-
-        Button: #mid left
             size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: mid_left_image
             pos_hint: {'center_x': 0.27, 'center_y': 0.43}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
-
-        Button: #mid right
             size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: mid_right_image
             pos_hint: {'center_x': 0.73, 'center_y': 0.43}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
-
-        Button: #bottom left
             size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: bottom_left_image
             pos_hint: {'center_x': 0.27, 'center_y': 0.20}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
-
-        Button: #bottom right
             size_hint: (0.4, 0.20)
-            background_color:0,0,0,0
+            source: 'images/icons/general/user_btn_background.png'
+
+        Image:
+            id: bottom_right_image
             pos_hint: {'center_x': 0.73, 'center_y': 0.20}
-            on_press:
-                app.root.transition = FadeTransition()
-                app.root.current = 'ct_updatepatientlist'
+            size_hint: (0.4, 0.20)
+            source: 'images/icons/general/user_btn_background.png'
+
+        Label:
+            id: top_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.66}
+            text: '佔位符文本'
+
+        Label:
+            id: top_right_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.66}
+            text: '佔位符文本'
+
+        Label:
+            id: mid_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+            text: '佔位符文本'
+
+        Label:
+            id: mid_right_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.43}
+            text: '佔位符文本'
+
+        Label:
+            id: bottom_left_label
+            background_color:1,1,1,
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.27, 'center_y': 0.20}
+            text: '佔位符文本'
+
+        Label:
+            id: bottom_left_label
+            background_color:1,1,1,0
+            font_name: 'Noto'
+            color:0,0,0,1
+            size_hint: (0.38, 0.20)
+            pos_hint: {'center_x': 0.73, 'center_y': 0.20}
+            text: '佔位符文本'
+
+        # Button:
+        #     size_hint: (0.0856, 0.0218)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.5, 'center_y': 0.9}
+        #     on_press:
+        #         app.root.transition = SlideTransition(direction="down")
+        #         app.root.current = 'ct_caretakerUp'
+        #     Image:
+        #         source: 'images/icons/en/up_btn.png'
+        #         size: self.parent.size
+        #         center_x: self.parent.center_x
+        #         center_y: self.parent.center_y
+        #
+        # Button: #top left
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.66}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
+        #
+        # Button: #top right
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.66}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
+        #
+        # Button: #mid left
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.43}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
+        #
+        # Button: #mid right
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.43}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
+        #
+        # Button: #bottom left
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.27, 'center_y': 0.20}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
+        #
+        # Button: #bottom right
+        #     size_hint: (0.4, 0.20)
+        #     background_color:0,0,0,0
+        #     pos_hint: {'center_x': 0.73, 'center_y': 0.20}
+        #     on_press:
+        #         app.root.transition = FadeTransition()
+        #         app.root.current = 'ct_updatepatientlist'
 
 
         Button:
@@ -2141,7 +2262,7 @@ windowManager:
                 app.root.transition = FadeTransition()
                 app.root.current = 'ct_updatepatientlist'
             Image:
-                source: 'images/icons/en/UpdatePatientList_btn.png'
+                source: 'images/icons/ct/UpdatePatientList_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -2154,7 +2275,7 @@ windowManager:
         Rectangle:
             pos: self.pos
             size: self.size
-            source: 'images/bg/en/update_patient_list_bg.png'
+            source: 'images/bg/ct/update_patient_list_bg.png'
 
     FloatLayout:
         Button:
@@ -2165,7 +2286,7 @@ windowManager:
                 app.root.transition = FadeTransition()
                 app.root.current = 'ct_caretakerDown'
             Image:
-                source: 'images/icons/en/back.png'
+                source: 'images/icons/ct/back_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -2178,7 +2299,7 @@ windowManager:
                 root.addorremove_patient('add')
                 app.root.current='en_caretakerDown'
             Image:
-                source: 'images/icons/en/addContact_btn.png'
+                source: 'images/icons/ct/addContact_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
@@ -2191,7 +2312,7 @@ windowManager:
                 root.addorremove_patient('remove')
                 app.root.current='en_caretakerDown'
             Image:
-                source: 'images/icons/en/RemoveContact_btn.png'
+                source: 'images/icons/ct/RemoveContact_btn.png'
                 size: self.parent.size
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
