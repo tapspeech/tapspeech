@@ -896,11 +896,15 @@ class ct_loginScreen(Screen):
             if completed_login == 'none':
                 error(1)
             else:
+                print(completed_login)
                 if completed_login == 'patient':
                     App.get_running_app().sm.current = 'ct_patientUp'
                     global global_patient_name
                     global_patient_name = self.username.text
-                elif completed_login == 'caretaker':
+                    #elif completed_login == 'caretaker' or completed_login == 'None' or completed_login == ''
+                    #fix this for some reason completed_login is 'None'
+                else:
+                    print('senses is caretaker')
                     App.get_running_app().sm.current = 'ct_caretakerUp'
 
                     '''
@@ -1070,7 +1074,7 @@ class ct_contactsScreen(Screen):
         self.emergency_contact_1.text = econlist[0]
         self.emergency_contact_2.text = econlist[1]
         self.emergency_contact_3.text = econlist[2]
-#
+
     def save_Contacts(self):
         global global_patient_name
         Patient.objects.filter(patientFullName=global_patient_name).update(patientEmergencyContact=self.emergency_contact_1.text)
